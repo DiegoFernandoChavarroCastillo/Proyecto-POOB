@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=MaxwellContainer
-comment0.text=\r\n\ MaxwellContainer\ representa\ el\ contenedor\ donde\ se\ desarrolla\ la\ simulaci\u00F3n.\r\n\ Permite\ a\u00F1adir\ part\u00EDculas\ y\ controlar\ la\ visualizaci\u00F3n.\r\n\ El\ contenedor\ es\ un\ rect\u00E1ngulo\ con\ una\ divisi\u00F3n\ en\ la\ mitad.\r\n\ \r\n\ @author\ Diego\r\n\ @version\ 1.0\r\n
+comment0.text=\r\n\ MaxwellContainer\ representa\ el\ contenedor\ donde\ se\ desarrolla\ la\ simulaci\u00F3n.\r\n\ Permite\ a\u00F1adir\ part\u00EDculas\ y\ controlar\ la\ visualizaci\u00F3n.\r\n\ El\ contenedor\ es\ un\ rect\u00E1ngulo\ con\ una\ divisi\u00F3n\ en\ la\ mitad.\r\n\ \r\n\ @author\ Diego,\ Juan\ Diego\r\n\ @version\ 1.0\r\n
 comment1.params=width\ height
 comment1.target=MaxwellContainer(int,\ int)
 comment1.text=\r\n\ Constructor\ de\ la\ clase\ MaxwellContainer.\r\n\ @param\ width\ Ancho\ del\ contenedor.\r\n\ @param\ height\ Alto\ del\ contenedor.\r\n

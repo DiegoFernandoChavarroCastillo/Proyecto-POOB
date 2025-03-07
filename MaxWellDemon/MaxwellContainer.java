@@ -5,7 +5,7 @@ import java.util.*;
  * Permite añadir partículas y controlar la visualización.
  * El contenedor es un rectángulo con una división en la mitad.
  * 
- * @author Diego
+ * @author Diego, Juan Diego
  * @version 1.0
  */
 public class MaxwellContainer {
