@@ -20,7 +20,7 @@ public class Circle{
     
 
     public Circle(){
-        diameter = 30;
+        diameter = 10;
         xPosition = 20;
         yPosition = 15;
         color = "blue";
@@ -42,7 +42,7 @@ public class Circle{
 
     private void draw(){
         if(isVisible) {
-            Canvas canvas = Canvas.getCanvas();
+            Canvas canvas = Canvas.getCanvas(MaxwellContainer.getWidth(),MaxwellContainer.getHeight());
             canvas.draw(this, color, 
                 new Ellipse2D.Double(xPosition, yPosition, 
                 diameter, diameter));
@@ -52,7 +52,7 @@ public class Circle{
 
     private void erase(){
         if(isVisible) {
-            Canvas canvas = Canvas.getCanvas();
+            Canvas canvas = Canvas.getCanvas(MaxwellContainer.getWidth(),MaxwellContainer.getHeight());
             canvas.erase(this);
         }
     }

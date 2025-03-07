@@ -13,6 +13,8 @@ public class MaxwellContainer {
     private Rectangle division;
     private List<Particle> particles;
     private boolean visible;
+    private static int width;
+    private static int height;
 
     /**
      * Constructor de la clase MaxwellContainer.
@@ -20,17 +22,21 @@ public class MaxwellContainer {
      * @param height Alto del contenedor.
      */
     public MaxwellContainer(int width, int height) {
+        Canvas.reset(); // Reinicia cualquier canvas anterior
+        this.width = width;
+        this.height = height;
         container = new Rectangle();
         container.changeSize(height, width);
-        container.moveHorizontal(50);
-        container.moveVertical(50);
+        container.setPos(0,0);
         division = new Rectangle();
         division.changeSize(height, 5);
-        division.moveHorizontal(50 + width / 2);
-        division.moveVertical(50);
+        division.setPos(width/2,0);
         division.changeColor("black");
         particles = new ArrayList<>();
-        visible = false;
+        visible = true;
+        this.makeVisible();
+        Canvas.getCanvas(width,height);
+
     }
 
     /**
@@ -83,4 +89,27 @@ public class MaxwellContainer {
         makeInvisible();
         particles.clear();
     }
+    
+    public void createParticle(int x, int y, String color, int speedX, int speedY) {
+    if (isInside(x, y)) {
+        Particle p = new Particle(x, y, color, speedX, speedY);
+        particles.add(p);
+        if (visible) {
+            p.makeVisible();
+        }
+    }
+    }
+
+    private boolean isInside(int x, int y) {
+    return x >= 50 && x <= (50 + width) && y >= 50 && y <= (50 + height);
+    }
+    
+    public static int getWidth() {
+        return width;
+    }
+
+    public static int getHeight() {
+        return height;
+    }
+
 }

@@ -96,7 +96,14 @@ public class Rectangle{
         yPosition += distance;
         draw();
     }
-
+    
+    
+    public void setPos(int xPos,int yPos){
+    erase();
+    this.xPosition = xPos;
+    this.yPosition = yPos;
+    draw();
+    }
     /**
      * Slowly move the rectangle horizontally.
      * @param distance the desired distance in pixels
@@ -165,7 +172,7 @@ public class Rectangle{
 
     private void draw() {
         if(isVisible) {
-            Canvas canvas = Canvas.getCanvas();
+            Canvas canvas = Canvas.getCanvas(MaxwellContainer.getWidth(),MaxwellContainer.getHeight());
             canvas.draw(this, color,
                 new java.awt.Rectangle(xPosition, yPosition, 
                                        width, height));
@@ -178,7 +185,7 @@ public class Rectangle{
      */
     private void erase(){
         if(isVisible) {
-            Canvas canvas = Canvas.getCanvas();
+            Canvas canvas = Canvas.getCanvas(MaxwellContainer.getWidth(),MaxwellContainer.getHeight());
             canvas.erase(this);
         }
     }
