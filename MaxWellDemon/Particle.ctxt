@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Particle
+comment0.text=\r\n\ Clase\ Particle\ que\ representa\ una\ part\u00EDcula\ en\ la\ simulaci\u00F3n.\r\n\ \r\n\ @author\ Diego\r\n\ @version\ 1.0\r\n
+comment1.params=xPos\ yPos\ color\ speedX\ speedY
+comment1.target=Particle(int,\ int,\ java.lang.String,\ int,\ int)
+comment1.text=\r\n\ Constructor\ para\ objetos\ de\ la\ clase\ Particle.\r\n\ @param\ xPos\ Posici\u00F3n\ X\ inicial.\r\n\ @param\ yPos\ Posici\u00F3n\ Y\ inicial.\r\n\ @param\ color\ Color\ de\ la\ part\u00EDcula.\r\n\ @param\ speedX\ Velocidad\ en\ X.\r\n\ @param\ speedY\ Velocidad\ en\ Y.\r\n
+comment2.params=
+comment2.target=void\ move()
+comment2.text=\r\n\ Mueve\ la\ part\u00EDcula\ autom\u00E1ticamente\ seg\u00FAn\ su\ velocidad.\r\n
+comment3.params=newSpeedX\ newSpeedY
+comment3.target=void\ setSpeed(int,\ int)
+comment3.text=\r\n\ Cambia\ la\ velocidad\ de\ la\ part\u00EDcula.\r\n\ @param\ newSpeedX\ Nueva\ velocidad\ en\ X.\r\n\ @param\ newSpeedY\ Nueva\ velocidad\ en\ Y.\r\n
+numComments=4
