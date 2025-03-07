@@ -27,7 +27,9 @@ public class Circle{
         isVisible = false;
     }
 
-
+    public void setDiameter(int diameter){
+        this.diameter = diameter;
+    }
        
     public void makeVisible(){
         isVisible = true;
@@ -50,7 +52,7 @@ public class Circle{
         }
     }
 
-    private void erase(){
+    public void erase(){
         if(isVisible) {
             Canvas canvas = Canvas.getCanvas(MaxwellContainer.getWidth(),MaxwellContainer.getHeight());
             canvas.erase(this);

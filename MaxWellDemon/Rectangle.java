@@ -28,8 +28,8 @@ public class Rectangle{
         width = 40;
         xPosition = 70;
         yPosition = 15;
-        color = "magenta";
-        isVisible = false;
+        color = "yellow";
+        isVisible = true;
     }
     
 
@@ -183,7 +183,7 @@ public class Rectangle{
     /*
      * Erase the rectangle on screen.
      */
-    private void erase(){
+    public void erase(){
         if(isVisible) {
             Canvas canvas = Canvas.getCanvas(MaxwellContainer.getWidth(),MaxwellContainer.getHeight());
             canvas.erase(this);

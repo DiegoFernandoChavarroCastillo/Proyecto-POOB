@@ -16,16 +16,22 @@ class Particle extends Circle {
      * @param speedX Velocidad en X.
      * @param speedY Velocidad en Y.
      */
-    public Particle(int xPos, int yPos, String color, int speedX, int speedY) {
+    public Particle(int xPos, int yPos, boolean blue, int speedX, int speedY) {
         super();
-        changeColor(color);
+        if (blue){
+            changeColor("blue");
+        } else {
+            changeColor("red");
+        }
         moveHorizontal(xPos);
         moveVertical(yPos);
         this.speedX = speedX;
         this.speedY = speedY;
+        super.setDiameter(MaxwellContainer.getWidth()/30);
         this.makeVisible();
     }
 
+    
     /**
      * Mueve la partícula automáticamente según su velocidad.
      */

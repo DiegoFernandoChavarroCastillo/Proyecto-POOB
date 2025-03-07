@@ -21,13 +21,13 @@ public class Triangle{
     /**
      * Create a new triangle at default position with default color.
      */
-    public Triangle(){
-        height = 30;
-        width = 40;
-        xPosition = 140;
-        yPosition = 15;
+    public Triangle(int height, int width, int xPosition, int yPosition){
+        this.height = height;
+        this.width = width;
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
         color = "green";
-        isVisible = false;
+        isVisible = true;
     }
 
     /**
@@ -172,7 +172,7 @@ public class Triangle{
     /*
      * Erase the triangle on screen.
      */
-    private void erase(){
+    public void erase(){
         if(isVisible) {
             Canvas canvas = Canvas.getCanvas(MaxwellContainer.getWidth(),MaxwellContainer.getHeight());
             canvas.erase(this);

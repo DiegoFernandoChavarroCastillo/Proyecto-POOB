@@ -9,12 +9,14 @@ import java.util.*;
  * @version 1.0
  */
 public class MaxwellContainer {
-    private Rectangle container;
-    private Rectangle division;
-    private List<Particle> particles;
     private boolean visible;
     private static int width;
     private static int height;
+    private Rectangle container;
+    private Rectangle division;
+    private List<Demon> demons;
+    private List<Particle> particles;
+    private List<Hole> holes;
 
     /**
      * Constructor de la clase MaxwellContainer.
@@ -22,23 +24,59 @@ public class MaxwellContainer {
      * @param height Alto del contenedor.
      */
     public MaxwellContainer(int width, int height) {
-        Canvas.reset(); // Reinicia cualquier canvas anterior
+        Canvas.reset(); 
+        if (width < 4) {
+        width = 4;
+        }
+        if (height < 200) {
+            height = 200;
+        }
         this.width = width;
         this.height = height;
         container = new Rectangle();
         container.changeSize(height, width);
         container.setPos(0,0);
         division = new Rectangle();
-        division.changeSize(height, 5);
+        division.changeSize(height, width/80);
         division.setPos(width/2,0);
         division.changeColor("black");
+        this.demons = new ArrayList<>();
         particles = new ArrayList<>();
+        holes = new ArrayList<>();
         visible = true;
         this.makeVisible();
         Canvas.getCanvas(width,height);
 
     }
-
+    
+    public void createDemon(int height){
+            if (isInside(width/2, height)) {
+            Demon d = new Demon(height);
+            demons.add(d);
+        if (visible) {
+            d.makeVisible();
+        }
+    }
+    }
+    
+    public void deleteLastDemon(){
+        if (!demons.isEmpty()){
+            Demon lastDemon = demons.get(demons.size() - 1);
+            lastDemon.erase();
+            demons.remove(demons.size() - 1);
+        } else {
+            System.out.println("no hay demonios");
+        }
+    }
+    
+    private boolean isInside(int x, int y) {
+    if (x <= (width) && y <= (height)){
+        return x <= (width) && y <= (height);
+    } else {
+        System.out.println("Fuera de limites");
+        return false;
+    }}
+    
     /**
      * Hace visible el contenedor con la división y todas sus partículas.
      */
@@ -63,36 +101,9 @@ public class MaxwellContainer {
         visible = false;
     }
 
-    /**
-     * Añade una partícula al contenedor.
-     * @param particle La partícula a añadir.
-     */
-    public void addParticle(Particle particle) {
-        particles.add(particle);
-        if (visible) {
-            particle.makeVisible();
-        }
-    }
-
-    /**
-     * Consulta la cantidad de partículas en el contenedor.
-     * @return Número de partículas.
-     */
-    public int getParticleCount() {
-        return particles.size();
-    }
-
-    /**
-     * Termina la simulación limpiando todas las partículas.
-     */
-    public void finish() {
-        makeInvisible();
-        particles.clear();
-    }
-    
-    public void createParticle(int x, int y, String color, int speedX, int speedY) {
+    public void createParticle(int x, int y, boolean blue, int speedX, int speedY) {
     if (isInside(x, y)) {
-        Particle p = new Particle(x, y, color, speedX, speedY);
+        Particle p = new Particle(x, y, blue, speedX, speedY);
         particles.add(p);
         if (visible) {
             p.makeVisible();
@@ -100,8 +111,25 @@ public class MaxwellContainer {
     }
     }
 
-    private boolean isInside(int x, int y) {
-    return x >= 50 && x <= (50 + width) && y >= 50 && y <= (50 + height);
+    public void deleteLastParticle(){
+        if (!particles.isEmpty()){
+            Particle lastParticle = particles.get(particles.size() - 1);
+            lastParticle.erase();
+            particles.remove(particles.size() - 1);
+        } else{
+            System.out.println("no hay particulas");
+        }
+    }
+    
+    public void createHole(int xPosition, int yPosition, int capMax){
+        if (isInside(xPosition, yPosition)) {
+            Hole h = new Hole(xPosition, yPosition, capMax);
+            holes.add(h);
+            if (visible) {
+                h.makeVisible();
+            }
+    }
+        
     }
     
     public static int getWidth() {
