@@ -114,9 +114,22 @@ public class MaxwellContainer {
         // Método vacío
     }
 
-    public void addHole(int px, int py, int particles) {
-        // Método vacío
+   /**
+     * Agrega un agujero en una posición específica dentro del contenedor.
+     * @param px Coordenada X.
+     * @param py Coordenada Y.
+     * @param maxParticles Cantidad máxima de partículas que puede contener el agujero.
+     */
+    public void addHole(int px, int py, int maxParticles) {
+        if (isInside(px, py)) {
+            Hole hole = new Hole(px, py, maxParticles);
+            holes.add(hole);
+            if (!visible) {
+                hole.makeVisible();
+            }
+        }
     }
+
 
     public void start(int ticks) {
         for (int i = 0; i < ticks; i++) {

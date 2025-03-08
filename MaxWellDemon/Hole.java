@@ -18,11 +18,14 @@ public class Hole extends Circle
      */
     public Hole(int xPos, int yPos, int capMax)
     {
+        
         this.xPosition = xPos;
         this.yPosition = yPos;
         this.capMax = capMax;
-        super.setDiameter(MaxwellContainer.getWidth()/25);
-        changeColor("grey");
+        this.cap = 0;
+        super.setDiameter(MaxwellContainer.getWidth() / 25);
+        super.moveTo(xPosition, yPosition);
+        super.changeColor("grey");
         this.makeVisible();
     }
 
