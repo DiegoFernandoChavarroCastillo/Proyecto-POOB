@@ -23,9 +23,9 @@ public class Canvas{
 
     public static Canvas getCanvas(int width, int height) {
     if (canvasSingleton == null) {
-        canvasSingleton = new Canvas("MaxWellDemon", width, height, Color.white);
+        canvasSingleton = new Canvas("MaxWellDemon", width+50, height+50, Color.white);
     } else {
-        canvasSingleton.adjustWindowSize(width, height); // 🔥 Ajustar el tamaño correctamente
+        canvasSingleton.adjustWindowSize(width+50, height+50); // 🔥 Ajustar el tamaño correctamente
     }
     canvasSingleton.setVisible(true);
     return canvasSingleton;

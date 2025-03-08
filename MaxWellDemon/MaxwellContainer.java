@@ -138,10 +138,10 @@ public class MaxwellContainer {
                 int newY = p.getCircle().getY() + p.getVelocityY();
                 
                 // Colisiones con los bordes
-                if (newX <= 0 || newX >= width) {
+                if (newX <= 0 || newX >= width-10) {
                     p.setVelocityX(-p.getVelocityX());
                 }
-                if (newY <= 0 || newY >= height) {
+                if (newY <= 0 || newY >= height-10) {
                     p.setVelocityY(-p.getVelocityY());
                 }
                 

@@ -22,8 +22,9 @@ class Particle extends Circle {
         super();
         changeColor(color);
         this.isRed = isRed;
-        moveHorizontal(xPos);
-        moveVertical(yPos);
+        super.moveTo(xPos,yPos);
+        //moveHorizontal(xPos);
+        //moveVertical(yPos);
         this.color = color;
         this.speedX = speedX;
         this.speedY = speedY;
