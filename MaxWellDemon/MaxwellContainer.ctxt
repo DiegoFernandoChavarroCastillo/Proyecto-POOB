@@ -36,7 +36,6 @@ comment6.params=color
 comment6.target=void\ delParticle(java.lang.String)
 comment7.params=px\ py\ maxParticles
 comment7.target=void\ addHole(int,\ int,\ int)
-comment7.text=\r\n\ Agrega\ un\ agujero\ en\ una\ posici\u00F3n\ espec\u00EDfica\ dentro\ del\ contenedor.\r\n\ @param\ px\ Coordenada\ X.\r\n\ @param\ py\ Coordenada\ Y.\r\n\ @param\ maxParticles\ Cantidad\ m\u00E1xima\ de\ part\u00EDculas\ que\ puede\ contener\ el\ agujero.\r\n
 comment8.params=ticks
 comment8.target=void\ start(int)
 comment9.params=

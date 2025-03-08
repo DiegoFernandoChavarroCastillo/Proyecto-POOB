@@ -45,21 +45,18 @@ public class MaxwellContainer {
     }
 
     public MaxwellContainer(int h, int w, int d, int b, int r, int[][] particles) {
-        this(h, w); // 🔥 Llamamos al primer constructor
-
-        if (ok()) { // Solo si el primer constructor se ejecutó correctamente
-            // 🔥 Inicializar los demonios
+        this(h, w);
+        
+        if (ok()) {
             addDemon(d);
-
             addParticle(r, b, particles);
             System.out.println("MaxwellContainer creado con éxito.");
         } else {
             System.out.println("Error en la inicialización del contenedor.");
-            setIsOk(false); // Si hubo un problema, marcar como no exitoso
+            setIsOk(false);
         }
     }
 
-    // Métodos públicos según el diagrama de clases
     public void addDemon(int d) {
         if (d < 0 || d > height) {
             System.out.println("Error: Posición del demonio fuera de rango.");
@@ -74,7 +71,6 @@ public class MaxwellContainer {
         // Método vacío
     }
 
-    // Método para agregar múltiples partículas
     public void addParticle(int r, int b, int[][] particlesData) {
         if (particlesData.length != r + b) {
             System.out.println("Error: Se esperaban " + (r + b) + " partículas, pero se recibieron " + particlesData.length);
@@ -88,16 +84,15 @@ public class MaxwellContainer {
             int vx = particlesData[i][2];
             int vy = particlesData[i][3];
     
-            boolean isRed = (i < r); // Los primeros r son rojos
+            boolean isRed = (i < r);
             String color = isRed ? "red" : "blue";
     
-            // Validar si la posición está dentro del contenedor
             if (!isInside(px, py)) {
+                System.out.println("Error: Partícula fuera de los límites seguros. Ignorada.");
                 setIsOk(false);
                 continue;
             }
     
-            // Validar velocidad
             if (vx <= -width || vx >= width || vy <= -height || vy >= height || (vx == 0 && vy == 0)) {
                 System.out.println("Error: Velocidad de partícula no válida. Ignorada.");
                 setIsOk(false);
@@ -109,17 +104,10 @@ public class MaxwellContainer {
         }
     }
 
-
     public void delParticle(String color) {
         // Método vacío
     }
 
-   /**
-     * Agrega un agujero en una posición específica dentro del contenedor.
-     * @param px Coordenada X.
-     * @param py Coordenada Y.
-     * @param maxParticles Cantidad máxima de partículas que puede contener el agujero.
-     */
     public void addHole(int px, int py, int maxParticles) {
         if (isInside(px, py)) {
             Hole hole = new Hole(px, py, maxParticles);
@@ -130,25 +118,21 @@ public class MaxwellContainer {
         }
     }
 
-
     public void start(int ticks) {
         for (int i = 0; i < ticks; i++) {
             for (Particle p : particles) {
                 int newX = p.getCircle().getX() + p.getVelocityX();
                 int newY = p.getCircle().getY() + p.getVelocityY();
                 
-                // Colisiones con los bordes
-                if (newX <= 0 || newX >= width-10) {
+                if (newX <= 10 || newX >= width - 10) {
                     p.setVelocityX(-p.getVelocityX());
                 }
-                if (newY <= 0 || newY >= height-10) {
+                if (newY <= 10 || newY >= height - 10) {
                     p.setVelocityY(-p.getVelocityY());
                 }
                 
                 p.getCircle().moveTo(newX, newY);
             }
-            
-            // Pequeña pausa para la animación
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
@@ -158,19 +142,19 @@ public class MaxwellContainer {
     }
 
     public boolean isGoal() {
-        return false; // Retorno temporal
+        return false;
     }
 
     public int[] demons() {
-        return new int[0]; // Retorno temporal
+        return new int[0];
     }
 
     public int[][] particles() {
-        return new int[0][0]; // Retorno temporal
+        return new int[0][0];
     }
 
     public int[][] holes() {
-        return new int[0][0]; // Retorno temporal
+        return new int[0][0];
     }
 
     public void makeVisible() {
@@ -189,7 +173,6 @@ public class MaxwellContainer {
         return isOk;
     }
 
-    // Método auxiliar para actualizar el estado de la última acción
     private void setIsOk(boolean success) {
         this.isOk = success;
     }
@@ -198,17 +181,12 @@ public class MaxwellContainer {
     public static int getHeight() { return height; }
     
     private boolean isInside(int x, int y) {
-        if (x <= width && y <= height) {
+        if (x >= 10 && x <= width - 10 && y >= 10 && y <= height - 10) {
             return true;
         } else {
-            System.out.println("Fuera de límites");
+            System.out.println("Error: Partícula fuera de los límites seguros en (" + x + "," + y + ").");
             return false;
         }
     }
 
 }
-
-
-
-
-
