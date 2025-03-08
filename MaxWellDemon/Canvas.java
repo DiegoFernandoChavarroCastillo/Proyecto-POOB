@@ -57,12 +57,20 @@ public class Canvas{
         canvas = new CanvasPane();
         frame.setContentPane(canvas);
         frame.setTitle(title);
+        
+        // Ajustar el tamaño del CanvasPane
         canvas.setPreferredSize(new Dimension(width, height));
         backgroundColour = bgColour;
-        frame.pack();
-        objects = new ArrayList <Object>();
-        shapes = new HashMap <Object,ShapeDescription>();
+        
+        frame.pack(); // Empaqueta la ventana en función del contenido
+        frame.setSize(width, height); // 🔥 Asegura que la ventana tenga el tamaño correcto
+        frame.setResizable(true); // Opcional: evita que el usuario cambie el tamaño
+        frame.setLocationRelativeTo(null); // Centra la ventana en la pantalla
+        
+        objects = new ArrayList<>();
+        shapes = new HashMap<>();
     }
+
 
     /**
      * Set the canvas visibility and brings canvas to the front of screen
@@ -216,5 +224,7 @@ public class Canvas{
         
         
     }
+    
+    
 
 }
