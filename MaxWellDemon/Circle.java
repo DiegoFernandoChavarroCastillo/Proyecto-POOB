@@ -166,7 +166,20 @@ public class Circle{
         color = newColor;
         draw();
     }
+    
+    public void moveTo(int x, int y){
+    erase(); 
+    this.xPosition = x;
+    this.yPosition = y;
+    draw(); 
+}
 
-
+    public int getX(){
+    return this.xPosition;
+    }
+    
+    public int getY(){
+    return this.yPosition;
+    }
 
 }

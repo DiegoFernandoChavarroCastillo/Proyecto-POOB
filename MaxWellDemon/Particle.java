@@ -51,4 +51,22 @@ class Particle extends Circle {
     public String getColor(){
     return this.color;
     }
+    
+    public void setVelocityX(int vx){
+    this.speedX = vx;
+    }
+    public void setVelocityY(int vy){
+    this.speedY = vy;
+    }
+    
+    public int getVelocityX(){
+    return this.speedX;
+    }
+    public int getVelocityY(){
+    return this.speedY;
+    }
+    public Circle getCircle() {
+    return this;
+    }
+
 }
