@@ -172,7 +172,7 @@ public class Circle{
     this.xPosition = x;
     this.yPosition = y;
     draw(); 
-}
+    }
 
     public int getX(){
     return this.xPosition;

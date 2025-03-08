@@ -5,6 +5,7 @@
  * @version 1.0
  */
 class Particle extends Circle {
+
     private int speedX;
     private int speedY;
     private String color;
@@ -19,11 +20,11 @@ class Particle extends Circle {
      */
     public Particle(String color,int xPos, int yPos, boolean isRed, int speedX, int speedY) {
         super();
+        changeColor(color);
         this.isRed = isRed;
         moveHorizontal(xPos);
         moveVertical(yPos);
         this.color = color;
-        changeColor(this.color);
         this.speedX = speedX;
         this.speedY = speedY;
         super.setDiameter(MaxwellContainer.getWidth()/30);
@@ -51,4 +52,22 @@ class Particle extends Circle {
     public String getColor(){
     return this.color;
     }
+    
+    public void setVelocityX(int vx){
+    this.speedX = vx;
+    }
+    public void setVelocityY(int vy){
+    this.speedY = vy;
+    }
+    
+    public int getVelocityX(){
+    return this.speedX;
+    }
+    public int getVelocityY(){
+    return this.speedY;
+    }
+    public Circle getCircle() {
+    return this;
+    }
+
 }

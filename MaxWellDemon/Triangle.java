@@ -21,12 +21,12 @@ public class Triangle{
     /**
      * Create a new triangle at default position with default color.
      */
-    public Triangle(int height, int width, int xPosition, int yPosition){
+    public Triangle(int height, int width, int xPosition, int yPosition, String color){
         this.height = height;
         this.width = width;
         this.xPosition = xPosition;
         this.yPosition = yPosition;
-        color = "green";
+        this.color = color;
         isVisible = true;
     }
 

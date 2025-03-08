@@ -16,9 +16,9 @@ public class MaxwellContainer {
         Canvas.reset();
         
         if (w < 2) w = 2;
-        if (w > 200) w = 200;
+        if (w > 500) w = 500;
         if (h < 2) h = 2;
-        if (h > 200) h = 200;
+        if (h > 500) h = 500;
     
         this.width = w;
         this.height = h;
@@ -29,7 +29,7 @@ public class MaxwellContainer {
         
         division = new Rectangle();
         division.changeSize(h, Math.max(1, w / 80));
-        division.setPos(w / 2, 0);
+        division.setPos((w / 2)-(Math.max(1, w / 80)), 0);
         division.changeColor("black");
         
         this.demons = new ArrayList<>();
@@ -51,18 +51,7 @@ public class MaxwellContainer {
             // 🔥 Inicializar los demonios
             addDemon(d);
 
-            // 🔥 Inicializar las partículas (r rojas, b azules)
-            for (int i = 0; i < r + b; i++) {
-                int px = particles[i][0];
-                int py = particles[i][1];
-                int vx = particles[i][2];
-                int vy = particles[i][3];
-                
-                boolean isRed = (i < r); 
-                String color = isRed ? "red" : "blue";
-
-                this.particles.add(new Particle(color, px, py, isRed, vx, vy));
-            }
+            addParticle(r, b, particles);
             System.out.println("MaxwellContainer creado con éxito.");
         } else {
             System.out.println("Error en la inicialización del contenedor.");
@@ -85,9 +74,41 @@ public class MaxwellContainer {
         // Método vacío
     }
 
-    public void addParticle(String color, boolean isRed, int px, int py, int vx, int vy) {
-        // Método vacío
+    // Método para agregar múltiples partículas
+    public void addParticle(int r, int b, int[][] particlesData) {
+        if (particlesData.length != r + b) {
+            System.out.println("Error: Se esperaban " + (r + b) + " partículas, pero se recibieron " + particlesData.length);
+            setIsOk(false);
+            return;
+        }
+    
+        for (int i = 0; i < r + b; i++) {
+            int px = particlesData[i][0];
+            int py = particlesData[i][1];
+            int vx = particlesData[i][2];
+            int vy = particlesData[i][3];
+    
+            boolean isRed = (i < r); // Los primeros r son rojos
+            String color = isRed ? "red" : "blue";
+    
+            // Validar si la posición está dentro del contenedor
+            if (!isInside(px, py)) {
+                setIsOk(false);
+                continue;
+            }
+    
+            // Validar velocidad
+            if (vx <= -width || vx >= width || vy <= -height || vy >= height || (vx == 0 && vy == 0)) {
+                System.out.println("Error: Velocidad de partícula no válida. Ignorada.");
+                setIsOk(false);
+                continue;
+            }
+    
+            particles.add(new Particle(color, px, py, isRed, vx, vy));
+            System.out.println("Partícula agregada: Color=" + color + ", Pos=(" + px + "," + py + "), Vel=(" + vx + "," + vy + ")");
+        }
     }
+
 
     public void delParticle(String color) {
         // Método vacío
@@ -98,7 +119,29 @@ public class MaxwellContainer {
     }
 
     public void start(int ticks) {
-        // Método vacío
+        for (int i = 0; i < ticks; i++) {
+            for (Particle p : particles) {
+                int newX = p.getCircle().getX() + p.getVelocityX();
+                int newY = p.getCircle().getY() + p.getVelocityY();
+                
+                // Colisiones con los bordes
+                if (newX <= 0 || newX >= width) {
+                    p.setVelocityX(-p.getVelocityX());
+                }
+                if (newY <= 0 || newY >= height) {
+                    p.setVelocityY(-p.getVelocityY());
+                }
+                
+                p.getCircle().moveTo(newX, newY);
+            }
+            
+            // Pequeña pausa para la animación
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
     }
 
     public boolean isGoal() {
@@ -140,6 +183,16 @@ public class MaxwellContainer {
     
     public static int getWidth() { return width; }
     public static int getHeight() { return height; }
+    
+    private boolean isInside(int x, int y) {
+        if (x <= width && y <= height) {
+            return true;
+        } else {
+            System.out.println("Fuera de límites");
+            return false;
+        }
+    }
+
 }
 
 
