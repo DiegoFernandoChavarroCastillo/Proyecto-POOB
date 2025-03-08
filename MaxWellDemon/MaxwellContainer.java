@@ -23,7 +23,7 @@ public class MaxwellContainer {
      * @param width Ancho del contenedor.
      * @param height Alto del contenedor.
      */
-    public MaxwellContainer(int width, int height) {
+    public MaxwellContainer(int height,int width ) {
         Canvas.reset(); 
         if (width < 4) {
         width = 4;
@@ -49,27 +49,26 @@ public class MaxwellContainer {
 
     }
     
-    public void addDemon(int height){
-            if (isInside(width/2, height)) {
-            Demon d = new Demon(height);
-            demons.add(d);
+    public void addDemon(int d){
+            if (isInside(width/2, d)) {
+            Demon dem = new Demon(d);
+            demons.add(dem);
         if (visible) {
-            d.makeVisible();
+            dem.makeVisible();
         }
     }
     }
     
-    public void delDemon(int yPosition){
+    public void delDemon(int d){
     if (!demons.isEmpty()){
-        for (int i = 0; i < demons.size(); i++){
-            Demon demon = demons.get(i);
-            if (demon.getYPosition() == yPosition){
-                demon.erase(); 
-                demons.remove(i); 
-                return; 
-            }
+        boolean removed = demons.removeIf(dem -> { dem.erase(); dem.getYPosition() == d});
+
+        if (removed){
+            System.out.println("Demonio eliminado con d: " + d);
+            
+        } else {
+            System.out.println("No se encontro el demonio d: " + d);
         }
-        System.out.println("No se encontró demonio en la posición " + yPosition);
     } else {
         System.out.println("No hay demonios");
     }
@@ -108,9 +107,9 @@ public class MaxwellContainer {
         visible = false;
     }
 
-    public void addParticle(String color,boolean isRed,  int px, int py, int speedX, int speedY) {
+    public void addParticle(String color,boolean isRed,  int px, int py, int vx, int vy) {
     if (isInside(px, py)) {
-        Particle p = new Particle(color,px, py, isRed, speedX, speedY);
+        Particle p = new Particle(color,px, py, isRed, vx, vy);
         particles.add(p);
         if (visible) {
             p.makeVisible();
@@ -120,19 +119,17 @@ public class MaxwellContainer {
 
     public void delParticle(String color){
     if (!particles.isEmpty()){
-        for (int i = 0; i < particles.size(); i++){
-            Particle particle = particles.get(i);
-            if (particle.getColor().equals(color)){ // Comparamos el color
-                particle.erase(); // Se borra visualmente
-                particles.remove(i); // Se elimina de la lista
-                return; // Sale para no seguir buscando
-            }
+        boolean removed = particles.removeIf(p -> p.getColor().equals(color));
+        if (removed){
+            System.out.println("Partícula eliminada con el color: " + color);
+        } else {
+            System.out.println("No se encontró partícula con el color: " + color);
         }
-        System.out.println("No se encontró partícula con el color: " + color);
     } else {
         System.out.println("No hay partículas");
     }
-}
+    }
+
 
     
     public void addHole(int xPosition, int yPosition, int particles){

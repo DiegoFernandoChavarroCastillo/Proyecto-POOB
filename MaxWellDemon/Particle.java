@@ -8,6 +8,7 @@ class Particle extends Circle {
     private int speedX;
     private int speedY;
     private String color;
+    private boolean isRed;
     /**
      * Constructor para objetos de la clase Particle.
      * @param xPos Posición X inicial.
@@ -16,13 +17,10 @@ class Particle extends Circle {
      * @param speedX Velocidad en X.
      * @param speedY Velocidad en Y.
      */
-    public Particle(String color,int xPos, int yPos, boolean blue, int speedX, int speedY) {
+    public Particle(String color,int xPos, int yPos, boolean isRed, int speedX, int speedY) {
         super();
-        if (blue){
-            changeColor("blue");
-        } else {
-            changeColor("red");
-        }
+        changeColor(color);
+        this.isRed = isRed;
         moveHorizontal(xPos);
         moveVertical(yPos);
         this.color = color;
