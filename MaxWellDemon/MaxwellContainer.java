@@ -38,7 +38,7 @@ public class MaxwellContainer {
         
         visible = true;
         
-        Canvas.getCanvas(w, h);
+        Canvas.getCanvas(2*w, 2*h);
         
         this.makeVisible();
         setIsOk(true);
