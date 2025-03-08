@@ -27,4 +27,7 @@ public class Demon
     public void erase(){
         cuerpo.erase();
     }
+    public int getYPosition(){
+    return this.yPosition;
+}
 }

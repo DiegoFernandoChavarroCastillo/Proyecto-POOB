@@ -7,7 +7,7 @@
 class Particle extends Circle {
     private int speedX;
     private int speedY;
-
+    private String color;
     /**
      * Constructor para objetos de la clase Particle.
      * @param xPos Posición X inicial.
@@ -16,7 +16,7 @@ class Particle extends Circle {
      * @param speedX Velocidad en X.
      * @param speedY Velocidad en Y.
      */
-    public Particle(int xPos, int yPos, boolean blue, int speedX, int speedY) {
+    public Particle(String color,int xPos, int yPos, boolean blue, int speedX, int speedY) {
         super();
         if (blue){
             changeColor("blue");
@@ -25,6 +25,7 @@ class Particle extends Circle {
         }
         moveHorizontal(xPos);
         moveVertical(yPos);
+        this.color = color;
         this.speedX = speedX;
         this.speedY = speedY;
         super.setDiameter(MaxwellContainer.getWidth()/30);
@@ -48,5 +49,8 @@ class Particle extends Circle {
     public void setSpeed(int newSpeedX, int newSpeedY) {
         this.speedX = newSpeedX;
         this.speedY = newSpeedY;
+    }
+    public String getColor(){
+    return this.color;
     }
 }
