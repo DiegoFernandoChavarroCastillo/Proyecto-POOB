@@ -21,18 +21,32 @@ public class Canvas{
 
     private static Canvas canvasSingleton;
 
-    /**
-     * Factory method to get the canvas singleton object.
-     */
-    public static Canvas getCanvas(int width, int height){
-    if(canvasSingleton == null) {
+    public static Canvas getCanvas(int width, int height) {
+    if (canvasSingleton == null) {
         canvasSingleton = new Canvas("MaxWellDemon", width, height, Color.white);
     } else {
-        canvasSingleton.frame.setSize(width, height); // 🔥 Aquí se actualiza el tamaño
+        canvasSingleton.adjustWindowSize(width, height); // 🔥 Ajustar el tamaño correctamente
     }
     canvasSingleton.setVisible(true);
     return canvasSingleton;
     }
+    
+    // 🔥 Nuevo método para ajustar correctamente el tamaño de la ventana
+    private void adjustWindowSize(int width, int height) {
+        Insets insets = frame.getInsets();
+        int totalWidth = width + insets.left + insets.right;
+        int totalHeight = height + insets.top + insets.bottom;
+        
+        frame.setSize(totalWidth, totalHeight); // 🔥 Ajustamos la ventana
+        canvas.setPreferredSize(new Dimension(width, height)); // Ajustamos el panel de dibujo
+        frame.pack(); // 🔥 Empaquetamos para que todo encaje
+    }
+
+
+
+
+
+
 
 
     //  ----- instance part -----

@@ -15,9 +15,9 @@ public class MaxwellContainer {
     public MaxwellContainer(int h, int w) {
         Canvas.reset();
         
-        if (w < 2) w = 2;
+        if (w < 150) w = 150;
         if (w > 500) w = 500;
-        if (h < 2) h = 2;
+        if (h < 150) h = 150;
         if (h > 500) h = 500;
     
         this.width = w;
