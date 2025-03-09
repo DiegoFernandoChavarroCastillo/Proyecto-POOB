@@ -12,6 +12,8 @@ public class MaxwellContainer {
     private List<Particle> particles;
     private List<Hole> holes;
     private boolean visible;
+    private boolean isRunning;
+    private Thread simulationThread;
     
     public MaxwellContainer(int h, int w) {
         Canvas.reset();
@@ -38,6 +40,7 @@ public class MaxwellContainer {
         holes = new ArrayList<>();
         
         visible = true;
+        isRunning = false;
         
         Canvas.getCanvas(2*w, 2*h);
         
@@ -160,16 +163,20 @@ public class MaxwellContainer {
 
 
     public void start(int ticks) {
+    if (isRunning) return; 
+    System.out.println("**Simulacion Iniciada**");
+    isRunning = true;
+    simulationThread = new Thread(() -> {
         int divisionX = ((width / 2) - (Math.max(1, width / 80))); 
         Random random = new Random();
-    
-        for (int i = 0; i < ticks; i++) {
+
+        for (int i = 0; i < ticks && isRunning; i++) { 
             for (Particle p : particles) {
                 int oldX = p.getCircle().getX();
                 int oldY = p.getCircle().getY();
                 int newX = oldX + p.getVelocityX();
                 int newY = oldY + p.getVelocityY();
-    
+
                 if (!isInside(newX, newY)) {
                     if (newX < 10) {
                         newX = 10;
@@ -178,7 +185,7 @@ public class MaxwellContainer {
                         newX = width - 10;
                         p.setVelocityX(-p.getVelocityX());
                     }
-    
+
                     if (newY < 10) {
                         newY = 10;
                         p.setVelocityY(-p.getVelocityY());
@@ -187,7 +194,7 @@ public class MaxwellContainer {
                         p.setVelocityY(-p.getVelocityY());
                     }
                 }
-    
+
                 if ((oldX < divisionX && newX >= divisionX) || (oldX > divisionX && newX <= divisionX)) {
                     boolean demonioPresente = false;
                     for (Demon d : demons) {
@@ -196,7 +203,7 @@ public class MaxwellContainer {
                             break;
                         }
                     }
-    
+
                     if (demonioPresente) {
                         int chance = random.nextInt(2); 
                         if (chance == 1) {
@@ -210,7 +217,7 @@ public class MaxwellContainer {
                 }
                 p.getCircle().moveTo(newX, newY);
             }
-    
+
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
@@ -218,11 +225,16 @@ public class MaxwellContainer {
                 break;
             }
         }
-    }
+        isRunning = false; 
+    });
+
+    simulationThread.start(); 
+}
 
 
 
     public boolean isGoal() {
+        System.out.println("Simulacion Terminada");
         return false;
     }
 
@@ -327,8 +339,11 @@ public class MaxwellContainer {
     }
 
     public void finish() {
-        // Método vacío
+    isRunning = false; 
+    if (simulationThread != null) {
+        simulationThread.interrupt(); // Detiene el hilo
     }
+}
 
     public boolean ok() {
         return isOk;
@@ -347,12 +362,12 @@ public class MaxwellContainer {
         int divisionX = (width / 2) - (Math.max(1, width / 80));
     
         if (x < margin || x > width - margin || y < margin || y > height - margin) {
-            System.out.println("❌ Error: Fuera de límites (" + x + "," + y + ")");
+            //System.out.println("❌ Error: Fuera de límites (" + x + "," + y + ")");
             return false;
         }
     
         if (Math.abs(x - divisionX) < divisionMargin) {
-            System.out.println("❌ Error: Demasiado cerca de la división en X (" + x + ")");
+            //System.out.println("❌ Error: Demasiado cerca de la división en X (" + x + ")");
             return false;
         }
     
