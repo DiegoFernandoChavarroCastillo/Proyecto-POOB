@@ -126,4 +126,22 @@ class Particle extends Circle {
     public int getYPosition() {
         return super.getY();
     }
+    
+    /**
+     * Devuelve el valor de color de la particula.
+     * 
+     * @return isRed booleano
+     */
+    public boolean getRed(){
+        return isRed;
+    }
+    
+    /**
+     * Determina en qué lado del tablero está la partícula.
+     * @return `true` si está en la mitad izquierda, `false` si está en la mitad derecha.
+     */
+    public boolean isOnLeftSide() {
+        return getXPosition() < (MaxwellContainer.getWidth() / 2);
+    }
+
 }

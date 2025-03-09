@@ -18,8 +18,8 @@ public class MaxwellContainer {
     private List<Particle> particles;
     private List<Hole> holes;
     private boolean visible;
-    private boolean isRunning;
     private Thread simulationThread;
+    private volatile boolean running = false;
 
     /**
      * Constructor de la clase MaxwellContainer.
@@ -53,7 +53,7 @@ public class MaxwellContainer {
         holes = new ArrayList<>();
 
         visible = true;
-        isRunning = false;
+        running = false;
 
         Canvas.getCanvas(2*w, 2*h);
 
@@ -97,7 +97,8 @@ public class MaxwellContainer {
             return;
         }
         demons.add(new Demon(d));
-        System.out.println("Demonio agregado en la posición " + d);
+        setIsOk(true);
+        System.out.println("Demonio agregado");
     }
 
     /**
@@ -119,9 +120,11 @@ public class MaxwellContainer {
         }
 
         if (found) {
+            setIsOk(true);
             System.out.println("Todos los demonios en la posición " + d + " han sido eliminados.");
         } else {
             System.out.println("No se encontraron demonios en la posición " + d);
+            setIsOk(false);
         }
     }
 
@@ -163,6 +166,7 @@ public class MaxwellContainer {
             particles.add(new Particle(color, px, py, isRed, vx, vy));
             System.out.println("Partícula agregada: Color=" + color + ", Pos=(" + px + "," + py + "), Vel=(" + vx + "," + vy + ")");
         }
+        setIsOk(true);
     }
 
     /**
@@ -193,6 +197,7 @@ public class MaxwellContainer {
         } else {
             System.out.println("No se encontraron partículas de color: " + color);
         }
+        setIsOk(found);
     }
 
     /**
@@ -209,103 +214,153 @@ public class MaxwellContainer {
             if (!visible) {
                 hole.makeVisible();
             }
+            setIsOk(true);
+        } else {
+            setIsOk(false);
         }
     }
 
     /**
      * Inicia la simulación con el número de ticks especificado.
+     * La simulación se ejecuta en un hilo separado y se detiene automáticamente si se cumple el objetivo.
      * 
      * @param ticks El número de ticks de la simulación.
      */
     public void start(int ticks) {
-        int divisionX = ((width / 2) - (Math.max(1, width / 80))); 
-        Random random = new Random();
-    
-        for (int i = 0; i < ticks; i++) {
-            Iterator<Particle> particleIterator = particles.iterator(); 
-            
-            while (particleIterator.hasNext()) {
-                Particle p = particleIterator.next();
-                int oldX = p.getCircle().getX();
-                int oldY = p.getCircle().getY();
-                int newX = oldX + p.getVelocityX();
-                int newY = oldY + p.getVelocityY();
-    
-                boolean absorbed = false;
-                for (Hole h : holes) {
-                    if (Math.abs(h.getXPosition() - newX) <= 10 && Math.abs(h.getYPosition() - newY) <= 10) {
-                        if (h.canAbsorbMore()) { 
-                            h.absorbParticle();  
-                            p.erase();           
-                            particleIterator.remove(); 
-                            absorbed = true;
-                            System.out.println("💥 Partícula absorbida en hole (" + h.getXPosition() + ", " + h.getYPosition() + ")");
-                            break; 
-                        }
-                    }
+        if (ticks == 0) {
+            running = false; 
+            if (simulationThread != null) {
+                try {
+                    simulationThread.join(); 
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
                 }
-                if (absorbed) continue; 
-    
-                if (!isInside(newX, newY)) {
-                    if (newX < 10) {
-                        newX = 10;
-                        p.setVelocityX(-p.getVelocityX());
-                    } else if (newX > width - 10) {
-                        newX = width - 10;
-                        p.setVelocityX(-p.getVelocityX());
-                    }
-    
-                    if (newY < 10) {
-                        newY = 10;
-                        p.setVelocityY(-p.getVelocityY());
-                    } else if (newY > height - 10) {
-                        newY = height - 10;
-                        p.setVelocityY(-p.getVelocityY());
-                    }
-                }
-    
-                if ((oldX < divisionX && newX >= divisionX) || (oldX > divisionX && newX <= divisionX)) {
-                    boolean demonioPresente = false;
-                    for (Demon d : demons) {
-                        if (Math.abs(d.getYPosition() - newY) <= 10) { 
-                            demonioPresente = true;
-                            break;
-                        }
-                    }
-    
-                    if (demonioPresente) {
-                        int chance = random.nextInt(2); 
-                        if (chance == 1) {
-                            p.setVelocityX(-p.getVelocityX());
-                            newX = oldX; 
-                        } 
-                    } else {
-                        p.setVelocityX(-p.getVelocityX());
-                        newX = oldX;
-                    }
-                }
-                p.getCircle().moveTo(newX, newY);
             }
-    
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                break;
-            }
+            return;
         }
+
+        if (running) return; 
+
+        running = true;
+        simulationThread = new Thread(() -> {
+            int divisionX = ((width / 2) - (Math.max(1, width / 80))); 
+            Random random = new Random();
+
+            for (int i = 0; i < ticks && running; i++) {
+                Iterator<Particle> particleIterator = particles.iterator();
+
+                while (particleIterator.hasNext()) {
+                    Particle p = particleIterator.next();
+                    int oldX = p.getCircle().getX();
+                    int oldY = p.getCircle().getY();
+                    int newX = oldX + p.getVelocityX();
+                    int newY = oldY + p.getVelocityY();
+
+                    boolean absorbed = false;
+                    for (Hole h : holes) {
+                        if (Math.abs(h.getXPosition() - newX) <= 10 && Math.abs(h.getYPosition() - newY) <= 10) {
+                            if (h.canAbsorbMore()) { 
+                                h.absorbParticle();  
+                                p.erase();           
+                                particleIterator.remove(); 
+                                absorbed = true;
+                                System.out.println("Partícula absorbida");
+                                break; 
+                            }
+                        }
+                    }
+                    if (absorbed) continue;
+
+                    if (!isInside(newX, newY)) {
+                        if (newX < 10) {
+                            newX = 10;
+                            p.setVelocityX(-p.getVelocityX());
+                        } else if (newX > width - 10) {
+                            newX = width - 10;
+                            p.setVelocityX(-p.getVelocityX());
+                        }
+
+                        if (newY < 10) {
+                            newY = 10;
+                            p.setVelocityY(-p.getVelocityY());
+                        } else if (newY > height - 10) {
+                            newY = height - 10;
+                            p.setVelocityY(-p.getVelocityY());
+                        }
+                    }
+
+                    if ((oldX < divisionX && newX >= divisionX) || (oldX > divisionX && newX <= divisionX)) {
+                        boolean demonioPresente = false;
+                        for (Demon d : demons) {
+                            if (Math.abs(d.getYPosition() - newY) <= 10) { 
+                                demonioPresente = true;
+                                break;
+                            }
+                        }
+
+                        if (demonioPresente) {
+                            int chance = random.nextInt(2); 
+                            if (chance == 1) {
+                                p.setVelocityX(-p.getVelocityX());
+                                newX = oldX; 
+                            } 
+                        } else {
+                            p.setVelocityX(-p.getVelocityX());
+                            newX = oldX;
+                        }
+                    }
+                    p.getCircle().moveTo(newX, newY);
+                }
+
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
+            }
+            running = false; 
+        });
+
+        simulationThread.start();
     }
 
+    
 
     /**
-     * Verifica si se ha alcanzado el objetivo de la simulación.
-     * 
-     * @return true si se ha alcanzado el objetivo, false en caso contrario.
+     * Verifica si todas las partículas de un mismo color están en un solo lado del contenedor.
+     * Si esto ocurre, detiene la simulación llamando a `finish()`.
+     *
+     * @return `true` si la condición se cumple, `false` en caso contrario.
      */
     public boolean isGoal() {
-        System.out.println("Simulacion Terminada");
+        if (particles.isEmpty()) return false; 
+    
+        boolean allRedLeft = true;
+        boolean allBlueLeft = true;
+        boolean allRedRight = true;
+        boolean allBlueRight = true;
+    
+        for (Particle p : particles) {
+            boolean isLeft = p.isOnLeftSide();
+            boolean isRed = p.getRed();
+    
+            
+            if (isRed && !isLeft) allRedLeft = false;
+            if (!isRed && !isLeft) allBlueLeft = false;
+            if (isRed && isLeft) allRedRight = false;
+            if (!isRed && isLeft) allBlueRight = false;
+        }
+    
+        if (allRedLeft || allBlueLeft || allRedRight || allBlueRight) {
+            System.out.println("Todas las partículas de un color están en un solo lado.");
+            finish(); 
+            return true;
+        }
+    
         return false;
     }
+
 
     /**
      * Devuelve las posiciones de los demonios en el contenedor.
@@ -429,7 +484,7 @@ public class MaxwellContainer {
      * Finaliza la simulación.
      */
     public void finish() {
-        isRunning = false;
+        running = false;
         if (simulationThread != null) {
             simulationThread.interrupt();
         }
