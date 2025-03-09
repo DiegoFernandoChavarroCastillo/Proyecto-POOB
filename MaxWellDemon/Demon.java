@@ -28,8 +28,15 @@ public class Demon
         ojo.makeVisible();
     }
     
+<<<<<<< HEAD
     
     
+=======
+        public void makeInVisible(){
+        cuerpo.makeInvisible();
+        ojo.makeInvisible();
+    }
+>>>>>>> f52c7cd383ab0b3441ef89e53728505cf9aab6b9
     
     public void erase(){
         cuerpo.erase();

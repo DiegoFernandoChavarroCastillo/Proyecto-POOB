@@ -2,7 +2,11 @@
 dependency1.from=Particle
 dependency1.to=MaxwellContainer
 dependency1.type=UsesDependency
+<<<<<<< HEAD
 dependency10.from=Demon
+=======
+dependency10.from=Rectangle
+>>>>>>> f52c7cd383ab0b3441ef89e53728505cf9aab6b9
 dependency10.to=MaxwellContainer
 dependency10.type=UsesDependency
 dependency11.from=MaxwellContainer
@@ -26,6 +30,7 @@ dependency2.type=UsesDependency
 dependency3.from=Circle
 dependency3.to=MaxwellContainer
 dependency3.type=UsesDependency
+<<<<<<< HEAD
 dependency4.from=Rectangle
 dependency4.to=Canvas
 dependency4.type=UsesDependency
@@ -57,6 +62,39 @@ package.editor.width=1131
 package.editor.x=22
 package.editor.y=89
 package.frame.height=735
+=======
+dependency4.from=Hole
+dependency4.to=MaxwellContainer
+dependency4.type=UsesDependency
+dependency5.from=Triangle
+dependency5.to=Canvas
+dependency5.type=UsesDependency
+dependency6.from=Triangle
+dependency6.to=MaxwellContainer
+dependency6.type=UsesDependency
+dependency7.from=Demon
+dependency7.to=Triangle
+dependency7.type=UsesDependency
+dependency8.from=Demon
+dependency8.to=MaxwellContainer
+dependency8.type=UsesDependency
+dependency9.from=Rectangle
+dependency9.to=Canvas
+dependency9.type=UsesDependency
+editor.fx.0.height=737
+editor.fx.0.width=814
+editor.fx.0.x=360
+editor.fx.0.y=58
+objectbench.height=211
+objectbench.width=751
+package.divider.horizontal=0.599873577749684
+package.divider.vertical=0.6588639200998752
+package.editor.height=416
+package.editor.width=1147
+package.editor.x=0
+package.editor.y=60
+package.frame.height=740
+>>>>>>> f52c7cd383ab0b3441ef89e53728505cf9aab6b9
 package.frame.width=1300
 package.numDependencies=15
 package.numTargets=8

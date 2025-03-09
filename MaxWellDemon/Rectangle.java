@@ -29,7 +29,7 @@ public class Rectangle{
         xPosition = 70;
         yPosition = 15;
         color = "yellow";
-        isVisible = true;
+        isVisible = false;
     }
     
 

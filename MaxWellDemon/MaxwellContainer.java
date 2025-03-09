@@ -210,7 +210,7 @@ public class MaxwellContainer {
         demonPositions[i] = demons.get(i).getYPosition();
     }
 
-    Arrays.sort(demonPositions); // Ordenamos el array de menor a mayor
+    Arrays.sort(demonPositions); 
 
     return demonPositions;
     }
@@ -243,32 +243,64 @@ public class MaxwellContainer {
 
 
     public int[][] holes() {
-    int[][] holeData = new int[holes.size()][3];
-
-    for (int i = 0; i < holes.size(); i++) {
-        Hole h = holes.get(i);
-        holeData[i][0] = h.getXPosition();   
-        holeData[i][1] = h.getYPosition();  
-        holeData[i][2] = h.getRemainingParticles(); 
+        int[][] holeData = new int[holes.size()][3];
+    
+        for (int i = 0; i < holes.size(); i++) {
+            Hole h = holes.get(i);
+            holeData[i][0] = h.getXPosition();   
+            holeData[i][1] = h.getYPosition();  
+            holeData[i][2] = h.getRemainingParticles(); 
+        }
+    
+    
+        Arrays.sort(holeData, Comparator.comparingInt((int[] a) -> a[0])  
+                                         .thenComparingInt(a -> a[1])      
+                                         .thenComparingInt(a -> a[2]));    
+    
+        return holeData;
     }
-
-
-    Arrays.sort(holeData, Comparator.comparingInt((int[] a) -> a[0])  
-                                     .thenComparingInt(a -> a[1])      
-                                     .thenComparingInt(a -> a[2]));    
-
-    return holeData;
-    }
-
-
 
 
     public void makeVisible() {
-        // Método vacío
+        visible = true;   
+        container.makeVisible();
+        division.makeVisible();
+        if (!demons.isEmpty()){
+            for (Demon d : demons){
+                d.makeVisible();
+            }
+        }
+        if (!particles.isEmpty()){
+            for (Particle p : particles){
+                p.makeVisible();
+            }
+        }
+        if (!holes.isEmpty()){
+            for (Hole h : holes){
+                h.makeVisible();
+            }
+        }
     }
 
     public void makeInvisible() {
-        // Método vacío
+        visible = false;
+        division.makeInvisible();   
+        container.makeInvisible();
+        if (!demons.isEmpty()){
+            for (Demon d : demons){
+                d.makeInVisible();
+            }
+        }
+        if (!particles.isEmpty()){
+            for (Particle p : particles){
+                p.makeInvisible();
+            }
+        }
+        if (!holes.isEmpty()){
+            for (Hole h : holes){
+                h.makeInvisible();
+            }
+        }
     }
 
     public void finish() {
