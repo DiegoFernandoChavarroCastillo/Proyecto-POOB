@@ -158,44 +158,54 @@ public class MaxwellContainer {
     }
 
     public void start(int ticks) {
-    int divisionX = ((width / 2)-(Math.max(1,width/80))); // Posición de la división
+        int divisionX = ((width / 2) - (Math.max(1, width / 80))); 
     
-    for (int i = 0; i < ticks; i++) {
-        for (Particle p : particles) {
-            int newX = p.getCircle().getX() + p.getVelocityX();
-            int newY = p.getCircle().getY() + p.getVelocityY();
-
-            // Colisión con paredes verticales (izquierda y derecha)
-            if (newX <= 10 || newX >= width) {
-                p.setVelocityX(-p.getVelocityX());
-                newX = p.getCircle().getX() + p.getVelocityX(); // Actualizar posición
+        for (int i = 0; i < ticks; i++) {
+            for (Particle p : particles) {
+                int oldX = p.getCircle().getX(); 
+                int oldY = p.getCircle().getY(); 
+    
+                int newX = oldX + p.getVelocityX(); 
+                int newY = oldY + p.getVelocityY(); 
+    
+                if (!isInside(newX, newY)) {
+                    
+                    if (newX < 10) {
+                        newX = 10; 
+                        p.setVelocityX(-p.getVelocityX()); 
+                    }
+                    else if (newX > width - 10) {
+                        newX = width - 10; 
+                        p.setVelocityX(-p.getVelocityX()); 
+                    }
+    
+                    if (newY < 10) {
+                        newY = 10;
+                        p.setVelocityY(-p.getVelocityY()); 
+                    }
+                    else if (newY > height - 10) {
+                        newY = height - 10; 
+                        p.setVelocityY(-p.getVelocityY()); 
+                    }
+                }
+    
+                if ((oldX < divisionX && newX >= divisionX) || (oldX > divisionX && newX <= divisionX)) {
+                    p.setVelocityX(-p.getVelocityX()); 
+                    newX = oldX; 
+                }
+    
+                p.getCircle().moveTo(newX, newY);
             }
-
-            // Colisión con paredes horizontales (arriba y abajo)
-            if (newY <= 10 || newY >= height) {
-                p.setVelocityY(-p.getVelocityY());
-                newY = p.getCircle().getY() + p.getVelocityY(); // Actualizar posición
+    
+            // ⏳ Pequeña pausa para la simulación
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break; // Salir del bucle si hay una interrupción
             }
-
-            // Colisión con la división central
-            if ((p.getCircle().getX() < divisionX && newX >= divisionX) || 
-                (p.getCircle().getX() > divisionX && newX <= divisionX)) {
-                p.setVelocityX(-p.getVelocityX()); // Invertir velocidad en X
-                newX = p.getCircle().getX() + p.getVelocityX(); // Ajustar posición
-            }
-
-            // Mover la partícula a la nueva posición
-            p.getCircle().moveTo(newX, newY);
         }
-
-        // Simulación con retardo
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            break; // Si el hilo es interrumpido, salir del bucle
-        }
-    }
+    
     }
 
 
