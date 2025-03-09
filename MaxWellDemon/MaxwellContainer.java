@@ -185,7 +185,15 @@ public class MaxwellContainer {
     }
 
     public int[] demons() {
-        return new int[0];
+    int[] demonPositions = new int[demons.size()];
+
+    for (int i = 0; i < demons.size(); i++) {
+        demonPositions[i] = demons.get(i).getYPosition();
+    }
+
+    Arrays.sort(demonPositions); // Ordenamos el array de menor a mayor
+
+    return demonPositions;
     }
 
     public int[][] particles() {
@@ -216,8 +224,25 @@ public class MaxwellContainer {
 
 
     public int[][] holes() {
-        return new int[0][0];
+    int[][] holeData = new int[holes.size()][3];
+
+    for (int i = 0; i < holes.size(); i++) {
+        Hole h = holes.get(i);
+        holeData[i][0] = h.getXPosition();   
+        holeData[i][1] = h.getYPosition();  
+        holeData[i][2] = h.getRemainingParticles(); 
     }
+
+
+    Arrays.sort(holeData, Comparator.comparingInt((int[] a) -> a[0])  
+                                     .thenComparingInt(a -> a[1])      
+                                     .thenComparingInt(a -> a[2]));    
+
+    return holeData;
+    }
+
+
+
 
     public void makeVisible() {
         // Método vacío

@@ -28,5 +28,15 @@ public class Hole extends Circle
         super.changeColor("grey");
         this.makeVisible();
     }
-
+    
+    public int getXPosition(){
+    return xPosition;
+    }
+    
+    public int getYPosition(){
+       return yPosition;
+    }
+    public int getRemainingParticles(){
+       return capMax;
+    }
 }
