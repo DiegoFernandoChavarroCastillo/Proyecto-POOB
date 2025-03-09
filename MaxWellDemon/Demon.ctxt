@@ -1,15 +1,19 @@
 #BlueJ class context
 comment0.target=Demon
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Demon\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ La\ clase\ Demon\ representa\ un\ demonio\ en\ el\ contenedor\ de\ Maxwell.\r\n\ El\ demonio\ tiene\ una\ posici\u00F3n\ en\ el\ eje\ Y\ y\ est\u00E1\ representado\ visualmente\ por\ dos\ tri\u00E1ngulos\:\r\n\ uno\ para\ el\ cuerpo\ y\ otro\ para\ el\ ojo.\r\n\ \r\n\ @author\ Diego\ chavarro,\ Diego\ Rodriguez\r\n\ @version\ 08/03/25\r\n
 comment1.params=yPosition
 comment1.target=Demon(int)
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Demon\r\n
+comment1.text=\r\n\ Constructor\ de\ la\ clase\ Demon.\r\n\ Inicializa\ el\ demonio\ en\ la\ posici\u00F3n\ especificada\ y\ lo\ hace\ visible.\r\n\ \r\n\ @param\ yPosition\ La\ posici\u00F3n\ en\ el\ eje\ Y\ donde\ se\ ubicar\u00E1\ el\ demonio.\r\n
 comment2.params=
 comment2.target=void\ makeVisible()
+comment2.text=\r\n\ Hace\ visible\ el\ demonio,\ mostrando\ tanto\ el\ cuerpo\ como\ el\ ojo.\r\n
 comment3.params=
 comment3.target=void\ makeInVisible()
+comment3.text=\r\n\ Hace\ invisible\ el\ demonio,\ ocultando\ tanto\ el\ cuerpo\ como\ el\ ojo.\r\n
 comment4.params=
 comment4.target=void\ erase()
+comment4.text=\r\n\ Elimina\ el\ demonio\ del\ contenedor,\ borrando\ tanto\ el\ cuerpo\ como\ el\ ojo.\r\n
 comment5.params=
 comment5.target=int\ getYPosition()
+comment5.text=\r\n\ Devuelve\ la\ posici\u00F3n\ en\ el\ eje\ Y\ del\ demonio.\r\n\ \r\n\ @return\ La\ posici\u00F3n\ en\ el\ eje\ Y\ del\ demonio.\r\n
 numComments=6

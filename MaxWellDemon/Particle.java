@@ -1,5 +1,7 @@
+import java.util.*;
 /**
- * Clase Particle que representa una partícula en la simulación.
+ * La clase Particle representa una partícula en la simulación del contenedor de Maxwell.
+ * Cada partícula tiene una posición, velocidad, color y puede moverse dentro del contenedor.
  * 
  * @author Diego
  * @version 1.0
@@ -10,27 +12,30 @@ class Particle extends Circle {
     private int speedY;
     private String color;
     private boolean isRed;
+
     /**
-     * Constructor para objetos de la clase Particle.
-     * @param xPos Posición X inicial.
-     * @param yPos Posición Y inicial.
-     * @param color Color de la partícula.
-     * @param speedX Velocidad en X.
-     * @param speedY Velocidad en Y.
+     * Constructor de la clase Particle.
+     * Inicializa la partícula con una posición, color, velocidad y la hace visible.
+     * 
+     * @param color El color de la partícula.
+     * @param xPos La posición inicial en el eje X.
+     * @param yPos La posición inicial en el eje Y.
+     * @param isRed Indica si la partícula es roja.
+     * @param speedX La velocidad inicial en el eje X.
+     * @param speedY La velocidad inicial en el eje Y.
      */
-    public Particle(String color,int xPos, int yPos, boolean isRed, int speedX, int speedY) {
+    public Particle(String color, int xPos, int yPos, boolean isRed, int speedX, int speedY) {
         super();
         changeColor(color);
         this.isRed = isRed;
-        super.moveTo(xPos,yPos);
+        super.moveTo(xPos, yPos);
         this.color = color;
         this.speedX = speedX;
         this.speedY = speedY;
-        super.setDiameter(MaxwellContainer.getWidth()/30);
+        super.setDiameter(MaxwellContainer.getWidth() / 30);
         this.makeVisible();
     }
 
-    
     /**
      * Mueve la partícula automáticamente según su velocidad.
      */
@@ -41,39 +46,84 @@ class Particle extends Circle {
 
     /**
      * Cambia la velocidad de la partícula.
-     * @param newSpeedX Nueva velocidad en X.
-     * @param newSpeedY Nueva velocidad en Y.
+     * 
+     * @param newSpeedX La nueva velocidad en el eje X.
+     * @param newSpeedY La nueva velocidad en el eje Y.
      */
     public void setSpeed(int newSpeedX, int newSpeedY) {
         this.speedX = newSpeedX;
         this.speedY = newSpeedY;
     }
-    public String getColor(){
-    return this.color;
+
+    /**
+     * Devuelve el color de la partícula.
+     * 
+     * @return El color de la partícula.
+     */
+    public String getColor() {
+        return this.color;
     }
-    
-    public void setVelocityX(int vx){
-    this.speedX = vx;
+
+    /**
+     * Establece la velocidad en el eje X.
+     * 
+     * @param vx La nueva velocidad en el eje X.
+     */
+    public void setVelocityX(int vx) {
+        this.speedX = vx;
     }
-    public void setVelocityY(int vy){
-    this.speedY = vy;
+
+    /**
+     * Establece la velocidad en el eje Y.
+     * 
+     * @param vy La nueva velocidad en el eje Y.
+     */
+    public void setVelocityY(int vy) {
+        this.speedY = vy;
     }
-    
-    public int getVelocityX(){
-    return this.speedX;
+
+    /**
+     * Devuelve la velocidad en el eje X.
+     * 
+     * @return La velocidad en el eje X.
+     */
+    public int getVelocityX() {
+        return this.speedX;
     }
-    public int getVelocityY(){
-    return this.speedY;
+
+    /**
+     * Devuelve la velocidad en el eje Y.
+     * 
+     * @return La velocidad en el eje Y.
+     */
+    public int getVelocityY() {
+        return this.speedY;
     }
+
+    /**
+     * Devuelve el círculo que representa visualmente la partícula.
+     * 
+     * @return El círculo de la partícula.
+     */
     public Circle getCircle() {
-    return this;
+        return this;
     }
-    
-    public int getXPosition(){
+
+    /**
+     * Devuelve la posición en el eje X de la partícula.
+     * 
+     * @return La posición en el eje X.
+     */
+    public int getXPosition() {
         return super.getX();
     }
 
-    public int getYPosition(){
+    /**
+     * Devuelve la posición en el eje Y de la partícula.
+     * 
+     * @return La posición en el eje Y.
+     */
+    public int getYPosition() {
         return super.getY();
     }
 }
