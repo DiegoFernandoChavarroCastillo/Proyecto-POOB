@@ -105,8 +105,30 @@ public class MaxwellContainer {
     }
 
     public void delParticle(String color) {
-        // Método vacío
+        if (particles.isEmpty()) {
+            System.out.println("No hay partículas para eliminar.");
+            return;
+        }
+    
+        Iterator<Particle> iterator = particles.iterator();
+        boolean found = false;
+    
+        while (iterator.hasNext()) {
+            Particle p = iterator.next();
+            if (p.getColor().equals(color)) {
+                p.erase(); 
+                iterator.remove();
+                found = true;
+            }
+        }
+    
+        if (found) {
+            System.out.println("Se eliminaron todas las partículas de color: " + color);
+        } else {
+            System.out.println("No se encontraron partículas de color: " + color);
+        }
     }
+
 
     public void addHole(int px, int py, int maxParticles) {
         if (isInside(px, py)) {
