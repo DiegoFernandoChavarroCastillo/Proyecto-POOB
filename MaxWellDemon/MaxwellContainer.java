@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.Random;
 
 public class MaxwellContainer {
     
@@ -157,56 +158,69 @@ public class MaxwellContainer {
         }
     }
 
-    public void start(int ticks) {
-        int divisionX = ((width / 2) - (Math.max(1, width / 80))); 
-    
-        for (int i = 0; i < ticks; i++) {
-            for (Particle p : particles) {
-                int oldX = p.getCircle().getX(); 
-                int oldY = p.getCircle().getY(); 
-    
-                int newX = oldX + p.getVelocityX(); 
-                int newY = oldY + p.getVelocityY(); 
-    
-                if (!isInside(newX, newY)) {
-                    
-                    if (newX < 10) {
-                        newX = 10; 
-                        p.setVelocityX(-p.getVelocityX()); 
-                    }
-                    else if (newX > width - 10) {
-                        newX = width - 10; 
-                        p.setVelocityX(-p.getVelocityX()); 
-                    }
-    
-                    if (newY < 10) {
-                        newY = 10;
-                        p.setVelocityY(-p.getVelocityY()); 
-                    }
-                    else if (newY > height - 10) {
-                        newY = height - 10; 
-                        p.setVelocityY(-p.getVelocityY()); 
+
+public void start(int ticks) {
+    int divisionX = ((width / 2) - (Math.max(1, width / 80))); // Posición de la división
+    Random random = new Random(); // Generador de números aleatorios
+
+    for (int i = 0; i < ticks; i++) {
+        for (Particle p : particles) {
+            int oldX = p.getCircle().getX();
+            int oldY = p.getCircle().getY();
+            int newX = oldX + p.getVelocityX();
+            int newY = oldY + p.getVelocityY();
+
+            if (!isInside(newX, newY)) {
+                if (newX < 10) {
+                    newX = 10;
+                    p.setVelocityX(-p.getVelocityX());
+                } else if (newX > width - 10) {
+                    newX = width - 10;
+                    p.setVelocityX(-p.getVelocityX());
+                }
+
+                if (newY < 10) {
+                    newY = 10;
+                    p.setVelocityY(-p.getVelocityY());
+                } else if (newY > height - 10) {
+                    newY = height - 10;
+                    p.setVelocityY(-p.getVelocityY());
+                }
+            }
+
+            if ((oldX < divisionX && newX >= divisionX) || (oldX > divisionX && newX <= divisionX)) {
+                boolean demonioPresente = false;
+                for (Demon d : demons) {
+                    if (Math.abs(d.getYPosition() - newY) <= 10) { 
+                        demonioPresente = true;
+                        break;
                     }
                 }
-    
-                if ((oldX < divisionX && newX >= divisionX) || (oldX > divisionX && newX <= divisionX)) {
-                    p.setVelocityX(-p.getVelocityX()); 
-                    newX = oldX; 
+
+                if (demonioPresente) {
+                    int chance = random.nextInt(2); 
+                    if (chance == 1) {
+                        p.setVelocityX(-p.getVelocityX());
+                        newX = oldX; 
+                    } 
+                } else {
+                    p.setVelocityX(-p.getVelocityX());
+                    newX = oldX;
                 }
-    
-                p.getCircle().moveTo(newX, newY);
             }
-    
-            // ⏳ Pequeña pausa para la simulación
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                break; // Salir del bucle si hay una interrupción
-            }
+            p.getCircle().moveTo(newX, newY);
         }
-    
+
+        // ⏳ Pequeña pausa para la simulación
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            break;
+        }
     }
+}
+
 
 
     public boolean isGoal() {
