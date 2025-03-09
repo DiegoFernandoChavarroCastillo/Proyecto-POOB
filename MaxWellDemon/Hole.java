@@ -1,42 +1,71 @@
-
 /**
- * Write a description of class Hole here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Representa un agujero en el contenedor que puede absorber partículas hasta una capacidad máxima.
  */
-public class Hole extends Circle
-{
+public class Hole extends Circle {
 
     private int xPosition;
     private int yPosition;
-    private int capMax;
-    private int cap;
+    private int capMax; 
+    private int current;
 
     /**
-     * Constructor for objects of class Hole
+     * Constructor de la clase Hole
+     * @param xPos Posición X
+     * @param yPos Posición Y
+     * @param capMax Capacidad máxima de partículas que puede absorber
      */
-    public Hole(int xPos, int yPos, int capMax)
-    {
-        
+    public Hole(int xPos, int yPos, int capMax) {
         this.xPosition = xPos;
         this.yPosition = yPos;
         this.capMax = capMax;
-        this.cap = 0;
+        this.current = 0; 
         super.setDiameter(MaxwellContainer.getWidth() / 25);
         super.moveTo(xPosition, yPosition);
         super.changeColor("grey");
         this.makeVisible();
     }
-    
-    public int getXPosition(){
-    return xPosition;
+
+    /**
+     * Devuelve la posición X del agujero.
+     */
+    public int getXPosition() {
+        return xPosition;
+    }
+
+    /**
+     * Devuelve la posición Y del agujero.
+     */
+    public int getYPosition() {
+        return yPosition;
+    }
+
+    /**
+     * Devuelve la cantidad de partículas que aún puede absorber.
+     */
+    public int getRemainingCapacity() {
+        return capMax - current;
+    }
+
+    /**
+     * Devuelve `true` si el agujero aún puede absorber partículas.
+     */
+    public boolean canAbsorbMore() {
+        return current < capMax;
+    }
+
+    /**
+     * Absorbe una partícula si hay capacidad disponible.
+     */
+    public boolean absorbParticle() {
+        if (canAbsorbMore()) {
+            current++;
+            return true;
+        } else {
+            return false;
+        }
     }
     
-    public int getYPosition(){
-       return yPosition;
-    }
-    public int getRemainingParticles(){
-       return capMax;
+    public int getCapacity(){
+        return this.capMax;
     }
 }

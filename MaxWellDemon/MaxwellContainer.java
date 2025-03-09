@@ -272,7 +272,7 @@ public class MaxwellContainer {
             Hole h = holes.get(i);
             holeData[i][0] = h.getXPosition();   
             holeData[i][1] = h.getYPosition();  
-            holeData[i][2] = h.getRemainingParticles(); 
+            holeData[i][2] = h.getCapacity(); 
         }
     
     
