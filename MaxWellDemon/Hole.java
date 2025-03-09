@@ -54,17 +54,20 @@ public class Hole extends Circle {
     }
 
     /**
-     * Absorbe una partícula si hay capacidad disponible.
+     * Absorbe una partícula si hay capacidad disponible, al llenarse se cambia de color.
      */
-    public boolean absorbParticle() {
-        if (canAbsorbMore()) {
+    public void absorbParticle() {
+        if (current < capMax) {
             current++;
-            return true;
-        } else {
-            return false;
+            if (current >= capMax) {
+                super.changeColor("black");
+            }
         }
     }
     
+    /**
+     * Devuelve la capacidad maxima del agujero negro
+     */
     public int getCapacity(){
         return this.capMax;
     }
