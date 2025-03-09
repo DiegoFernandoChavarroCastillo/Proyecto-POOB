@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=CasosDePrueba
+comment1.params=
+comment1.target=void\ casoPrueba1()
+comment1.text=\r\n\ Caso\ de\ prueba\ 1\:\ Contenedor\ con\ un\ demonio\ y\ algunas\ part\u00EDculas.\r\n\ Se\ agregan\ part\u00EDculas\ rojas\ y\ azules\ con\ velocidades\ aleatorias.\r\n
+comment2.params=
+comment2.target=void\ casoPrueba2()
+comment2.text=\r\n\ Caso\ de\ prueba\ 2\:\ Contenedor\ con\ m\u00FAltiples\ demonios\ y\ agujeros.\r\n\ Se\ agregan\ varios\ demonios\ y\ agujeros\ estrat\u00E9gicamente.\r\n
+comment3.params=
+comment3.target=void\ casoPrueba3()
+comment3.text=\r\n\ Caso\ de\ prueba\ 3\:\ Contenedor\ con\ m\u00FAltiples\ part\u00EDculas\ y\ obst\u00E1culos.\r\n\ Se\ agregan\ part\u00EDculas\ con\ velocidades\ elevadas\ y\ varios\ demonios.\r\n
+comment4.params=rojas\ azules\ maxX\ maxY
+comment4.target=int[][]\ generarParticulas(int,\ int,\ int,\ int)
+comment4.text=\r\n\ Genera\ datos\ de\ part\u00EDculas\ con\ posiciones\ y\ velocidades\ aleatorias.\r\n\ \r\n\ @param\ rojas\ N\u00FAmero\ de\ part\u00EDculas\ rojas.\r\n\ @param\ azules\ N\u00FAmero\ de\ part\u00EDculas\ azules.\r\n\ @param\ maxX\ L\u00EDmite\ del\ eje\ X.\r\n\ @param\ maxY\ L\u00EDmite\ del\ eje\ Y.\r\n\ @return\ Matriz\ con\ los\ datos\ de\ las\ part\u00EDculas.\r\n
+numComments=5

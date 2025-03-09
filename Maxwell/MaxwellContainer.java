@@ -127,7 +127,17 @@ public class MaxwellContainer {
             setIsOk(false);
         }
     }
-
+    
+    public void addHole(int px, int py, int maxParticles) {
+        if (isInside(px, py)) {
+            Hole hole = new Hole(px, py, maxParticles);
+            holes.add(hole);
+            if (!visible) {
+                hole.makeVisible();
+            }
+        }
+    }
+    
     /**
      * Añade partículas al contenedor.
      * 
@@ -200,142 +210,139 @@ public class MaxwellContainer {
         setIsOk(found);
     }
 
-/**
- * Inicia la simulación con el número de ticks especificado.
- * La simulación se ejecuta en un hilo separado y se detiene automáticamente si se cumple el objetivo.
- * 
- * @param ticks El número de ticks de la simulación.
- */
-public void start(int ticks) {
-    if (ticks == 0) {
-        running = false; 
-        if (simulationThread != null) {
-            try {
-                simulationThread.join(); 
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+    /**
+     * Inicia la simulación con el número de ticks especificado.
+     * La simulación se ejecuta en un hilo separado y se detiene automáticamente si se cumple el objetivo.
+     * 
+     * @param ticks El número de ticks de la simulación.
+     */
+    public void start(int ticks) {
+        if (ticks == 0) {
+            running = false; 
+            if (simulationThread != null) {
+                try {
+                    simulationThread.join(); 
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
             }
+            return;
         }
-        return;
-    }
-
-    if (running) return; 
-
-    running = true;
-    simulationThread = new Thread(() -> {
-        int divisionX = ((width / 2) - (Math.max(1, width / 80))); 
-        Random random = new Random();
-
-        for (int i = 0; i < ticks && running; i++) {
-            Iterator<Particle> particleIterator = particles.iterator();
-
-            while (particleIterator.hasNext()) {
-                Particle p = particleIterator.next();
-                int oldX = p.getCircle().getX();
-                int oldY = p.getCircle().getY();
-                int newX = oldX + p.getVelocityX();
-                int newY = oldY + p.getVelocityY();
-
-                boolean absorbed = false;
-                for (Hole h : holes) {
-                    if (Math.abs(h.getXPosition() - newX) <= 10 && Math.abs(h.getYPosition() - newY) <= 10) {
-                        if (h.canAbsorbMore()) { 
-                            h.absorbParticle();  
-                            p.erase();           
-                            particleIterator.remove(); 
-                            absorbed = true;
-                            System.out.println("Partícula absorbida");
-                            break; 
-                        }
-                    }
-                }
-                if (absorbed) continue;
-
-                if (!isInside(newX, newY)) {
-                    if (newX < 10) {
-                        newX = 10;
-                        p.setVelocityX(-p.getVelocityX());
-                    } else if (newX > width - 10) {
-                        newX = width - 10;
-                        p.setVelocityX(-p.getVelocityX());
-                    }
-
-                    if (newY < 10) {
-                        newY = 10;
-                        p.setVelocityY(-p.getVelocityY());
-                    } else if (newY > height - 10) {
-                        newY = height - 10;
-                        p.setVelocityY(-p.getVelocityY());
-                    }
-                }
-
-                if ((oldX < divisionX && newX >= divisionX) || (oldX > divisionX && newX <= divisionX)) {
-                    boolean demonioPresente = false;
-                    for (Demon d : demons) {
-                        if (Math.abs(d.getYPosition() - newY) <= 10) { 
-                            demonioPresente = true;
-                            break;
-                        }
-                    }
-
-                    if (demonioPresente) {
-                        int chance = random.nextInt(2); 
-                        if (chance == 1) {
-                            p.setVelocityX(-p.getVelocityX());
-                            newX = oldX; 
-                        } 
-                    } else {
-                        p.setVelocityX(-p.getVelocityX());
-                        newX = oldX;
-                    }
-                }
-                p.getCircle().moveTo(newX, newY);
-            }
-
-            // **Verificación del objetivo en cada iteración**
-            if (isGoal()) {
-                System.out.println("🎯 ¡Todas las partículas rojas están en un solo lado! 🚀");
-                finish();
-            }
-            
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                break;
-            }
-        }
-        running = false; 
-    });
-
-    simulationThread.start();
-}
-
-
     
-
-/**
- * Verifica si todas las partículas rojas están en un solo lado del contenedor.
- * Si esto ocurre, detiene la simulación llamando a `finish()`.
- *
- * @return `true` si todas las partículas rojas están en un solo lado, `false` en caso contrario.
- */
-public boolean isGoal() {
-    if (particles.isEmpty()) return false; 
-
-    Boolean leftRed = false; 
-    Boolean rightRed = false;// Ahora usamos `Boolean` para manejar el primer caso correctamente.
-
-    for (Particle p : particles) {
-        if (p.isOnLeftSide()){
-            if(!p.getRed()){
-                leftRed = false; 
+        if (running) return; 
+    
+        running = true;
+        simulationThread = new Thread(() -> {
+            int divisionX = ((width / 2) - (Math.max(1, width / 80))); 
+            Random random = new Random();
+    
+            for (int i = 0; i < ticks && running; i++) {
+                Iterator<Particle> particleIterator = particles.iterator();
+    
+                while (particleIterator.hasNext()) {
+                    Particle p = particleIterator.next();
+                    int oldX = p.getCircle().getX();
+                    int oldY = p.getCircle().getY();
+                    int newX = oldX + p.getVelocityX();
+                    int newY = oldY + p.getVelocityY();
+    
+                    boolean absorbed = false;
+                    for (Hole h : holes) {
+                        if (Math.abs(h.getXPosition() - newX) <= 10 && Math.abs(h.getYPosition() - newY) <= 10) {
+                            if (h.canAbsorbMore()) { 
+                                h.absorbParticle();  
+                                p.erase();           
+                                particleIterator.remove(); 
+                                absorbed = true;
+                                System.out.println("Partícula absorbida");
+                                break; 
+                            }
+                        }
+                    }
+                    if (absorbed) continue;
+    
+                    if (!isInside(newX, newY)) {
+                        if (newX < 10) {
+                            newX = 10;
+                            p.setVelocityX(-p.getVelocityX());
+                        } else if (newX > width - 10) {
+                            newX = width - 10;
+                            p.setVelocityX(-p.getVelocityX());
+                        }
+    
+                        if (newY < 10) {
+                            newY = 10;
+                            p.setVelocityY(-p.getVelocityY());
+                        } else if (newY > height - 10) {
+                            newY = height - 10;
+                            p.setVelocityY(-p.getVelocityY());
+                        }
+                    }
+    
+                    if ((oldX < divisionX && newX >= divisionX) || (oldX > divisionX && newX <= divisionX)) {
+                        boolean demonioPresente = false;
+                        for (Demon d : demons) {
+                            if (Math.abs(d.getYPosition() - newY) <= 10) { 
+                                demonioPresente = true;
+                                break;
+                            }
+                        }
+    
+                        if (demonioPresente) {
+                            int chance = random.nextInt(2); 
+                            if (chance == 1) {
+                                p.setVelocityX(-p.getVelocityX());
+                                newX = oldX; 
+                            } 
+                        } else {
+                            p.setVelocityX(-p.getVelocityX());
+                            newX = oldX;
+                        }
+                    }
+                    p.getCircle().moveTo(newX, newY);
+                }
+    
+                
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
             }
-        }
+            running = false; 
+        });
+    
+        simulationThread.start();
     }
 
-    return false;
-}
+
+    /**
+     * Verifica si todas las partículas rojas están en un solo lado del contenedor.
+     * Si esto ocurre, detiene la simulación llamando a `finish()`.
+     *
+     * @return `true` si todas las partículas rojas están en un solo lado, `false` en caso contrario.
+     */
+    public boolean isGoal() {
+        if (particles.isEmpty()) return false; 
+    
+        Boolean leftRed = true; 
+        Boolean rightRed = true;// Ahora usamos `Boolean` para manejar el primer caso correctamente.
+    
+        for (Particle p : particles) {
+            if (p.isOnLeftSide()){
+                if(!p.getRed()){
+                    leftRed = false; 
+                }
+            } else {
+                if(!p.getRed()){
+                    rightRed = false;
+                }
+            }
+        }
+    
+        return leftRed || rightRed;
+    }
 
 
 

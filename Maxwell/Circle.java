@@ -18,7 +18,9 @@ public class Circle{
     private String color;
     private boolean isVisible;
     
-
+    /**
+     * construye circulo predeterminado
+     */
     public Circle(){
         diameter = 10;
         xPosition = 20;
@@ -26,17 +28,26 @@ public class Circle{
         color = "blue";
         isVisible = false;
     }
-
+    /**
+     * cambia el daimetro
+     * 
+     * @param diametro el diametro del circulo
+     */
     public void setDiameter(int diameter){
         this.diameter = diameter;
     }
-       
+    
+    /**
+     * hace visible
+     */
     public void makeVisible(){
         isVisible = true;
         draw();
     }
     
-
+    /**
+     * hace invisible
+     */
     public void makeInvisible(){
         erase();
         isVisible = false;
