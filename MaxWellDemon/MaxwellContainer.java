@@ -68,8 +68,26 @@ public class MaxwellContainer {
     }
 
     public void delDemon(int d) {
-        // Método vacío
+    boolean found = false;
+    Iterator<Demon> iterator = demons.iterator();
+    
+    while (iterator.hasNext()) {
+        Demon demon = iterator.next();
+        if (demon.getYPosition() == d) {
+            demon.erase();
+            iterator.remove();
+            found = true;
+        }
     }
+    
+    if (found) {
+        System.out.println("Todos los demonios en la posición " + d + " han sido eliminados.");
+    } else {
+        System.out.println("No se encontraron demonios en la posición " + d);
+    }
+    }
+
+    
 
     public void addParticle(int r, int b, int[][] particlesData) {
         if (particlesData.length != r + b) {
