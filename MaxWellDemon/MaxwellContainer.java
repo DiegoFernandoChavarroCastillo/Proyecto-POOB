@@ -159,67 +159,66 @@ public class MaxwellContainer {
     }
 
 
-public void start(int ticks) {
-    int divisionX = ((width / 2) - (Math.max(1, width / 80))); // Posición de la división
-    Random random = new Random(); // Generador de números aleatorios
-
-    for (int i = 0; i < ticks; i++) {
-        for (Particle p : particles) {
-            int oldX = p.getCircle().getX();
-            int oldY = p.getCircle().getY();
-            int newX = oldX + p.getVelocityX();
-            int newY = oldY + p.getVelocityY();
-
-            if (!isInside(newX, newY)) {
-                if (newX < 10) {
-                    newX = 10;
-                    p.setVelocityX(-p.getVelocityX());
-                } else if (newX > width - 10) {
-                    newX = width - 10;
-                    p.setVelocityX(-p.getVelocityX());
-                }
-
-                if (newY < 10) {
-                    newY = 10;
-                    p.setVelocityY(-p.getVelocityY());
-                } else if (newY > height - 10) {
-                    newY = height - 10;
-                    p.setVelocityY(-p.getVelocityY());
-                }
-            }
-
-            if ((oldX < divisionX && newX >= divisionX) || (oldX > divisionX && newX <= divisionX)) {
-                boolean demonioPresente = false;
-                for (Demon d : demons) {
-                    if (Math.abs(d.getYPosition() - newY) <= 10) { 
-                        demonioPresente = true;
-                        break;
+    public void start(int ticks) {
+        int divisionX = ((width / 2) - (Math.max(1, width / 80))); 
+        Random random = new Random();
+    
+        for (int i = 0; i < ticks; i++) {
+            for (Particle p : particles) {
+                int oldX = p.getCircle().getX();
+                int oldY = p.getCircle().getY();
+                int newX = oldX + p.getVelocityX();
+                int newY = oldY + p.getVelocityY();
+    
+                if (!isInside(newX, newY)) {
+                    if (newX < 10) {
+                        newX = 10;
+                        p.setVelocityX(-p.getVelocityX());
+                    } else if (newX > width - 10) {
+                        newX = width - 10;
+                        p.setVelocityX(-p.getVelocityX());
+                    }
+    
+                    if (newY < 10) {
+                        newY = 10;
+                        p.setVelocityY(-p.getVelocityY());
+                    } else if (newY > height - 10) {
+                        newY = height - 10;
+                        p.setVelocityY(-p.getVelocityY());
                     }
                 }
-
-                if (demonioPresente) {
-                    int chance = random.nextInt(2); 
-                    if (chance == 1) {
+    
+                if ((oldX < divisionX && newX >= divisionX) || (oldX > divisionX && newX <= divisionX)) {
+                    boolean demonioPresente = false;
+                    for (Demon d : demons) {
+                        if (Math.abs(d.getYPosition() - newY) <= 10) { 
+                            demonioPresente = true;
+                            break;
+                        }
+                    }
+    
+                    if (demonioPresente) {
+                        int chance = random.nextInt(2); 
+                        if (chance == 1) {
+                            p.setVelocityX(-p.getVelocityX());
+                            newX = oldX; 
+                        } 
+                    } else {
                         p.setVelocityX(-p.getVelocityX());
-                        newX = oldX; 
-                    } 
-                } else {
-                    p.setVelocityX(-p.getVelocityX());
-                    newX = oldX;
+                        newX = oldX;
+                    }
                 }
+                p.getCircle().moveTo(newX, newY);
             }
-            p.getCircle().moveTo(newX, newY);
-        }
-
-        // ⏳ Pequeña pausa para la simulación
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            break;
+    
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
         }
     }
-}
 
 
 
@@ -343,12 +342,22 @@ public void start(int ticks) {
     public static int getHeight() { return height; }
     
     private boolean isInside(int x, int y) {
-        if (x >= 10 && x <= width - 10 && y >= 10 && y <= height - 10) {
-            return true;
-        } else {
-            System.out.println("Error: Partícula fuera de los límites seguros en (" + x + "," + y + ").");
+        int margin = 10; //bordes
+        int divisionMargin = 20; // division
+        int divisionX = (width / 2) - (Math.max(1, width / 80));
+    
+        if (x < margin || x > width - margin || y < margin || y > height - margin) {
+            System.out.println("❌ Error: Fuera de límites (" + x + "," + y + ")");
             return false;
         }
+    
+        if (Math.abs(x - divisionX) < divisionMargin) {
+            System.out.println("❌ Error: Demasiado cerca de la división en X (" + x + ")");
+            return false;
+        }
+    
+        return true;
     }
+
 
 }
