@@ -189,8 +189,31 @@ public class MaxwellContainer {
     }
 
     public int[][] particles() {
-        return new int[0][0];
+        if (particles == null || particles.isEmpty()) {
+            return new int[0][0]; 
+        }
+    
+        int[][] particleMatrix = new int[particles.size()][4];
+    
+        for (int i = 0; i < particles.size(); i++) {
+            Particle p = particles.get(i);
+            particleMatrix[i][0] = p.getXPosition();
+            particleMatrix[i][1] = p.getYPosition();
+            particleMatrix[i][2] = p.getVelocityX(); 
+            particleMatrix[i][3] = p.getVelocityY();
+        }
+    
+        Arrays.sort(particleMatrix, (a, b) -> {
+            if (a[0] != b[0]) return Integer.compare(a[0], b[0]); 
+            if (a[1] != b[1]) return Integer.compare(a[1], b[1]); 
+            if (a[2] != b[2]) return Integer.compare(a[2], b[2]); 
+            return Integer.compare(a[3], b[3]); 
+        });
+    
+        return particleMatrix;
     }
+
+
 
     public int[][] holes() {
         return new int[0][0];

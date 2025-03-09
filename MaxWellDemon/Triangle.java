@@ -156,7 +156,7 @@ public class Triangle{
         draw();
     }
 
-    /*
+    /**
      * Draw the triangle with current specifications on screen.
      */
     private void draw(){
@@ -169,7 +169,7 @@ public class Triangle{
         }
     }
 
-    /*
+    /**
      * Erase the triangle on screen.
      */
     public void erase(){

@@ -25,21 +25,20 @@ public class Canvas{
     if (canvasSingleton == null) {
         canvasSingleton = new Canvas("MaxWellDemon", width+50, height+50, Color.white);
     } else {
-        canvasSingleton.adjustWindowSize(width+50, height+50); // 🔥 Ajustar el tamaño correctamente
+        canvasSingleton.adjustWindowSize(width+50, height+50); 
     }
     canvasSingleton.setVisible(true);
     return canvasSingleton;
     }
     
-    // 🔥 Nuevo método para ajustar correctamente el tamaño de la ventana
     private void adjustWindowSize(int width, int height) {
         Insets insets = frame.getInsets();
         int totalWidth = width + insets.left + insets.right;
         int totalHeight = height + insets.top + insets.bottom;
         
-        frame.setSize(totalWidth, totalHeight); // 🔥 Ajustamos la ventana
-        canvas.setPreferredSize(new Dimension(width, height)); // Ajustamos el panel de dibujo
-        frame.pack(); // 🔥 Empaquetamos para que todo encaje
+        frame.setSize(totalWidth, totalHeight); 
+        canvas.setPreferredSize(new Dimension(width, height));
+        frame.pack();
     }
 
 
@@ -72,14 +71,13 @@ public class Canvas{
         frame.setContentPane(canvas);
         frame.setTitle(title);
         
-        // Ajustar el tamaño del CanvasPane
         canvas.setPreferredSize(new Dimension(width, height));
         backgroundColour = bgColour;
         
-        frame.pack(); // Empaqueta la ventana en función del contenido
-        frame.setSize(width, height); // 🔥 Asegura que la ventana tenga el tamaño correcto
-        frame.setResizable(true); // Opcional: evita que el usuario cambie el tamaño
-        frame.setLocationRelativeTo(null); // Centra la ventana en la pantalla
+        frame.pack(); 
+        frame.setSize(width, height); 
+        frame.setResizable(true); 
+        frame.setLocationRelativeTo(null); 
         
         objects = new ArrayList<>();
         shapes = new HashMap<>();
@@ -95,8 +93,6 @@ public class Canvas{
      */
     public void setVisible(boolean visible){
         if(graphic == null) {
-            // first time: instantiate the offscreen image and fill it with
-            // the background colour
             Dimension size = canvas.getSize();
             canvasImage = canvas.createImage(size.width, size.height);
             graphic = (Graphics2D)canvasImage.getGraphics();
@@ -128,7 +124,7 @@ public class Canvas{
      * @param  referenceObject  the shape object to be erased 
      */
     public void erase(Object referenceObject){
-        objects.remove(referenceObject);   // just in case it was already there
+        objects.remove(referenceObject);   
         shapes.remove(referenceObject);
         redraw();
     }
@@ -169,7 +165,6 @@ public class Canvas{
         try{
             Thread.sleep(milliseconds);
         } catch (Exception e){
-            // ignoring exception at the moment
         }
     }
 
@@ -209,8 +204,8 @@ public class Canvas{
     
     public static void reset() {
         if (canvasSingleton != null) {
-            canvasSingleton.frame.dispose(); // Cierra la ventana
-            canvasSingleton = null; // Libera la instancia
+            canvasSingleton.frame.dispose();
+            canvasSingleton = null; 
             }
         }
 

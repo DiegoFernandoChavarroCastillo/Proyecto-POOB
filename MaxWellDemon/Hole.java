@@ -7,7 +7,7 @@
  */
 public class Hole extends Circle
 {
-    // instance variables - replace the example below with your own
+
     private int xPosition;
     private int yPosition;
     private int capMax;

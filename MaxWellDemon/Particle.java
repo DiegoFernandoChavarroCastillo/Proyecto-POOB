@@ -23,8 +23,6 @@ class Particle extends Circle {
         changeColor(color);
         this.isRed = isRed;
         super.moveTo(xPos,yPos);
-        //moveHorizontal(xPos);
-        //moveVertical(yPos);
         this.color = color;
         this.speedX = speedX;
         this.speedY = speedY;
@@ -70,5 +68,12 @@ class Particle extends Circle {
     public Circle getCircle() {
     return this;
     }
+    
+    public int getXPosition(){
+        return super.getX();
+    }
 
+    public int getYPosition(){
+        return super.getY();
+    }
 }
