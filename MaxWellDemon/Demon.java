@@ -28,6 +28,9 @@ public class Demon
         ojo.makeVisible();
     }
     
+    
+    
+    
     public void erase(){
         cuerpo.erase();
         ojo.erase();
