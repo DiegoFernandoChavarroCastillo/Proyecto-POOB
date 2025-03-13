@@ -58,5 +58,5 @@ comment8.target=void\ start(int)
 comment8.text=\r\n\ Inicia\ la\ simulaci\u00F3n\ con\ el\ n\u00FAmero\ de\ ticks\ especificado.\r\n\ La\ simulaci\u00F3n\ se\ ejecuta\ en\ un\ hilo\ separado\ y\ se\ detiene\ autom\u00E1ticamente\ si\ se\ cumple\ el\ objetivo.\r\n\ \r\n\ @param\ ticks\ El\ n\u00FAmero\ de\ ticks\ de\ la\ simulaci\u00F3n.\r\n
 comment9.params=
 comment9.target=boolean\ isGoal()
-comment9.text=\r\n\ Verifica\ si\ todas\ las\ part\u00EDculas\ rojas\ est\u00E1n\ en\ un\ solo\ lado\ del\ contenedor.\r\n\ Si\ esto\ ocurre,\ detiene\ la\ simulaci\u00F3n\ llamando\ a\ `finish()`.\r\n\r\n\ @return\ `true`\ si\ todas\ las\ part\u00EDculas\ rojas\ est\u00E1n\ en\ un\ solo\ lado,\ `false`\ en\ caso\ contrario.\r\n
+comment9.text=\r\n\ Verifica\ si\ todas\ las\ part\u00EDculas\ rojas\ est\u00E1n\ en\ un\ solo\ lado\ y\ todas\ las\ azules\ en\ el\ otro,\r\n\ o\ si\ todas\ las\ part\u00EDculas\ son\ del\ mismo\ color\ y\ est\u00E1n\ en\ un\ solo\ lado.\r\n\r\n\ @return\ `true`\ si\ el\ objetivo\ se\ ha\ alcanzado,\ `false`\ en\ caso\ contrario.\r\n
 numComments=21

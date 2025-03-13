@@ -64,6 +64,50 @@ public class CasosDePrueba {
     }
 
     /**
+     * Caso de prueba 2: Contenedor con múltiples demonios y agujeros.
+     * deberia terminar despues de un tiempo, con solo rojas a la izquierda.
+     */
+    public void casoPrueba4() {
+        System.out.println("Ejecutando Caso de Prueba 2...");
+        MaxwellContainer container = new MaxwellContainer(400, 500);
+
+        container.addDemon(100);
+        container.addDemon(200);
+        container.addDemon(300);
+
+        container.addHole(100, 100, 3);
+        container.addHole(250, 200, 5);
+        container.addHole(400, 300, 4);
+
+        int[][] particlesData = {{15,15, 70,15}, {30,30,15,15}, {350,70,15,15}, {380, 50, 15,1}};
+        container.addParticle(3, 1, particlesData);
+
+        container.start(150);
+    }
+    
+        /**
+     * Caso de prueba 2: Contenedor con múltiples demonios y agujeros.
+     * Se agregan varios demonios y agujeros estratégicamente.
+     */
+    public void casoPrueba5() {
+        System.out.println("Ejecutando Caso de Prueba 2...");
+        MaxwellContainer container = new MaxwellContainer(400, 500);
+
+        container.addDemon(100);
+        container.addDemon(200);
+        container.addDemon(300);
+
+        container.addHole(100, 100, 3);
+        container.addHole(250, 200, 5);
+        container.addHole(400, 300, 4);
+
+        int[][] particlesData = {{350,70,15,15}, {380, 50, 15,1}, {15,15, 70,15}, {30,30,15,15}};
+        container.addParticle(3, 1, particlesData);
+
+        container.start(150);
+    }
+    
+    /**
      * Genera datos de partículas con posiciones y velocidades aleatorias.
      * 
      * @param rojas Número de partículas rojas.

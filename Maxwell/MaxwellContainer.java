@@ -301,7 +301,12 @@ public class MaxwellContainer {
                     }
                     p.getCircle().moveTo(newX, newY);
                 }
-    
+                
+                if (isGoal()) {
+                    System.out.println("¡Objetivo alcanzado! Todas las partículas están en el lado correcto.");
+                    finish();
+                }
+
                 
                 try {
                     Thread.sleep(50);
@@ -318,14 +323,48 @@ public class MaxwellContainer {
 
 
     /**
-     * Verifica si todas las partículas rojas están en un solo lado del contenedor.
-     * Si esto ocurre, detiene la simulación llamando a `finish()`.
+     * Verifica si todas las partículas rojas están en un solo lado y todas las azules en el otro,
+     * o si todas las partículas son del mismo color y están en un solo lado.
      *
-     * @return `true` si todas las partículas rojas están en un solo lado, `false` en caso contrario.
+     * @return `true` si el objetivo se ha alcanzado, `false` en caso contrario.
      */
     public boolean isGoal() {
-        return true; //falta implementar
+        boolean allRedLeft = true;
+        boolean allBlueRight = true;
+        boolean onlyRed = true;
+        boolean onlyBlue = true;
+    
+        System.out.println("Verificando isGoal...");
+    
+        for (Particle p : particles) {
+            boolean isRed = p.getRed(); // ¿Es roja?
+            boolean isOnLeft = p.isOnLeftSide(); // ¿Está en la mitad izquierda?
+    
+            // Imprimir la posición y color de la partícula
+            System.out.println("Partícula: " + (isRed ? "Roja" : "Azul") +
+                               " | PosX: " + p.getXPosition() + " | Lado: " + (isOnLeft ? "Izquierda" : "Derecha"));
+    
+            if (isRed && !isOnLeft) {
+                allRedLeft = false;
+            }
+            if (!isRed && isOnLeft) {
+                allBlueRight = false;
+            }
+    
+            if (isRed) {
+                onlyBlue = false;
+            } else {
+                onlyRed = false;
+            }
+        }
+    
+        boolean resultado = (allRedLeft && allBlueRight) || onlyRed || onlyBlue;
+        System.out.println("¿isGoal cumplido? " + resultado);
+        return resultado;
     }
+
+
+
 
 
 
