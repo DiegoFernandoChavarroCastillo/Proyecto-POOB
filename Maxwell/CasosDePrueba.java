@@ -86,8 +86,9 @@ public class CasosDePrueba {
     }
     
         /**
-     * Caso de prueba 2: Contenedor con múltiples demonios y agujeros.
-     * Se agregan varios demonios y agujeros estratégicamente.
+     * Caso de prueba 5: Contenedor con múltiples demonios y agujeros.
+     * deberia terminar dentro del tiempo, solo termina si las rojas estan
+     * al mismo lado, asi no haya azules.
      */
     public void casoPrueba5() {
         System.out.println("Ejecutando Caso de Prueba 2...");
@@ -97,11 +98,11 @@ public class CasosDePrueba {
         container.addDemon(200);
         container.addDemon(300);
 
-        container.addHole(100, 100, 3);
-        container.addHole(250, 200, 5);
-        container.addHole(400, 300, 4);
+        container.addHole(100, 100, 1);
+        container.addHole(250, 200, 1);
+        container.addHole(400, 300, 1);
 
-        int[][] particlesData = {{350,70,15,15}, {380, 50, 15,1}, {15,15, 70,15}, {30,30,15,15}};
+        int[][] particlesData = {{350,70,15,15}, {380, 50, 15,1}, {15,15,70,15}, {30,30,15,15}};
         container.addParticle(3, 1, particlesData);
 
         container.start(150);
