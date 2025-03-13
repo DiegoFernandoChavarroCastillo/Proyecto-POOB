@@ -324,24 +324,7 @@ public class MaxwellContainer {
      * @return `true` si todas las partículas rojas están en un solo lado, `false` en caso contrario.
      */
     public boolean isGoal() {
-        if (particles.isEmpty()) return false; 
-    
-        Boolean leftRed = true; 
-        Boolean rightRed = true;// Ahora usamos `Boolean` para manejar el primer caso correctamente.
-    
-        for (Particle p : particles) {
-            if (p.isOnLeftSide()){
-                if(!p.getRed()){
-                    leftRed = false; 
-                }
-            } else {
-                if(!p.getRed()){
-                    rightRed = false;
-                }
-            }
-        }
-    
-        return leftRed || rightRed;
+        return true; //falta implementar
     }
 
 
