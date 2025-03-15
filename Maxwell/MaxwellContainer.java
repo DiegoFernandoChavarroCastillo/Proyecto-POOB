@@ -330,9 +330,7 @@ public class MaxwellContainer {
      */
     public boolean isGoal() {
     
-        boolean allRedLeft = true;   
-        boolean allRedRight = true;  
-        boolean allBlueLeft = true;  
+        boolean allRedLeft = true;     
         boolean allBlueRight = true; 
     
         for (Particle p : particles) {
@@ -344,12 +342,10 @@ public class MaxwellContainer {
                                " | Lado: " + (isOnLeft ? "Izquierda" : "Derecha"));
     
             if (isRed && !isOnLeft) { allRedLeft = false; }
-            if (isRed && isOnLeft) { allRedRight = false; }
-            if (!isRed && !isOnLeft) { allBlueLeft = false; }
             if (!isRed && isOnLeft) { allBlueRight = false; }
         }
     
-        boolean resultado = (allRedLeft && allBlueRight) || (allRedRight && allBlueLeft);
+        boolean resultado = (allRedLeft && allBlueRight) ;
         System.out.println("isGoal cumplido? " + resultado);
         return resultado;
     }
