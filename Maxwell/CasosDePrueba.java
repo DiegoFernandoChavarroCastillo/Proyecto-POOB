@@ -17,7 +17,7 @@ public class CasosDePrueba {
 
         container.addHole(200, 150, 3);
 
-        container.start(100);
+        container.start(1000);
     }
 
     /**
@@ -39,7 +39,7 @@ public class CasosDePrueba {
         int[][] particlesData = generarParticulas(10, 10, 500, 400);
         container.addParticle(10, 10, particlesData);
 
-        container.start(150);
+        container.start(1500);
     }
 
     /**
@@ -60,12 +60,12 @@ public class CasosDePrueba {
         int[][] particlesData = generarParticulas(15, 15, 500, 500);
         container.addParticle(15, 15, particlesData);
 
-        container.start(200);
+        container.start(2000);
     }
 
     /**
-     * Caso de prueba 2: Contenedor con múltiples demonios y agujeros.
-     * deberia terminar despues de un tiempo, con solo rojas a la izquierda.
+     * Caso de prueba 4: Contenedor con múltiples demonios y agujeros.
+     * mayores velocidades
      */
     public void casoPrueba4() {
         System.out.println("Ejecutando Caso de Prueba 2...");
@@ -82,10 +82,10 @@ public class CasosDePrueba {
         int[][] particlesData = {{15,15, 70,15}, {30,30,15,15}, {350,70,15,15}, {380, 50, 15,1}};
         container.addParticle(3, 1, particlesData);
 
-        container.start(150);
+        container.start(1500);
     }
     
-        /**
+    /**
      * Caso de prueba 5: Contenedor con múltiples demonios y agujeros.
      * deberia terminar dentro del tiempo, solo termina si las rojas estan
      * al mismo lado, asi no haya azules.
@@ -105,7 +105,29 @@ public class CasosDePrueba {
         int[][] particlesData = {{350,70,15,15}, {380, 50, 15,1}, {15,15,70,15}, {30,30,15,15}};
         container.addParticle(3, 1, particlesData);
 
-        container.start(150);
+        container.start(1500);
+    }
+    
+    /**
+     * Caso de prueba 6: Contenedor con un demonio.
+     * deberia termina retornar imposible sin iniciar simulacion
+     */
+    public void casoPrueba6() {
+        System.out.println("Ejecutando Caso de Prueba 2...");
+        MaxwellContainer container = new MaxwellContainer(40, 40);
+
+        container.addDemon(100);
+        container.addDemon(200);
+        container.addDemon(300);
+
+        container.addHole(100, 100, 1);
+        container.addHole(250, 200, 1);
+        container.addHole(400, 300, 1);
+
+        int[][] particlesData = {{350,70,15,15}, {380, 50, 15,1}, {15,15,70,15}, {30,30,15,15}};
+        container.addParticle(3, 1, particlesData);
+
+        container.start(1500);
     }
     
     /**
@@ -126,11 +148,11 @@ public class CasosDePrueba {
             int x = rand.nextInt(maxX - 20) + 10;
             int y = rand.nextInt(maxY - 20) + 10;
 
-            int vx = rand.nextInt(10) - 5; 
-            int vy = rand.nextInt(10) - 5;
+            int vx = rand.nextInt(10) ; 
+            int vy = rand.nextInt(10) ;
 
-            if (vx == 0) vx = 1;
-            if (vy == 0) vy = 1;
+            if (vx == 0) vx = 30;
+            if (vy == 0) vy = 30;
 
             particlesData[i][0] = x;
             particlesData[i][1] = y;

@@ -290,10 +290,14 @@ public class MaxwellContainer {
     
                         if (demonioPresente) {
                             int chance = random.nextInt(2); 
-                            if (chance == 1) {
+                            if (p.getRed() && (p.getVelocityX()>0)) {
                                 p.setVelocityX(-p.getVelocityX());
                                 newX = oldX; 
-                            } 
+                            }
+                            if (!p.getRed() && (p.getVelocityX()<0)){
+                                p.setVelocityX(-p.getVelocityX());
+                                newX = oldX; 
+                            }
                         } else {
                             p.setVelocityX(-p.getVelocityX());
                             newX = oldX;
