@@ -303,7 +303,6 @@ public class MaxwellContainer {
                 }
                 
                 if (isGoal()) {
-                    System.out.println("¡Objetivo alcanzado! Todas las partículas están en el lado correcto.");
                     finish();
                 }
 
@@ -336,17 +335,12 @@ public class MaxwellContainer {
         for (Particle p : particles) {
             boolean isRed = p.getRed();
             boolean isOnLeft = p.isOnLeftSide();
-    
-            System.out.println("?Partícula: " + (isRed ? "Roja" : "Azul") +
-                               " | PosX: " + p.getXPosition() +
-                               " | Lado: " + (isOnLeft ? "Izquierda" : "Derecha"));
-    
+        
             if (isRed && !isOnLeft) { allRedLeft = false; }
             if (!isRed && isOnLeft) { allBlueRight = false; }
         }
     
         boolean resultado = (allRedLeft && allBlueRight) ;
-        System.out.println("isGoal cumplido? " + resultado);
         return resultado;
     }
 

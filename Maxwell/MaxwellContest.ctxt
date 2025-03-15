@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=MaxwellContest
+comment0.text=\r\n\ Clase\ MaxwellContest\ que\ resuelve\ el\ problema\ del\ demonio\ de\ Maxwell.\r\n
+comment1.params=h\ w\ d\ b\ r\ particles
+comment1.target=java.lang.Object\ solve(int,\ int,\ int,\ int,\ int,\ int[][])
+comment1.text=\r\n\ Verifica\ el\ tiempo\ m\u00EDnimo\ necesario\ para\ ordenar\ las\ part\u00EDculas.\r\n\ Retorna\ "impossible"\ si\ es\ imposible\ resolver\ el\ problema.\r\n\r\n\ @param\ h\ Altura\ del\ contenedor.\r\n\ @param\ w\ Ancho\ del\ contenedor.\r\n\ @param\ d\ Posici\u00F3n\ en\ Y\ del\ demonio.\r\n\ @param\ b\ N\u00FAmero\ de\ part\u00EDculas\ azules.\r\n\ @param\ r\ N\u00FAmero\ de\ part\u00EDculas\ rojas.\r\n\ @param\ particles\ Matriz\ de\ part\u00EDculas\ {px,\ py,\ vx,\ vy}.\r\n\ @return\ Tiempo\ m\u00EDnimo\ para\ resolver\ el\ problema\ o\ "impossible"\ si\ es\ imposible.\r\n
+comment2.params=h\ w\ d\ b\ r\ particles
+comment2.target=void\ simulate(int,\ int,\ int,\ int,\ int,\ int[][])
+comment2.text=\r\n\ Simula\ la\ soluci\u00F3n\ del\ problema\ visualmente.\r\n\r\n\ @param\ h\ Altura\ del\ contenedor.\r\n\ @param\ w\ Ancho\ del\ contenedor.\r\n\ @param\ d\ Posici\u00F3n\ en\ Y\ del\ demonio.\r\n\ @param\ b\ N\u00FAmero\ de\ part\u00EDculas\ azules.\r\n\ @param\ r\ N\u00FAmero\ de\ part\u00EDculas\ rojas.\r\n\ @param\ particles\ Matriz\ de\ part\u00EDculas\ {px,\ py,\ vx,\ vy}.\r\n
+numComments=3
