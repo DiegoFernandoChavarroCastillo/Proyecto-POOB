@@ -73,7 +73,7 @@ public class MaxwellContest {
         Object result = solve(h, w, d, b, r, particles);
         
         if (result instanceof String && result.equals("impossible")) {
-            System.out.println("imposible");
+            System.out.println("impossible");
             return;
         }
         

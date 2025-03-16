@@ -9,8 +9,8 @@ import java.util.*;
  */
 public class Demon {
     private int yPosition;
-    private Triangle cuerpo;
-    private Triangle ojo;
+    private Triangle body;
+    private Triangle eye;
 
     /**
      * Constructor de la clase Demon.
@@ -20,38 +20,38 @@ public class Demon {
      */
     public Demon(int yPosition) {
         this.yPosition = yPosition;
-        cuerpo = new Triangle(MaxwellContainer.getHeight() / 20, MaxwellContainer.getWidth() / 20, 
+        body = new Triangle(MaxwellContainer.getHeight() / 20, MaxwellContainer.getWidth() / 20, 
                              MaxwellContainer.getWidth() / 2 - (Math.max(1, MaxwellContainer.getWidth() / 100)), 
                              yPosition, "green");
-        cuerpo.makeVisible();
-        ojo = new Triangle(MaxwellContainer.getHeight() / 40, MaxwellContainer.getWidth() / 40, 
+        body.makeVisible();
+        eye = new Triangle(MaxwellContainer.getHeight() / 40, MaxwellContainer.getWidth() / 40, 
                            MaxwellContainer.getWidth() / 2 - (Math.max(1, MaxwellContainer.getWidth() / 100)), 
                            yPosition + (MaxwellContainer.getHeight() / 60), "magenta");
-        ojo.makeVisible();
+        eye.makeVisible();
     }
 
     /**
      * Hace visible el demonio, mostrando tanto el cuerpo como el ojo.
      */
     public void makeVisible() {
-        cuerpo.makeVisible();
-        ojo.makeVisible();
+        body.makeVisible();
+        eye.makeVisible();
     }
 
     /**
      * Hace invisible el demonio, ocultando tanto el cuerpo como el ojo.
      */
     public void makeInVisible() {
-        cuerpo.makeInvisible();
-        ojo.makeInvisible();
+        body.makeInvisible();
+        eye.makeInvisible();
     }
 
     /**
      * Elimina el demonio del contenedor, borrando tanto el cuerpo como el ojo.
      */
     public void erase() {
-        cuerpo.erase();
-        ojo.erase();
+        body.erase();
+        eye.erase();
     }
 
     /**

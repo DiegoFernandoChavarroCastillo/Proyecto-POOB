@@ -139,9 +139,9 @@ public class CasosDePrueba {
      * @param maxY Límite del eje Y.
      * @return Matriz con los datos de las partículas.
      */
-    private int[][] generarParticulas(int rojas, int azules, int maxX, int maxY) {
+    private int[][] generarParticulas(int r, int b, int maxX, int maxY) {
         Random rand = new Random();
-        int total = rojas + azules;
+        int total = r + b;
         int[][] particlesData = new int[total][4];
 
         for (int i = 0; i < total; i++) {
