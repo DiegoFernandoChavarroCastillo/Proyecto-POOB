@@ -7,7 +7,6 @@ public class CasosDePrueba {
      * Se agregan partículas rojas y azules con velocidades aleatorias.
      */
     public void casoPrueba1() {
-        System.out.println("Ejecutando Caso de Prueba 1...");
         MaxwellContainer container = new MaxwellContainer(300, 400);
 
         container.addDemon(150);
@@ -22,10 +21,9 @@ public class CasosDePrueba {
 
     /**
      * Caso de prueba 2: Contenedor con múltiples demonios y agujeros.
-     * Se agregan varios demonios y agujeros estratégicamente.
+     * Se agregan varios demonios y agujeros.
      */
     public void casoPrueba2() {
-        System.out.println("Ejecutando Caso de Prueba 2...");
         MaxwellContainer container = new MaxwellContainer(400, 500);
 
         container.addDemon(100);
@@ -47,7 +45,6 @@ public class CasosDePrueba {
      * Se agregan partículas con velocidades elevadas y varios demonios.
      */
     public void casoPrueba3() {
-        System.out.println("Ejecutando Caso de Prueba 3...");
         MaxwellContainer container = new MaxwellContainer(500, 500);
 
         container.addDemon(50);
@@ -68,7 +65,6 @@ public class CasosDePrueba {
      * mayores velocidades
      */
     public void casoPrueba4() {
-        System.out.println("Ejecutando Caso de Prueba 2...");
         MaxwellContainer container = new MaxwellContainer(400, 500);
 
         container.addDemon(100);
@@ -91,7 +87,6 @@ public class CasosDePrueba {
      * al mismo lado, asi no haya azules.
      */
     public void casoPrueba5() {
-        System.out.println("Ejecutando Caso de Prueba 2...");
         MaxwellContainer container = new MaxwellContainer(400, 500);
 
         container.addDemon(100);
@@ -113,19 +108,12 @@ public class CasosDePrueba {
      * deberia termina retornar imposible sin iniciar simulacion
      */
     public void casoPrueba6() {
-        System.out.println("Ejecutando Caso de Prueba 2...");
         MaxwellContainer container = new MaxwellContainer(40, 40);
 
-        container.addDemon(100);
-        container.addDemon(200);
-        container.addDemon(300);
+        container.addDemon(10);
 
-        container.addHole(100, 100, 1);
-        container.addHole(250, 200, 1);
-        container.addHole(400, 300, 1);
-
-        int[][] particlesData = {{350,70,15,15}, {380, 50, 15,1}, {15,15,70,15}, {30,30,15,15}};
-        container.addParticle(3, 1, particlesData);
+        int[][] particlesData = {{20,30,-20,-10}, {70, 20, 10,-20}, {70,20,10,-20}, {20,20,20,20}};
+        container.addParticle(2, 2, particlesData);
 
         container.start(1500);
     }
@@ -148,8 +136,8 @@ public class CasosDePrueba {
             int x = rand.nextInt(maxX - 20) + 10;
             int y = rand.nextInt(maxY - 20) + 10;
 
-            int vx = rand.nextInt(10) ; 
-            int vy = rand.nextInt(10) ;
+            int vx = rand.nextInt(20) ; 
+            int vy = rand.nextInt(20) ;
 
             if (vx == 0) vx = 30;
             if (vy == 0) vy = 30;

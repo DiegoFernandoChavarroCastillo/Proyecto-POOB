@@ -20,6 +20,8 @@ public class MaxwellContainer {
     private boolean visible;
     private Thread simulationThread;
     private volatile boolean running = false;
+    private static final int MARGIN = 10; 
+    private static final int DIVISIONMARGIN = 20;
 
     /**
      * Constructor de la clase MaxwellContainer.
@@ -36,16 +38,16 @@ public class MaxwellContainer {
         if (h < 150) h = 150;
         if (h > 500) h = 500;
 
-        this.width = w;
+        this.width = 2*w;
         this.height = h;
 
         container = new Rectangle();
-        container.changeSize(h, w);
+        container.changeSize(h, 2*w);
         container.setPos(0, 0);
 
         division = new Rectangle();
-        division.changeSize(h, Math.max(1, w / 80));
-        division.setPos((w / 2)-(Math.max(1, w / 80)), 0);
+        division.changeSize(h, Math.max(1, w / 40));
+        division.setPos((w )-(Math.max(1, w / 40)), 0);
         division.changeColor("black");
 
         this.demons = new ArrayList<>();
@@ -150,6 +152,7 @@ public class MaxwellContainer {
             System.out.println("Error: Se esperaban " + (r + b) + " partículas, pero se recibieron " + particlesData.length);
             setIsOk(false);
         } else{
+            setIsOk(true);
             for (int i = 0; i < r + b; i++) {
                 int px = particlesData[i][0];
                 int py = particlesData[i][1];
@@ -158,7 +161,7 @@ public class MaxwellContainer {
     
                 boolean isRed = (i < r);
                 String color = isRed ? "red" : "blue";
-    
+                
                 if (!isInside(px, py)) {
                     System.out.println("Error: Partícula fuera de los límites seguros. Ignorada.");
                     setIsOk(false);
@@ -174,7 +177,7 @@ public class MaxwellContainer {
                 particles.add(new Particle(color, px, py, isRed, vx, vy));
                 System.out.println("Partícula agregada: Color=" + color + ", Pos=(" + px + "," + py + "), Vel=(" + vx + "," + vy + ")");
             }
-            setIsOk(true);
+            
         }
     }
 
@@ -225,8 +228,10 @@ public class MaxwellContainer {
                     Thread.currentThread().interrupt();
                 }
             }
+            setIsOk(false);
         } else if (!running){
         running = true;
+        setIsOk(true);
         simulationThread = new Thread(() -> {
             int divisionX = ((width / 2) - (Math.max(1, width / 80))); 
             Random random = new Random();
@@ -358,7 +363,7 @@ public class MaxwellContainer {
         }
 
         Arrays.sort(demonPositions);
-
+        setIsOk(true);
         return demonPositions;
     }
 
@@ -390,6 +395,7 @@ public class MaxwellContainer {
                                   return Integer.compare(a[3], b[3]);
             });
         }
+        setIsOk(true);
         return particlesMatrix;
     }
 
@@ -411,7 +417,7 @@ public class MaxwellContainer {
         Arrays.sort(holeData, Comparator.comparingInt((int[] a) -> a[0])
                                          .thenComparingInt(a -> a[1])
                                          .thenComparingInt(a -> a[2]));
-
+        setIsOk(true);
         return holeData;
     }
 
@@ -438,6 +444,7 @@ public class MaxwellContainer {
             }
         }
         Canvas.getCanvas(width, height);
+        setIsOk(true);
     }
 
     /**
@@ -462,6 +469,7 @@ public class MaxwellContainer {
                 h.makeInvisible();
             }
         }
+        setIsOk(true);
     }
 
     /**
@@ -472,6 +480,7 @@ public class MaxwellContainer {
         if (simulationThread != null) {
             simulationThread.interrupt();
         }
+        setIsOk(true);
     }
 
     /**
@@ -512,9 +521,7 @@ public class MaxwellContainer {
      * @param y La coordenada y de la posición.
      * @return true si la posición está dentro de los límites, false en caso contrario.
      */
-    private boolean isInside(int x, int y) {
-        int MARGIN = 10; // bordes
-        int DIVISIONMARGIN = 20; // división
+    private boolean isInside(int x, int y) { 
         int divisionX = (width / 2) - (Math.max(1, width / 80));
 
         if (x < MARGIN || x > width - MARGIN || y < MARGIN || y > height - MARGIN) {
