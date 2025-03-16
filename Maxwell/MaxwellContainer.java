@@ -94,11 +94,11 @@ public class MaxwellContainer {
         if (d < 0 || d > height) {
             System.out.println("Error: Posición del demonio fuera de rango.");
             setIsOk(false);
-            return;
+        } else {
+            demons.add(new Demon(d));
+            setIsOk(true);
+            System.out.println("Demonio agregado");
         }
-        demons.add(new Demon(d));
-        setIsOk(true);
-        System.out.println("Demonio agregado");
     }
 
     /**
@@ -149,34 +149,33 @@ public class MaxwellContainer {
         if (particlesData.length != r + b) {
             System.out.println("Error: Se esperaban " + (r + b) + " partículas, pero se recibieron " + particlesData.length);
             setIsOk(false);
-            return;
-        }
-
-        for (int i = 0; i < r + b; i++) {
-            int px = particlesData[i][0];
-            int py = particlesData[i][1];
-            int vx = particlesData[i][2];
-            int vy = particlesData[i][3];
-
-            boolean isRed = (i < r);
-            String color = isRed ? "red" : "blue";
-
-            if (!isInside(px, py)) {
-                System.out.println("Error: Partícula fuera de los límites seguros. Ignorada.");
-                setIsOk(false);
-                continue;
+        } else{
+            for (int i = 0; i < r + b; i++) {
+                int px = particlesData[i][0];
+                int py = particlesData[i][1];
+                int vx = particlesData[i][2];
+                int vy = particlesData[i][3];
+    
+                boolean isRed = (i < r);
+                String color = isRed ? "red" : "blue";
+    
+                if (!isInside(px, py)) {
+                    System.out.println("Error: Partícula fuera de los límites seguros. Ignorada.");
+                    setIsOk(false);
+                    continue;
+                }
+    
+                if (vx <= -width || vx >= width || vy <= -height || vy >= height || (vx == 0 && vy == 0)) {
+                    System.out.println("Error: Velocidad de partícula no válida. Ignorada.");
+                    setIsOk(false);
+                    continue;
+                }
+    
+                particles.add(new Particle(color, px, py, isRed, vx, vy));
+                System.out.println("Partícula agregada: Color=" + color + ", Pos=(" + px + "," + py + "), Vel=(" + vx + "," + vy + ")");
             }
-
-            if (vx <= -width || vx >= width || vy <= -height || vy >= height || (vx == 0 && vy == 0)) {
-                System.out.println("Error: Velocidad de partícula no válida. Ignorada.");
-                setIsOk(false);
-                continue;
-            }
-
-            particles.add(new Particle(color, px, py, isRed, vx, vy));
-            System.out.println("Partícula agregada: Color=" + color + ", Pos=(" + px + "," + py + "), Vel=(" + vx + "," + vy + ")");
+            setIsOk(true);
         }
-        setIsOk(true);
     }
 
     /**
@@ -187,27 +186,27 @@ public class MaxwellContainer {
     public void delParticle(String color) {
         if (particles.isEmpty()) {
             System.out.println("No hay partículas para eliminar.");
-            return;
-        }
-
-        Iterator<Particle> iterator = particles.iterator();
-        boolean found = false;
-
-        while (iterator.hasNext()) {
-            Particle p = iterator.next();
-            if (p.getColor().equals(color)) {
-                p.erase();
-                iterator.remove();
-                found = true;
-            }
-        }
-
-        if (found) {
-            System.out.println("Se eliminaron todas las partículas de color: " + color);
+            setIsOk(false);
         } else {
-            System.out.println("No se encontraron partículas de color: " + color);
-        }
+            Iterator<Particle> iterator = particles.iterator();
+            boolean found = false;
+    
+            while (iterator.hasNext()) {
+                Particle p = iterator.next();
+                if (p.getColor().equals(color)) {
+                    p.erase();
+                    iterator.remove();
+                    found = true;
+                }
+            }
+    
+            if (found) {
+                System.out.println("Se eliminaron todas las partículas de color: " + color);
+            } else {
+                System.out.println("No se encontraron partículas de color: " + color);
+            }
         setIsOk(found);
+        }
     }
 
     /**
@@ -226,11 +225,7 @@ public class MaxwellContainer {
                     Thread.currentThread().interrupt();
                 }
             }
-            return;
-        }
-    
-        if (running) return; 
-    
+        } else if (!running){
         running = true;
         simulationThread = new Thread(() -> {
             int divisionX = ((width / 2) - (Math.max(1, width / 80))); 
@@ -323,6 +318,7 @@ public class MaxwellContainer {
     
         simulationThread.start();
     }
+    }
 
 
     /**
@@ -372,28 +368,29 @@ public class MaxwellContainer {
      * @return Una matriz con los datos de las partículas.
      */
     public int[][] particles() {
+        int[][] particlesMatrix;
+        
         if (particles == null || particles.isEmpty()) {
-            return new int[0][0];
+            particlesMatrix = new int[0][0];
+        } else {
+            particlesMatrix = new int[particles.size()][4];
+    
+            for (int i = 0; i < particles.size(); i++) {
+                Particle p = particles.get(i);
+                particlesMatrix[i][0] = p.getXPosition();
+                particlesMatrix[i][1] = p.getYPosition();
+                particlesMatrix[i][2] = p.getVelocityX();
+                particlesMatrix[i][3] = p.getVelocityY();
+            }
+    
+            Arrays.sort(particlesMatrix, (a, b) -> {
+                if (a[0] != b[0]) return Integer.compare(a[0], b[0]);
+                if (a[1] != b[1]) return Integer.compare(a[1], b[1]);
+                if (a[2] != b[2]) return Integer.compare(a[2], b[2]);
+                                  return Integer.compare(a[3], b[3]);
+            });
         }
-
-        int[][] particleMatrix = new int[particles.size()][4];
-
-        for (int i = 0; i < particles.size(); i++) {
-            Particle p = particles.get(i);
-            particleMatrix[i][0] = p.getXPosition();
-            particleMatrix[i][1] = p.getYPosition();
-            particleMatrix[i][2] = p.getVelocityX();
-            particleMatrix[i][3] = p.getVelocityY();
-        }
-
-        Arrays.sort(particleMatrix, (a, b) -> {
-            if (a[0] != b[0]) return Integer.compare(a[0], b[0]);
-            if (a[1] != b[1]) return Integer.compare(a[1], b[1]);
-            if (a[2] != b[2]) return Integer.compare(a[2], b[2]);
-            return Integer.compare(a[3], b[3]);
-        });
-
-        return particleMatrix;
+        return particlesMatrix;
     }
 
     /**
@@ -516,15 +513,15 @@ public class MaxwellContainer {
      * @return true si la posición está dentro de los límites, false en caso contrario.
      */
     private boolean isInside(int x, int y) {
-        int margin = 10; // bordes
-        int divisionMargin = 20; // división
+        int MARGIN = 10; // bordes
+        int DIVISIONMARGIN = 20; // división
         int divisionX = (width / 2) - (Math.max(1, width / 80));
 
-        if (x < margin || x > width - margin || y < margin || y > height - margin) {
+        if (x < MARGIN || x > width - MARGIN || y < MARGIN || y > height - MARGIN) {
             return false;
         }
 
-        if (Math.abs(x - divisionX) < divisionMargin) {
+        if (Math.abs(x - divisionX) < DIVISIONMARGIN) {
             return false;
         }
 
