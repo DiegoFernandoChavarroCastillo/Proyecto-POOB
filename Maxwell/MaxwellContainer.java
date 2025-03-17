@@ -247,25 +247,16 @@ public class MaxwellContainer {
                         if ((oldX < divisionX && (oldX + p.getVelocityX()) >= divisionX) || 
                             (oldX > divisionX && (oldX + p.getVelocityX()) <= divisionX)) {
     
-                            boolean demonioPresente = false;
+                            boolean handledByDemon = false;
                             for (Demon d : demons) {
-                                if (Math.abs(d.getYPosition() - oldY) <= 10) { 
-                                    demonioPresente = true;
+                                if (d.interactInContainer(p, oldX, oldY, newX, newY)) {
+                                    handledByDemon = true;
                                     break;
                                 }
                             }
-    
-                            if (demonioPresente) {
-                                if ((p.getRed() && p.getVelocityX() > 0) || (!p.getRed() && p.getVelocityX() < 0)) {
-                                    p.setVelocityX(-p.getVelocityX()); 
-                                    p.moveTo(oldX, oldY); 
-                                    continue; 
-                                } else if (p.getRed() && p.getVelocityX() < 0 || !p.getRed() && p.getVelocityX() > 0){
-                                    p.moveTo(newX,newY);
-                                    continue;
-                                }
-                            }
+                            if (handledByDemon) continue;
                         }
+                            
     
                         p.moveInContainer(width, height);
     

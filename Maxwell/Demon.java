@@ -62,4 +62,21 @@ public class Demon {
     public int getYPosition() {
         return this.yPosition;
     }
+    
+    /**
+     * decide si dejar pasar o no a la particula.
+     */
+    public boolean interactInContainer(Particle p, int oldX, int oldY, int newX, int newY) {
+        if (Math.abs(this.getYPosition() - oldY) <= 10) {
+            if ((p.getRed() && p.getVelocityX() > 0) || (!p.getRed() && p.getVelocityX() < 0)) {
+                p.setVelocityX(-p.getVelocityX()); 
+                p.moveTo(oldX, oldY);
+                return true;
+            } else if (p.getRed() && p.getVelocityX() < 0 || !p.getRed() && p.getVelocityX() > 0) {
+                p.moveTo(newX, newY);
+                return true;
+            }
+        }
+        return false;
+    }
 }
