@@ -1,12 +1,13 @@
 /**
  * Representa un agujero en el contenedor que puede absorber partículas hasta una capacidad máxima.
  */
-public class Hole extends Circle {
+public class Hole {
 
     private int xPosition;
     private int yPosition;
     private int capMax; 
     private int current;
+    private Circle circle;
 
     /**
      * Constructor de la clase Hole
@@ -19,10 +20,12 @@ public class Hole extends Circle {
         this.yPosition = yPos;
         this.capMax = capMax;
         this.current = 0; 
-        super.setDiameter(MaxwellContainer.getWidth() / 40);
-        super.moveTo(xPosition, yPosition);
-        super.changeColor("grey");
-        this.makeVisible();
+        
+        this.circle = new Circle();
+        circle.setDiameter(MaxwellContainer.getWidth() / 40);
+        circle.moveTo(xPosition, yPosition);
+        circle.changeColor("grey");
+        circle.makeVisible();
     }
 
     /**
@@ -60,7 +63,7 @@ public class Hole extends Circle {
         if (current < capMax) {
             current++;
             if (current >= capMax) {
-                super.changeColor("black");
+                circle.changeColor("black");
             }
         }
     }
@@ -70,5 +73,19 @@ public class Hole extends Circle {
      */
     public int getCapacity(){
         return this.capMax;
+    }
+    
+        /**
+     * hace visible
+     */
+    public void makeVisible(){
+        circle.makeVisible();
+    }
+    
+    /**
+     * hace invisible
+     */
+    public void makeInvisible(){
+        circle.makeInvisible();
     }
 }

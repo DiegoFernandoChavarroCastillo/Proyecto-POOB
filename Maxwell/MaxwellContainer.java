@@ -80,7 +80,6 @@ public class MaxwellContainer {
         if (ok()) {
             addDemon(d);
             addParticle(r, b, particles);
-            System.out.println("MaxwellContainer creado con éxito.");
         } else {
             System.out.println("Error en la inicialización del contenedor.");
             setIsOk(false);
@@ -99,7 +98,6 @@ public class MaxwellContainer {
         } else {
             demons.add(new Demon(d));
             setIsOk(true);
-            System.out.println("Demonio agregado");
         }
     }
 
