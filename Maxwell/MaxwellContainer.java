@@ -218,110 +218,95 @@ public class MaxwellContainer {
      */
     public void start(int ticks) {
         if (ticks == 0) {
-            running = false; 
+            running = false;
             if (simulationThread != null) {
                 try {
-                    simulationThread.join(); 
+                    simulationThread.join();
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
             }
             setIsOk(false);
-        } else if (!running){
-        running = true;
-        setIsOk(true);
-        simulationThread = new Thread(() -> {
-            int divisionX = ((width / 2) - (Math.max(1, width / 80))); 
-            Random random = new Random();
+        } else if (!running) {
+            running = true;
+            setIsOk(true);
+            simulationThread = new Thread(() -> {
+                Random random = new Random();
+                int divisionX = ((width / 2) - (Math.max(1, width / 80))); 
     
-            for (int i = 0; i < ticks && running; i++) {
-                Iterator<Particle> particleIterator = particles.iterator();
+                for (int i = 0; i < ticks && running; i++) {
+                    Iterator<Particle> particleIterator = particles.iterator();
     
-                while (particleIterator.hasNext()) {
-                    Particle p = particleIterator.next();
-                    int oldX = p.getX();
-                    int oldY = p.getY();
-                    int newX = oldX + p.getVelocityX();
-                    int newY = oldY + p.getVelocityY();
+                    while (particleIterator.hasNext()) {
+                        Particle p = particleIterator.next();
+                        int oldX = p.getX();
+                        int oldY = p.getY();
+                        int newX = p.getX() + p.getVelocityX();
+                        int newY = p.getY() + p.getVelocityY();
+                        
+                        if ((oldX < divisionX && (oldX + p.getVelocityX()) >= divisionX) || 
+                            (oldX > divisionX && (oldX + p.getVelocityX()) <= divisionX)) {
     
-                    boolean absorbed = false;
-                    for (Hole h : holes) {
-                        if (Math.abs(h.getXPosition() - newX) <= 10 && Math.abs(h.getYPosition() - newY) <= 10) {
-                            if (h.canAbsorbMore()) { 
-                                h.absorbParticle();  
-                                p.erase();           
-                                particleIterator.remove(); 
-                                absorbed = true;
-                                System.out.println("Partícula absorbida");
-                                break; 
+                            boolean demonioPresente = false;
+                            for (Demon d : demons) {
+                                if (Math.abs(d.getYPosition() - oldY) <= 10) { 
+                                    demonioPresente = true;
+                                    break;
+                                }
+                            }
+    
+                            if (demonioPresente) {
+                                if ((p.getRed() && p.getVelocityX() > 0) || (!p.getRed() && p.getVelocityX() < 0)) {
+                                    p.setVelocityX(-p.getVelocityX()); 
+                                    p.moveTo(oldX, oldY); 
+                                    continue; 
+                                } else if (p.getRed() && p.getVelocityX() < 0 || !p.getRed() && p.getVelocityX() > 0){
+                                    p.moveTo(newX,newY);
+                                    continue;
+                                }
                             }
                         }
+    
+                        p.moveInContainer(width, height);
+    
+                        newX = p.getX();
+                        newY = p.getY();
+    
+                        boolean absorbed = false;
+                        for (Hole h : holes) {
+                            if (Math.abs(h.getXPosition() - newX) <= 10 && Math.abs(h.getYPosition() - newY) <= 10) {
+                                if (h.canAbsorbMore()) { 
+                                    h.absorbParticle();  
+                                    p.erase();           
+                                    particleIterator.remove(); 
+                                    absorbed = true;
+                                    System.out.println("Partícula absorbida");
+                                    break; 
+                                }
+                            }
+                        }
+                        if (absorbed) continue;
                     }
-                    if (absorbed) continue;
     
-                    if (!isInside(newX, newY)) {
-                        if (newX < 10) {
-                            newX = 10;
-                            p.setVelocityX(-p.getVelocityX());
-                        } else if (newX > width - 10) {
-                            newX = width - 10;
-                            p.setVelocityX(-p.getVelocityX());
-                        }
-    
-                        if (newY < 10) {
-                            newY = 10;
-                            p.setVelocityY(-p.getVelocityY());
-                        } else if (newY > height - 10) {
-                            newY = height - 10;
-                            p.setVelocityY(-p.getVelocityY());
-                        }
+                    if (isGoal()) {
+                        finish();
                     }
     
-                    if ((oldX < divisionX && newX >= divisionX) || (oldX > divisionX && newX <= divisionX)) {
-                        boolean demonioPresente = false;
-                        for (Demon d : demons) {
-                            if (Math.abs(d.getYPosition() - newY) <= 10) { 
-                                demonioPresente = true;
-                                break;
-                            }
-                        }
-    
-                        if (demonioPresente) {
-                            int chance = random.nextInt(2); 
-                            if (p.getRed() && (p.getVelocityX()>0)) {
-                                p.setVelocityX(-p.getVelocityX());
-                                newX = oldX; 
-                            }
-                            if (!p.getRed() && (p.getVelocityX()<0)){
-                                p.setVelocityX(-p.getVelocityX());
-                                newX = oldX; 
-                            }
-                        } else {
-                            p.setVelocityX(-p.getVelocityX());
-                            newX = oldX;
-                        }
+                    try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        break;
                     }
-                    p.moveTo(newX, newY);
                 }
-                
-                if (isGoal()) {
-                    finish();
-                }
+                running = false;
+            });
+    
+            simulationThread.start();
+        }
+    }
 
-                
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    break;
-                }
-            }
-            running = false; 
-        });
-    
-        simulationThread.start();
-    }
-    }
+
 
 
     /**

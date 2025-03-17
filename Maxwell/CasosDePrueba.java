@@ -93,7 +93,6 @@ public class CasosDePrueba {
         container.addDemon(200);
         container.addDemon(300);
 
-        container.addHole(100, 100, 1);
         container.addHole(250, 200, 1);
         container.addHole(400, 300, 1);
 
@@ -133,8 +132,8 @@ public class CasosDePrueba {
         int[][] particlesData = new int[total][4];
 
         for (int i = 0; i < total; i++) {
-            int x = rand.nextInt(maxX - 20) + 10;
-            int y = rand.nextInt(maxY - 20) + 10;
+            int x = rand.nextInt((2*maxX) - 20) + 10;
+            int y = rand.nextInt((maxY) - 20) + 10;
 
             int vx = rand.nextInt(20) ; 
             int vy = rand.nextInt(20) ;
