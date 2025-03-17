@@ -6,12 +6,13 @@ import java.util.*;
  * @author Diego
  * @version 1.0
  */
-class Particle extends Circle {
+class Particle {
 
     private int speedX;
     private int speedY;
     private String color;
     private boolean isRed;
+    private Circle circle;
 
     /**
      * Constructor de la clase Particle.
@@ -25,23 +26,24 @@ class Particle extends Circle {
      * @param speedY La velocidad inicial en el eje Y.
      */
     public Particle(String color, int xPos, int yPos, boolean isRed, int speedX, int speedY) {
-        super();
-        changeColor(color);
-        this.isRed = isRed;
-        super.moveTo(xPos, yPos);
+        this.circle = new Circle();
+        circle.changeColor(color);
+        circle.moveTo(xPos, yPos);
+        circle.setDiameter(MaxwellContainer.getWidth() / 40);
+        circle.makeVisible();
+
         this.color = color;
         this.speedX = speedX;
         this.speedY = speedY;
-        super.setDiameter(MaxwellContainer.getWidth() / 30);
-        this.makeVisible();
+        this.isRed = isRed;
     }
 
     /**
      * Mueve la partícula automáticamente según su velocidad.
      */
     public void move() {
-        moveHorizontal(speedX);
-        moveVertical(speedY);
+        circle.moveHorizontal(speedX);
+        circle.moveVertical(speedY);
     }
 
     /**
@@ -106,7 +108,7 @@ class Particle extends Circle {
      * @return El círculo de la partícula.
      */
     public Circle getCircle() {
-        return this;
+        return this.circle;
     }
 
     /**
@@ -115,7 +117,7 @@ class Particle extends Circle {
      * @return La posición en el eje X.
      */
     public int getXPosition() {
-        return super.getX();
+        return circle.getX();
     }
 
     /**
@@ -124,7 +126,7 @@ class Particle extends Circle {
      * @return La posición en el eje Y.
      */
     public int getYPosition() {
-        return super.getY();
+        return circle.getY();
     }
     
     /**
@@ -142,6 +144,30 @@ class Particle extends Circle {
      */
     public boolean isOnLeftSide() {
         return getXPosition() < (MaxwellContainer.getWidth() / 2);
+    }
+    
+    public void erase(){
+        circle.erase();
+    }
+    
+    public void makeVisible(){
+        circle.makeVisible();
+    }
+    
+    public void makeInvisible(){
+        circle.makeInvisible();
+    }
+    
+    public int getX(){
+    return circle.getX();
+    }
+    
+    public int getY(){
+    return circle.getY();
+    }
+    
+    public void moveTo(int newX,int newY){
+        circle.moveTo(newX,newY);
     }
 
 }

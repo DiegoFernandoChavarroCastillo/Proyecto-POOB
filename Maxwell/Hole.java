@@ -19,7 +19,7 @@ public class Hole extends Circle {
         this.yPosition = yPos;
         this.capMax = capMax;
         this.current = 0; 
-        super.setDiameter(MaxwellContainer.getWidth() / 25);
+        super.setDiameter(MaxwellContainer.getWidth() / 40);
         super.moveTo(xPosition, yPosition);
         super.changeColor("grey");
         this.makeVisible();

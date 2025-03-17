@@ -241,8 +241,8 @@ public class MaxwellContainer {
     
                 while (particleIterator.hasNext()) {
                     Particle p = particleIterator.next();
-                    int oldX = p.getCircle().getX();
-                    int oldY = p.getCircle().getY();
+                    int oldX = p.getX();
+                    int oldY = p.getY();
                     int newX = oldX + p.getVelocityX();
                     int newY = oldY + p.getVelocityY();
     
@@ -303,7 +303,7 @@ public class MaxwellContainer {
                             newX = oldX;
                         }
                     }
-                    p.getCircle().moveTo(newX, newY);
+                    p.moveTo(newX, newY);
                 }
                 
                 if (isGoal()) {
