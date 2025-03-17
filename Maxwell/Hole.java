@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 /**
  * Representa un agujero en el contenedor que puede absorber partículas hasta una capacidad máxima.
  */
@@ -87,5 +89,21 @@ public class Hole {
      */
     public void makeInvisible(){
         circle.makeInvisible();
+    }
+    
+    /**
+     * Absorbe particulas en el contenedor.
+     */
+    public boolean absorbInContainer(Particle p, Iterator<Particle> iterator) {
+        if (Math.abs(this.getXPosition() - p.getX()) <= 10 && Math.abs(this.getYPosition() - p.getY()) <= 10) {
+            if (this.canAbsorbMore()) { 
+                this.absorbParticle();  
+                p.erase();
+                iterator.remove(); 
+                System.out.println("Partícula absorbida");
+                return true; 
+            }
+        }
+        return false;
     }
 }

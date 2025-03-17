@@ -274,15 +274,9 @@ public class MaxwellContainer {
     
                         boolean absorbed = false;
                         for (Hole h : holes) {
-                            if (Math.abs(h.getXPosition() - newX) <= 10 && Math.abs(h.getYPosition() - newY) <= 10) {
-                                if (h.canAbsorbMore()) { 
-                                    h.absorbParticle();  
-                                    p.erase();           
-                                    particleIterator.remove(); 
-                                    absorbed = true;
-                                    System.out.println("Partícula absorbida");
-                                    break; 
-                                }
+                            if (h.absorbInContainer(p, particleIterator)){
+                                absorbed = true;
+                                break;
                             }
                         }
                         if (absorbed) continue;
