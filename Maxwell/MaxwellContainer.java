@@ -20,8 +20,8 @@ public class MaxwellContainer {
     private boolean visible;
     private Thread simulationThread;
     private volatile boolean running = false;
-    private static final int MARGIN = 10; 
-    private static final int DIVISIONMARGIN = 20;
+    private static final int MARGIN = 0; 
+    private static final int DIVISIONMARGIN = 0;
 
     /**
      * Constructor de la clase MaxwellContainer.
@@ -290,7 +290,6 @@ public class MaxwellContainer {
             simulationThread.start();
         }
     }
-
 
 
 

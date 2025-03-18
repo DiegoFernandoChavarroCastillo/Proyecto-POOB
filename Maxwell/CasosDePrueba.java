@@ -3,27 +3,10 @@ import java.util.Random;
 public class CasosDePrueba {
 
     /**
-     * Caso de prueba 1: Contenedor con un demonio y algunas partículas.
-     * Se agregan partículas rojas y azules con velocidades aleatorias.
-     */
-    public void casoPrueba1() {
-        MaxwellContainer container = new MaxwellContainer(300, 400);
-
-        container.addDemon(150);
-
-        int[][] particlesData = generarParticulas(5, 5, 400, 300);
-        container.addParticle(5, 5, particlesData);
-
-        container.addHole(200, 150, 3);
-
-        container.start(1000);
-    }
-
-    /**
-     * Caso de prueba 2: Contenedor con múltiples demonios y agujeros.
+     * Caso de prueba 1: Contenedor con múltiples demonios y agujeros.
      * Se agregan varios demonios y agujeros.
      */
-    public void casoPrueba2() {
+    public void casoPrueba1() {
         MaxwellContainer container = new MaxwellContainer(400, 500);
 
         container.addDemon(100);
@@ -41,10 +24,10 @@ public class CasosDePrueba {
     }
 
     /**
-     * Caso de prueba 3: Contenedor con múltiples partículas y obstáculos.
+     * Caso de prueba 2: Contenedor con múltiples partículas y obstáculos.
      * Se agregan partículas con velocidades elevadas y varios demonios.
      */
-    public void casoPrueba3() {
+    public void casoPrueba2() {
         MaxwellContainer container = new MaxwellContainer(500, 500);
 
         container.addDemon(50);
@@ -61,10 +44,10 @@ public class CasosDePrueba {
     }
 
     /**
-     * Caso de prueba 4: Contenedor con múltiples demonios y agujeros.
+     * Caso de prueba 3: Contenedor con múltiples demonios y agujeros.
      * mayores velocidades
      */
-    public void casoPrueba4() {
+    public void casoPrueba3() {
         MaxwellContainer container = new MaxwellContainer(400, 500);
 
         container.addDemon(100);
@@ -82,11 +65,11 @@ public class CasosDePrueba {
     }
     
     /**
-     * Caso de prueba 5: Contenedor con múltiples demonios y agujeros.
+     * Caso de prueba 4: Contenedor con múltiples demonios y agujeros.
      * deberia terminar dentro del tiempo, solo termina si las rojas estan
      * al mismo lado, asi no haya azules.
      */
-    public void casoPrueba5() {
+    public void casoPrueba4() {
         MaxwellContainer container = new MaxwellContainer(400, 500);
 
         container.addDemon(100);
@@ -103,18 +86,33 @@ public class CasosDePrueba {
     }
     
     /**
-     * Caso de prueba 6: Contenedor con un demonio.
-     * deberia termina retornar imposible sin iniciar simulacion
+     * Caso de prueba 5:
+     * Caso imposible de las especificaciones del problema.
      */
-    public void casoPrueba6() {
+    public void casoPrueba5() {
         MaxwellContainer container = new MaxwellContainer(40, 40);
 
         container.addDemon(10);
 
-        int[][] particlesData = {{20,30,-20,-10}, {70, 20, 10,-20}, {70,20,10,-20}, {20,20,20,20}};
+        int[][] particlesData = {{70,10,20,20}, {20, 30, -20,-10}, {70,20,10,-20}, {60,20,20,20}};
         container.addParticle(2, 2, particlesData);
 
         container.start(1500);
+    }
+    
+    /**
+     * Caso de prueba 6: Contenedor con un demonio y algunas partículas.
+     * Se agregan partículas rojas y azules con velocidades aleatorias.
+     */
+    public void casoPrueba6() {
+        MaxwellContainer container = new MaxwellContainer(140, 40);
+
+        container.addDemon(10);
+
+        int[][] particlesData = {{60,10,40,10},{10,10,20,0}};
+        container.addParticle(1, 1, particlesData);
+
+        container.start(1000);
     }
     
     /**

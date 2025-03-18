@@ -95,7 +95,7 @@ public class Hole {
      * Absorbe particulas en el contenedor.
      */
     public boolean absorbInContainer(Particle p, Iterator<Particle> iterator) {
-        if (Math.abs(this.getXPosition() - p.getX()) <= 10 && Math.abs(this.getYPosition() - p.getY()) <= 10) {
+        if (Math.abs(this.getXPosition() - p.getX()) <= 5 && Math.abs(this.getYPosition() - p.getY()) <= 5) {
             if (this.canAbsorbMore()) { 
                 this.absorbParticle();  
                 p.erase();
