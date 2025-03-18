@@ -1,3 +1,4 @@
+import java.util.Locale;
 public class MaxwellContest {
 
     static final double EPS = 1e-9;
@@ -102,8 +103,9 @@ public class MaxwellContest {
             System.out.println("impossible");
             return;
         }
-        
-        float timeToSolve = Float.parseFloat(result.toString());
+
+        float timeToSolve = Float.parseFloat(result.toString().replace(",", "."));
+
         container.start((int) Math.ceil(timeToSolve));
     }
 }
