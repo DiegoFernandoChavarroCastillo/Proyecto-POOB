@@ -1,11 +1,16 @@
 #BlueJ class context
 comment0.target=MaxwellContest
+comment0.text=\r\n\ Clase\ MaxwellContest\ para\ simular\ el\ problema\ del\ demonio\ de\ Maxwell.\r\n
 comment1.params=u\ h
 comment1.target=double\ reflect(double,\ double)
+comment1.text=\r\n\ Refleja\ una\ posici\u00F3n\ en\ un\ eje\ dado\ un\ l\u00EDmite.\r\n\ @param\ u\ La\ posici\u00F3n\ inicial.\r\n\ @param\ h\ El\ l\u00EDmite\ del\ eje.\r\n\ @return\ La\ posici\u00F3n\ reflejada.\r\n
 comment2.params=px\ py\ vx\ vy\ w\ h\ d
 comment2.target=double\ findMinFlipTime(double,\ double,\ double,\ double,\ double,\ double,\ double)
+comment2.text=\r\n\ Encuentra\ el\ tiempo\ m\u00EDnimo\ en\ el\ que\ una\ part\u00EDcula\ cambia\ de\ lado.\r\n\ @param\ px\ Posici\u00F3n\ inicial\ en\ x.\r\n\ @param\ py\ Posici\u00F3n\ inicial\ en\ y.\r\n\ @param\ vx\ Velocidad\ en\ x.\r\n\ @param\ vy\ Velocidad\ en\ y.\r\n\ @param\ w\ Ancho\ del\ \u00E1rea.\r\n\ @param\ h\ Altura\ del\ \u00E1rea.\r\n\ @param\ d\ Distancia\ de\ referencia.\r\n\ @return\ Tiempo\ m\u00EDnimo\ para\ el\ cambio\ de\ lado.\r\n
 comment3.params=w\ h\ d\ r\ b\ particles
 comment3.target=java.lang.String\ solve(int,\ int,\ double,\ int,\ int,\ int[][])
+comment3.text=\r\n\ Resuelve\ el\ problema\ y\ calcula\ el\ tiempo\ m\u00EDnimo\ para\ equilibrar\ las\ part\u00EDculas.\r\n\ @param\ w\ Ancho\ del\ \u00E1rea.\r\n\ @param\ h\ Altura\ del\ \u00E1rea.\r\n\ @param\ d\ Distancia\ de\ referencia.\r\n\ @param\ r\ Cantidad\ de\ part\u00EDculas\ del\ grupo\ rojo.\r\n\ @param\ b\ Cantidad\ de\ part\u00EDculas\ del\ grupo\ azul.\r\n\ @param\ particles\ Matriz\ con\ los\ datos\ de\ las\ part\u00EDculas.\r\n\ @return\ Tiempo\ m\u00EDnimo\ en\ el\ que\ las\ part\u00EDculas\ alcanzan\ el\ equilibrio\ o\ "impossible"\ si\ no\ es\ posible.\r\n
 comment4.params=w\ h\ d\ b\ r\ particles
 comment4.target=void\ simulate(int,\ int,\ int,\ int,\ int,\ int[][])
+comment4.text=\r\n\ Simula\ el\ proceso\ del\ demonio\ de\ Maxwell\ y\ muestra\ las\ decisiones\ del\ demonio\ en\ cada\ paso.\r\n\ @param\ w\ Ancho\ del\ \u00E1rea.\r\n\ @param\ h\ Altura\ del\ \u00E1rea.\r\n\ @param\ d\ Distancia\ de\ referencia.\r\n\ @param\ b\ Cantidad\ de\ part\u00EDculas\ azules.\r\n\ @param\ r\ Cantidad\ de\ part\u00EDculas\ rojas.\r\n\ @param\ particles\ Matriz\ con\ los\ datos\ de\ las\ part\u00EDculas.\r\n
 numComments=5
