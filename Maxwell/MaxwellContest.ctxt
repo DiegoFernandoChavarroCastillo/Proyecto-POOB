@@ -6,6 +6,6 @@ comment2.params=px\ py\ vx\ vy\ w\ h\ d
 comment2.target=double\ findMinFlipTime(double,\ double,\ double,\ double,\ double,\ double,\ double)
 comment3.params=w\ h\ d\ r\ b\ particles
 comment3.target=java.lang.String\ solve(int,\ int,\ double,\ int,\ int,\ int[][])
-comment4.params=h\ w\ d\ b\ r\ particles
+comment4.params=w\ h\ d\ b\ r\ particles
 comment4.target=void\ simulate(int,\ int,\ int,\ int,\ int,\ int[][])
 numComments=5

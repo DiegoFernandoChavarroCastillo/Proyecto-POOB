@@ -84,18 +84,19 @@ public class MaxwellContest {
         }
     }
 
-    public static void simulate(int h, int w, int d, int b, int r, int[][] particles) {
+    public static void simulate(int w, int h, int d, int b, int r, int[][] particles) {
         int[][] fixedParticles = new int[particles.length][4];
     
         for (int i = 0; i < particles.length; i++) {
-            fixedParticles[i][0] = particles[i][0] + w;
-            fixedParticles[i][1] = particles[i][1];
-            fixedParticles[i][2] = particles[i][2];
-            fixedParticles[i][3] = particles[i][3];
+            fixedParticles[i][0] = (particles[i][0] + w)*10;
+            fixedParticles[i][1] = particles[i][1]*10;
+            fixedParticles[i][2] = particles[i][2]*10;
+            fixedParticles[i][3] = particles[i][3]*10;
         }
         
-        MaxwellContainer container = new MaxwellContainer(h, w, d, b, r, fixedParticles);
+        MaxwellContainer container = new MaxwellContainer(w*10, h*10, d*10, b, r, fixedParticles);
         Object result = solve(w, h, d, r, b, particles);
+        System.out.println(result.toString());
         
         if (result instanceof String && result.equals("impossible")) {
             System.out.println("impossible");
