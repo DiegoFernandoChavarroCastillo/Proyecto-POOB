@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=MaxwellContainer
 comment0.text=\r\n\ La\ clase\ MaxwellContainer\ representa\ un\ contenedor\ que\ simula\ el\ experimento\ del\ demonio\ de\ Maxwell.\r\n\ El\ contenedor\ tiene\ una\ divisi\u00F3n\ central\ y\ puede\ contener\ part\u00EDculas,\ demonios\ y\ agujeros.\r\n\ Las\ part\u00EDculas\ pueden\ moverse\ dentro\ del\ contenedor\ y\ rebotar\ en\ las\ paredes\ o\ interactuar\ con\ los\ demonios.\r\n\ \r\n\ @author\ Diego\ Chavarro,\ Diego\ Rodriguez\r\n\ @version\ 08/03/25\r\n
-comment1.params=h\ w
+comment1.params=w\ h
 comment1.target=MaxwellContainer(int,\ int)
 comment1.text=\r\n\ Constructor\ de\ la\ clase\ MaxwellContainer.\r\n\ Inicializa\ el\ contenedor\ con\ las\ dimensiones\ especificadas.\r\n\ \r\n\ @param\ h\ La\ altura\ del\ contenedor.\r\n\ @param\ w\ El\ ancho\ del\ contenedor.\r\n
 comment10.params=

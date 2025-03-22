@@ -20,8 +20,8 @@ public class MaxwellContainer {
     private boolean visible;
     private Thread simulationThread;
     private volatile boolean running = false;
-    private static final int MARGIN = 0; 
-    private static final int DIVISIONMARGIN = 0;
+    private static final int MARGIN = 1; 
+    private static final int DIVISIONMARGIN = 1;
 
     /**
      * Constructor de la clase MaxwellContainer.
@@ -30,7 +30,7 @@ public class MaxwellContainer {
      * @param h La altura del contenedor.
      * @param w El ancho del contenedor.
      */
-    public MaxwellContainer(int h, int w) {
+    public MaxwellContainer(int w, int h) {
         Canvas.reset();
 
         if (w < 2) w = 2;
@@ -156,7 +156,7 @@ public class MaxwellContainer {
                 int py = particlesData[i][1];
                 int vx = particlesData[i][2];
                 int vy = particlesData[i][3];
-    
+                System.out.printf("%d,%d,%d,%d,%d",px,py,vx,vy,width);
                 boolean isRed = (i < r);
                 String color = isRed ? "red" : "blue";
                 
