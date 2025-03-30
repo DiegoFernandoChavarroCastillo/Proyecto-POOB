@@ -1,11 +1,16 @@
 #BlueJ class context
 comment0.target=Triangle
+comment0.text=\r\n\ Clase\ que\ representa\ un\ tri\u00E1ngulo\ dibujable\ sobre\ el\ lienzo.\r\n\ Hereda\ las\ funcionalidades\ comunes\ de\ la\ clase\ Figure.\r\n
 comment1.params=height\ width\ xPosition\ yPosition\ color
 comment1.target=Triangle(int,\ int,\ int,\ int,\ java.lang.String)
+comment1.text=\r\n\ Crea\ un\ tri\u00E1ngulo\ con\ los\ valores\ especificados.\r\n\r\n\ @param\ height\ altura\ del\ tri\u00E1ngulo\r\n\ @param\ width\ base\ del\ tri\u00E1ngulo\r\n\ @param\ xPosition\ posici\u00F3n\ inicial\ en\ X\r\n\ @param\ yPosition\ posici\u00F3n\ inicial\ en\ Y\r\n\ @param\ color\ color\ del\ tri\u00E1ngulo\r\n
 comment2.params=newHeight\ newWidth
 comment2.target=void\ changeSize(int,\ int)
+comment2.text=\r\n\ Cambia\ el\ tama\u00F1o\ del\ tri\u00E1ngulo.\r\n\r\n\ @param\ newHeight\ nueva\ altura\ en\ p\u00EDxeles\r\n\ @param\ newWidth\ nuevo\ ancho\ en\ p\u00EDxeles\r\n
 comment3.params=
 comment3.target=void\ draw()
+comment3.text=\r\n\ Dibuja\ el\ tri\u00E1ngulo\ sobre\ el\ lienzo.\r\n
 comment4.params=
 comment4.target=void\ erase()
+comment4.text=\r\n\ Borra\ el\ tri\u00E1ngulo\ del\ lienzo.\r\n
 numComments=5

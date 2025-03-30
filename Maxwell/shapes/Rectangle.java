@@ -1,14 +1,32 @@
 package shapes;
-import maxwell.MaxwellContainer;
 
+import maxwell.MaxwellContainer;
 import java.awt.*;
 
+/**
+ * Clase que representa un rectángulo dibujable sobre el lienzo.
+ * Hereda las funcionalidades comunes de la clase Figure.
+ */
 public class Rectangle extends Figure {
 
+    /**
+     * Número de bordes del rectángulo.
+     */
     public static int EDGES = 4;
+
+    /**
+     * Altura del rectángulo.
+     */
     private int height;
+
+    /**
+     * Ancho del rectángulo.
+     */
     private int width;
 
+    /**
+     * Crea un rectángulo con valores predeterminados.
+     */
     public Rectangle() {
         height = 30;
         width = 40;
@@ -18,6 +36,12 @@ public class Rectangle extends Figure {
         isVisible = false;
     }
 
+    /**
+     * Establece una nueva posición para el rectángulo.
+     *
+     * @param xPos nueva coordenada X
+     * @param yPos nueva coordenada Y
+     */
     public void setPos(int xPos, int yPos) {
         erase();
         this.xPosition = xPos;
@@ -25,6 +49,12 @@ public class Rectangle extends Figure {
         draw();
     }
 
+    /**
+     * Cambia el tamaño del rectángulo.
+     *
+     * @param newHeight nueva altura en píxeles
+     * @param newWidth nuevo ancho en píxeles
+     */
     public void changeSize(int newHeight, int newWidth) {
         erase();
         height = newHeight;
@@ -32,6 +62,9 @@ public class Rectangle extends Figure {
         draw();
     }
 
+    /**
+     * Dibuja el rectángulo sobre el lienzo.
+     */
     @Override
     public void draw() {
         if (isVisible) {
@@ -41,6 +74,9 @@ public class Rectangle extends Figure {
         }
     }
 
+    /**
+     * Borra el rectángulo del lienzo.
+     */
     @Override
     public void erase() {
         if (isVisible) {

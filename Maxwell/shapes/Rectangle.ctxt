@@ -1,13 +1,19 @@
 #BlueJ class context
 comment0.target=Rectangle
+comment0.text=\r\n\ Clase\ que\ representa\ un\ rect\u00E1ngulo\ dibujable\ sobre\ el\ lienzo.\r\n\ Hereda\ las\ funcionalidades\ comunes\ de\ la\ clase\ Figure.\r\n
 comment1.params=
 comment1.target=Rectangle()
+comment1.text=\r\n\ Crea\ un\ rect\u00E1ngulo\ con\ valores\ predeterminados.\r\n
 comment2.params=xPos\ yPos
 comment2.target=void\ setPos(int,\ int)
+comment2.text=\r\n\ Establece\ una\ nueva\ posici\u00F3n\ para\ el\ rect\u00E1ngulo.\r\n\r\n\ @param\ xPos\ nueva\ coordenada\ X\r\n\ @param\ yPos\ nueva\ coordenada\ Y\r\n
 comment3.params=newHeight\ newWidth
 comment3.target=void\ changeSize(int,\ int)
+comment3.text=\r\n\ Cambia\ el\ tama\u00F1o\ del\ rect\u00E1ngulo.\r\n\r\n\ @param\ newHeight\ nueva\ altura\ en\ p\u00EDxeles\r\n\ @param\ newWidth\ nuevo\ ancho\ en\ p\u00EDxeles\r\n
 comment4.params=
 comment4.target=void\ draw()
+comment4.text=\r\n\ Dibuja\ el\ rect\u00E1ngulo\ sobre\ el\ lienzo.\r\n
 comment5.params=
 comment5.target=void\ erase()
+comment5.text=\r\n\ Borra\ el\ rect\u00E1ngulo\ del\ lienzo.\r\n
 numComments=6
