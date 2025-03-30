@@ -186,7 +186,26 @@ public class MaxwellContainer {
         setIsOk(true);
     }
 
+    /**
+     * Agrega una nueva partícula al contenedor, permitiendo definir su tipo.
+     * 
+     * @param type Tipo de partícula ("normal", "ephemeral", "flying", "rotator")
+     * @param color Color de la partícula
+     * @param isRed true si la partícula es roja
+     * @param px Posición X inicial
+     * @param py Posición Y inicial
+     * @param vx Velocidad en el eje X
+     * @param vy Velocidad en el eje Y
+     */
+    public void addParticle(String type, String color, boolean isRed, int px, int py, int vx, int vy) {
+        if ("normal".equalsIgnoreCase(type)) {
+            addParticle(color, isRed, px, py, vx, vy); 
+            return;
+        }
+    
+    }
 
+    
     /**
      * Elimina todas las partículas del color especificado.
      * 
