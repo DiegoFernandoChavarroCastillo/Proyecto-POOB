@@ -78,17 +78,34 @@ public class MaxwellContainer {
      * @param r El número de partículas rojas.
      * @param particles Los datos de las partículas.
      */
-    public MaxwellContainer(int h, int w, int d, int b, int r, int[][] particles) {
+    public MaxwellContainer(int h, int w, int d, int b, int r, int[][] particlesData) {
         this(h, w);
-
+    
         if (ok()) {
             addDemon(d);
-            addParticle(r, b, particles);
+            if (particlesData.length != r + b) {
+                System.out.println("Error: Se esperaban " + (r + b) + " partículas, pero se recibieron " + particlesData.length);
+                setIsOk(false);
+            } else {
+                setIsOk(true);
+                for (int i = 0; i < r + b; i++) {
+                    int px = particlesData[i][0];
+                    int py = particlesData[i][1];
+                    int vx = particlesData[i][2];
+                    int vy = particlesData[i][3];
+    
+                    boolean isRed = (i < r);
+                    String color = isRed ? "red" : "blue";
+    
+                    addParticle(color, isRed, px, py, vx, vy);
+                }
+            }
         } else {
             System.out.println("Error en la inicialización del contenedor.");
             setIsOk(false);
         }
     }
+
 
     /**
      * Añade un demonio en la posición especificada.
@@ -143,44 +160,32 @@ public class MaxwellContainer {
     }
     
     /**
-     * Añade partículas al contenedor.
-     * 
-     * @param r El número de partículas rojas.
-     * @param b El número de partículas azules.
-     * @param particlesData Los datos de las partículas.
+     * Agrega una nueva partícula al contenedor.
+     *
+     * @param color Color de la partícula ("red", "blue", etc.)
+     * @param isRed Indica si la partícula es roja
+     * @param px Posición inicial en el eje X
+     * @param py Posición inicial en el eje Y
+     * @param vx Velocidad en el eje X
+     * @param vy Velocidad en el eje Y
      */
-    public void addParticle(int r, int b, int[][] particlesData) {
-        if (particlesData.length != r + b) {
-            System.out.println("Error: Se esperaban " + (r + b) + " partículas, pero se recibieron " + particlesData.length);
+    public void addParticle(String color, boolean isRed, int px, int py, int vx, int vy) {
+        if (!isInside(px, py)) {
+            System.out.println("Error: Partícula fuera de los límites seguros. Ignorada.");
             setIsOk(false);
-        } else{
-            setIsOk(true);
-            for (int i = 0; i < r + b; i++) {
-                int px = particlesData[i][0];
-                int py = particlesData[i][1];
-                int vx = particlesData[i][2];
-                int vy = particlesData[i][3];
-                System.out.printf("%d,%d,%d,%d,%d",px,py,vx,vy,width);
-                boolean isRed = (i < r);
-                String color = isRed ? "red" : "blue";
-                
-                if (!isInside(px, py)) {
-                    System.out.println("Error: Partícula fuera de los límites seguros. Ignorada.");
-                    setIsOk(false);
-                    continue;
-                }
-    
-                if (vx <= -width || vx >= width || vy <= -height || vy >= height || (vx == 0 && vy == 0)) {
-                    System.out.println("Error: Velocidad de partícula no válida. Ignorada.");
-                    setIsOk(false);
-                    continue;
-                }
-    
-                particles.add(new Particle(color, px, py, isRed, vx, vy));
-            }
-            
+            return;
         }
+    
+        if (vx <= -width || vx >= width || vy <= -height || vy >= height || (vx == 0 && vy == 0)) {
+            System.out.println("Error: Velocidad de partícula no válida. Ignorada.");
+            setIsOk(false);
+            return;
+        }
+    
+        particles.add(new Particle(color, px, py, isRed, vx, vy));
+        setIsOk(true);
     }
+
 
     /**
      * Elimina todas las partículas del color especificado.
