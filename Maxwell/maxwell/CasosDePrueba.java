@@ -2,8 +2,16 @@ package maxwell;
 
 import java.util.Random;
 
+/**
+ * Clase que contiene múltiples casos de prueba para simular el funcionamiento del contenedor de Maxwell.
+ * Cada método representa un escenario diferente con demonios, partículas y agujeros.
+ */
 public class CasosDePrueba {
-
+    
+    /**
+     * Caso de prueba 1: Contenedor con múltiples demonios y agujeros.
+     * Se agregan varias partículas de ambos colores.
+     */
     public void casoPrueba1() {
         MaxwellContainer container = new MaxwellContainer(400, 500);
 
@@ -23,25 +31,11 @@ public class CasosDePrueba {
         container.start(1500);
     }
 
+
+    /**
+     * Caso de prueba 2: Partículas con alta velocidad y varios demonios.
+     */
     public void casoPrueba2() {
-        MaxwellContainer container = new MaxwellContainer(500, 500);
-
-        container.addDemon(50);
-        container.addDemon(250);
-        container.addDemon(450);
-
-        container.addHole(200, 100, 3);
-        container.addHole(350, 300, 5);
-
-        int r = 15;
-        int b = 15;
-        int[][] particlesData = generarParticulas(r, b, 500, 500);
-        agregarParticulas(container, r, b, particlesData);
-
-        container.start(2000);
-    }
-
-    public void casoPrueba3() {
         MaxwellContainer container = new MaxwellContainer(400, 500);
 
         container.addDemon(100);
@@ -57,24 +51,12 @@ public class CasosDePrueba {
 
         container.start(1500);
     }
-
-    public void casoPrueba4() {
-        MaxwellContainer container = new MaxwellContainer(400, 500);
-
-        container.addDemon(100);
-        container.addDemon(200);
-        container.addDemon(300);
-
-        container.addHole(250, 200, 1);
-        container.addHole(400, 300, 1);
-
-        int[][] particlesData = {{350,70,15,15}, {380, 50, 15,1}, {15,15,70,15}, {30,30,15,15}};
-        agregarParticulas(container, 3, 1, particlesData);
-
-        container.start(1500);
-    }
-
-    public void casoPrueba5() {
+    
+    /**
+     * Caso de prueba 3: Escenario imposible de resolver.
+     * Utiliza velocidades y posiciones que impiden cumplir la condición de separación.
+     */
+    public void casoPrueba3() {
         MaxwellContainer container = new MaxwellContainer(40, 40);
 
         container.addDemon(10);
@@ -85,7 +67,11 @@ public class CasosDePrueba {
         container.start(1500);
     }
 
-    public void casoPrueba6() {
+    /**
+     * Caso de prueba 4: Contenedor con pocas partículas y un solo demonio.
+     * Se utiliza para validar comportamientos básicos.
+     */
+    public void casoPrueba4() {
         MaxwellContainer container = new MaxwellContainer(140, 40);
 
         container.addDemon(10);
@@ -96,6 +82,9 @@ public class CasosDePrueba {
         container.start(1000);
     }
 
+    /**
+     * Genera partículas con posiciones y velocidades aleatorias.
+     */
     private int[][] generarParticulas(int r, int b, int maxX, int maxY) {
         Random rand = new Random();
         int total = r + b;
@@ -120,6 +109,15 @@ public class CasosDePrueba {
         return particlesData;
     }
 
+    /**
+     * Agrega partículas al contenedor usando el método addParticle.
+     * Asigna color rojo a las primeras r partículas, azul a las b siguientes.
+     *
+     * @param container Instancia del contenedor
+     * @param r Cantidad de partículas rojas
+     * @param b Cantidad de partículas azules
+     * @param particlesData Datos de posición y velocidad de las partículas
+     */
     private void agregarParticulas(MaxwellContainer container, int r, int b, int[][] particlesData) {
         for (int i = 0; i < r + b; i++) {
             int px = particlesData[i][0];
