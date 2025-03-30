@@ -1,3 +1,6 @@
+package maxwell;
+
+
 import java.util.Locale;
 /**
  * Clase MaxwellContest para simular el problema del demonio de Maxwell.

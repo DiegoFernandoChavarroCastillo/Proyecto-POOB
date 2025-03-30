@@ -1,25 +1,21 @@
+package shapes;
+
+import maxwell.MaxwellContainer;
 import java.awt.*;
 
-public class Rectangle extends Figure {
+public class Triangle extends Figure {
 
-    public static int EDGES = 4;
+    public static int VERTICES = 3;
     private int height;
     private int width;
 
-    public Rectangle() {
-        height = 30;
-        width = 40;
-        xPosition = 70;
-        yPosition = 15;
-        color = "yellow";
-        isVisible = false;
-    }
-
-    public void setPos(int xPos, int yPos) {
-        erase();
-        this.xPosition = xPos;
-        this.yPosition = yPos;
-        draw();
+    public Triangle(int height, int width, int xPosition, int yPosition, String color) {
+        this.height = height;
+        this.width = width;
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
+        this.color = color;
+        isVisible = true;
     }
 
     public void changeSize(int newHeight, int newWidth) {
@@ -33,7 +29,9 @@ public class Rectangle extends Figure {
     public void draw() {
         if (isVisible) {
             Canvas canvas = Canvas.getCanvas(MaxwellContainer.getWidth(), MaxwellContainer.getHeight());
-            canvas.draw(this, color, new java.awt.Rectangle(xPosition, yPosition, width, height));
+            int[] xpoints = {xPosition, xPosition + (width / 2), xPosition - (width / 2)};
+            int[] ypoints = {yPosition, yPosition + height, yPosition + height};
+            canvas.draw(this, color, new Polygon(xpoints, ypoints, 3));
             canvas.wait(10);
         }
     }

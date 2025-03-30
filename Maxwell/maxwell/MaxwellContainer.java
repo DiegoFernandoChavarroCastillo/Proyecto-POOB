@@ -1,4 +1,8 @@
+package maxwell;
+
 import java.util.*;
+import shapes.Rectangle;
+import shapes.Canvas;
 /**
  * La clase MaxwellContainer representa un contenedor que simula el experimento del demonio de Maxwell.
  * El contenedor tiene una división central y puede contener partículas, demonios y agujeros.

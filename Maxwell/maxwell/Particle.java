@@ -1,4 +1,9 @@
+package maxwell;
+
 import java.util.*;
+
+import shapes.Circle;
+
 /**
  * La clase Particle representa una partícula en la simulación del contenedor de Maxwell.
  * Cada partícula tiene una posición, velocidad, color y puede moverse dentro del contenedor.

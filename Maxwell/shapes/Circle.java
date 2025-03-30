@@ -1,3 +1,6 @@
+package shapes;
+
+import maxwell.MaxwellContainer;
 import java.awt.*;
 import java.awt.geom.*;
 

@@ -1,3 +1,6 @@
+package maxwell;
+
+
 import java.util.Random;
 
 public class CasosDePrueba {

@@ -1,3 +1,6 @@
+package maxwell;
+
+import shapes.Triangle;
 import java.util.*;
 /**
  * La clase Demon representa un demonio en el contenedor de Maxwell.

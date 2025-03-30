@@ -58,6 +58,6 @@ comment8.params=
 comment8.target=int\ getVelocityY()
 comment8.text=\r\n\ Devuelve\ la\ velocidad\ en\ el\ eje\ Y.\r\n\ \r\n\ @return\ La\ velocidad\ en\ el\ eje\ Y.\r\n
 comment9.params=
-comment9.target=Circle\ getCircle()
+comment9.target=shapes.Circle\ getCircle()
 comment9.text=\r\n\ Devuelve\ el\ c\u00EDrculo\ que\ representa\ visualmente\ la\ part\u00EDcula.\r\n\ \r\n\ @return\ El\ c\u00EDrculo\ de\ la\ part\u00EDcula.\r\n
 numComments=21

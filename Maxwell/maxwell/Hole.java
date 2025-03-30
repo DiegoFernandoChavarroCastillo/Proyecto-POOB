@@ -1,3 +1,6 @@
+package maxwell;
+
+import shapes.Circle;
 import java.util.Iterator;
 
 /**
