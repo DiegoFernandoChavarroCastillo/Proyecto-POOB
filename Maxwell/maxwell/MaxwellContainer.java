@@ -198,14 +198,35 @@ public class MaxwellContainer {
      * @param vy Velocidad en el eje Y
      */
     public void addParticle(String type, String color, boolean isRed, int px, int py, int vx, int vy) {
-        if ("normal".equalsIgnoreCase(type)) {
-            addParticle(color, isRed, px, py, vx, vy); 
+        if (!isInside(px, py)) {
+            System.out.println("Error: Partícula fuera de los límites seguros. Ignorada.");
+            setIsOk(false);
             return;
         }
     
+        if (vx <= -width || vx >= width || vy <= -height || vy >= height || (vx == 0 && vy == 0)) {
+            System.out.println("Error: Velocidad de partícula no válida. Ignorada.");
+            setIsOk(false);
+            return;
+        }
+    
+        switch (type.toLowerCase()) {
+            case "normal":
+                addParticle(color, isRed, px, py, vx, vy); // delega
+                break;
+            case "ephemeral":
+                particles.add(new EphemeralParticle(color, px, py, isRed, vx, vy, this));
+                break;
+            // futuros tipos: flying, rotator...
+            default:
+                System.out.println("Advertencia: Tipo de partícula '" + type + "' no reconocido. Ignorada.");
+                setIsOk(false);
+                return;
+        }
+    
+        setIsOk(true);
     }
 
-    
     /**
      * Elimina todas las partículas del color especificado.
      * 
@@ -236,6 +257,16 @@ public class MaxwellContainer {
         setIsOk(found);
         }
     }
+    
+    /**
+     * Elimina una partícula del contenedor.
+     *
+     * @param p Partícula a eliminar
+     */
+    public void removeParticle(Particle p) {
+        particles.remove(p);
+    }
+
 
     /**
      * Inicia la simulación con el número de ticks especificado.

@@ -216,6 +216,14 @@ class Particle {
         moveTo(newX, newY);
     }
 
+    /**
+     * Cambia el diámetro del círculo que representa la partícula.
+     *
+     * @param diameter nuevo diámetro en píxeles
+     */
+    protected void setDiameter(int diameter) {
+        circle.setDiameter(diameter);
+    }
 
 
 }

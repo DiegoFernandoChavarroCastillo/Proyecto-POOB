@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=EphemeralParticle
+comment0.text=\r\n\ Part\u00EDcula\ de\ tipo\ ephemeral.\r\n\ En\ cada\ colisi\u00F3n\ con\ los\ bordes\ del\ contenedor\ pierde\ 1\ unidad\ de\ velocidad\ en\ cada\ direcci\u00F3n.\r\n\ Si\ su\ velocidad\ llega\ a\ 0\ en\ ambos\ ejes,\ se\ borra\ visualmente\ y\ se\ elimina\ del\ contenedor.\r\n
+comment1.params=color\ xPos\ yPos\ isRed\ speedX\ speedY\ container
+comment1.target=EphemeralParticle(java.lang.String,\ int,\ int,\ boolean,\ int,\ int,\ MaxwellContainer)
+comment1.text=\r\n\ Crea\ una\ nueva\ part\u00EDcula\ ephemeral.\r\n\r\n\ @param\ color\ color\ de\ la\ part\u00EDcula\r\n\ @param\ xPos\ posici\u00F3n\ inicial\ en\ X\r\n\ @param\ yPos\ posici\u00F3n\ inicial\ en\ Y\r\n\ @param\ isRed\ indica\ si\ la\ part\u00EDcula\ es\ roja\r\n\ @param\ speedX\ velocidad\ inicial\ en\ X\r\n\ @param\ speedY\ velocidad\ inicial\ en\ Y\r\n\ @param\ container\ contenedor\ al\ que\ pertenece\r\n
+comment2.params=width\ height
+comment2.target=void\ moveInContainer(int,\ int)
+comment3.params=v
+comment3.target=int\ adjustVelocity(int)
+numComments=4
