@@ -438,6 +438,34 @@ public class MaxwellContainer {
         setIsOk(true);
         return demonPositions;
     }
+    
+    /**
+     * Retorna las posiciones (Y) de los demonios del tipo especificado, ordenadas de menor a mayor.
+     *
+     * @param type tipo de demonio ("normal", "blue", "weak")
+     * @return arreglo con las posiciones Y ordenadas de los demonios del tipo dado
+     */
+    public int[] demons(String type) {
+        List<Integer> posiciones = new ArrayList<>();
+    
+        for (Demon d : demons) {
+            boolean matches = switch (type.toLowerCase()) {
+                case "normal" -> d.getClass().equals(Demon.class);
+                case "blue" -> d instanceof BlueDemon;
+                case "weak" -> d instanceof WeakDemon;
+                default -> false;
+            };
+    
+            if (matches) {
+                posiciones.add(d.getYPosition());
+            }
+        }
+    
+        int[] resultado = posiciones.stream().mapToInt(Integer::intValue).toArray();
+        Arrays.sort(resultado);
+        setIsOk(true);
+        return resultado;
+    }
 
     /**
      * Devuelve las posiciones y velocidades de las partículas en el contenedor.
