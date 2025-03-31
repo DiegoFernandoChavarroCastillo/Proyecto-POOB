@@ -81,6 +81,35 @@ public class CasosDePrueba {
 
         container.start(1000);
     }
+    
+        /**
+     * Caso de prueba 5: Contenedor con partículas de todos los tipos.
+     * Incluye normales, ephemeral, flying y rotator. También se incluyen agujeros negros para verificar que las flying no sean absorbidas.
+     */
+    public void casoPrueba5() {
+        MaxwellContainer container = new MaxwellContainer(400, 500);
+
+        container.addDemon(100);
+        container.addDemon(200);
+        container.addDemon(300);
+
+        container.addHole(150, 200, 2);
+        container.addHole(250, 200, 2);
+        container.addHole(350, 250, 2);
+
+        container.addParticle("normal", "red", true, 30, 50, 10, 5);
+
+        container.addParticle("ephemeral", "magenta", true, 60, 80, 2, 2);
+
+        container.addParticle("flying", "green", false, 50, 180, 5, 0);
+        container.addParticle("flying", "green", false, 360, 240, -5, 0);
+
+        container.addParticle("rotator", "orange", true, 70, 70, 5, 5);
+        container.addParticle("rotator", "orange", false, 370, 370, -6, -3);
+
+        container.start(2000);
+    }
+
 
     /**
      * Genera partículas con posiciones y velocidades aleatorias.

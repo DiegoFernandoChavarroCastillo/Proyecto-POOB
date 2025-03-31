@@ -428,6 +428,40 @@ public class MaxwellContainer {
         setIsOk(true);
         return particlesMatrix;
     }
+    
+    /**
+     * Retorna las posiciones y velocidades de las partículas del tipo dado,
+     * ordenadas lexicográficamente por posición y velocidad.
+     *
+     * @param type tipo de partícula ("normal", "ephemeral", "flying", "rotator")
+     * @return matriz con las partículas del tipo dado en formato [x, y, vx, vy]
+     */
+    public int[][] particles(String type) {
+        List<int[]> datos = new ArrayList<>();
+    
+        for (Particle p : particles) {
+            boolean matches = switch (type.toLowerCase()) {
+                case "normal" -> p.getClass().equals(Particle.class);
+                case "ephemeral" -> p instanceof EphemeralParticle;
+                case "flying" -> p instanceof FlyingParticle;
+                case "rotator" -> p instanceof RotatorParticle;
+                default -> false;
+            };
+    
+            if (matches) {
+                datos.add(new int[]{ p.getX(), p.getY(), p.getVelocityX(), p.getVelocityY() });
+            }
+        }
+    
+        datos.sort(Comparator
+            .comparingInt((int[] a) -> a[0])  
+            .thenComparingInt(a -> a[1])      
+            .thenComparingInt(a -> a[2])      
+            .thenComparingInt(a -> a[3]));   
+    
+        return datos.toArray(new int[0][]);
+    }
+
 
     /**
      * Devuelve las posiciones y capacidades de los agujeros en el contenedor.
