@@ -52,6 +52,8 @@ public class WeakDemon extends Demon {
         }
 
         container.removeDemon(this);
+        makeInVisible();
+        erase();
         eliminado = true;
         return true;
     }

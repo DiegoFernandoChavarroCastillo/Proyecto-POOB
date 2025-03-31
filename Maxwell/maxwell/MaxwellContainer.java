@@ -145,7 +145,7 @@ public class MaxwellContainer {
                 setIsOk(true);
                 break;
             case "weak":
-                //demons.add(new WeakDemon(d));
+                demons.add(new WeakDemon(d,this));
                 setIsOk(true);
                 break;
             default:

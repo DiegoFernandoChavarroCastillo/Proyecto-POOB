@@ -111,29 +111,27 @@ public class CasosDePrueba {
     }
     
     /**
-     * Caso de prueba 6: Verificación del demonio azul (BlueDemon).
-     * Solo permite el paso de partículas azules, las rojas son devueltas.
+     * Caso de prueba 6: Verificación de los demonios nuevos.
      */
-    public void casoPrueba6() {
-        MaxwellContainer container = new MaxwellContainer(400, 500);
+public void casoPrueba6() {
+    MaxwellContainer container = new MaxwellContainer(400, 500);
+
+    container.addDemon("blue", 250);
+    container.addDemon("weak", 150);
+
+    container.addParticle("normal", "blue", false, 100, 250, -15, 0);
+    container.addParticle("normal", "blue", false, 350, 250, -15, 0);
+    container.addParticle("normal", "red", true, 100, 250, 15, 0);
+    container.addParticle("normal", "red", true, 350, 250, 15, 0);
+
+    container.addParticle("normal", "blue", false, 100, 150, 15, 0); 
+    container.addParticle("normal", "red", true, 350, 150, -15, 0); 
+
     
-        // Agregamos un BlueDemon a la altura media
-        container.addDemon("blue", 250);
-    
-        // Partícula azul intentando cruzar desde la izquierda hacia la derecha → debe pasar
-        container.addParticle("normal", "blue", false, 100, 250, -15, 0);
-    
-        // Partícula azul intentando cruzar desde la derecha hacia la izquierda → debe pasar
-        container.addParticle("normal", "blue", false, 350, 250, -15, 0);
-    
-        // Partícula roja intentando cruzar desde la izquierda hacia la derecha → debe ser devuelta
-        container.addParticle("normal", "red", true, 100, 250, 15, 0);
-    
-        // Partícula roja intentando cruzar desde la derecha hacia la izquierda → debe ser devuelta
-        container.addParticle("normal", "red", true, 350, 250, 15, 0);
-    
-        container.start(2000);
-    }
+    container.addParticle("normal", "blue", false, 100, 400, 15,0);
+    container.start(2000);
+}
+
 
 
 
