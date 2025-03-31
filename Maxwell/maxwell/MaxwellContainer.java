@@ -189,7 +189,9 @@ public class MaxwellContainer {
         demons.remove(d);
     }
 
-    
+    /**
+     * agrega un agujero con su posicion y capacidad en el mapa
+     */
     public void addHole(int px, int py, int maxParticles) {
         if (isInside(px, py)) {
             Hole hole = new Hole(px, py, maxParticles);
@@ -198,6 +200,31 @@ public class MaxwellContainer {
                 hole.makeVisible();
             }
         }
+    }
+    
+    /**
+     * Agrega un agujero al contenedor, especificando el tipo.
+     *
+     * @param type tipo de agujero ("normal", "otroTipo...")
+     * @param px posición en X
+     * @param py posición en Y
+     * @param particles capacidad máxima de absorción
+     */
+    public void addHole(String type, int px, int py, int particles) {
+        switch (type.toLowerCase()) {
+            case "normal":
+                holes.add(new Hole(px, py, particles));
+                break;
+            case "moving":
+                holes.add(new MovingHole(px, py, particles));
+                break;
+
+            default:
+                System.out.println("Error: Tipo de agujero '" + type + "' no reconocido.");
+                setIsOk(false);
+                return;
+        }
+        setIsOk(true);
     }
     
     /**
@@ -369,9 +396,13 @@ public class MaxwellContainer {
     
                         newX = p.getX();
                         newY = p.getY();
-    
+                        
+                        
                         boolean absorbed = false;
                         for (Hole h : holes) {
+                            if (h instanceof MovingHole moving) {
+                                moving.moveInContainer(width, height);
+                            }
                             if (h.absorbInContainer(p, particleIterator)){
                                 absorbed = true;
                                 break;
@@ -554,6 +585,41 @@ public class MaxwellContainer {
         setIsOk(true);
         return holeData;
     }
+    
+    /**
+     * Retorna las posiciones y capacidad restante de los agujeros del tipo indicado,
+     * ordenadas lexicográficamente por posición (x, y) y capacidad restante.
+     *
+     * @param type tipo de agujero ("normal", "moving")
+     * @return matriz con las posiciones y capacidades en formato [x, y, capacidadRestante]
+     */
+    public int[][] holes(String type) {
+        List<int[]> resultado = new ArrayList<>();
+    
+        for (Hole h : holes) {
+            boolean matches = switch (type.toLowerCase()) {
+                case "normal" -> h.getClass().equals(Hole.class);
+                case "moving" -> h instanceof MovingHole;
+                default -> false;
+            };
+    
+            if (matches) {
+                resultado.add(new int[]{
+                    h.getXPosition(),
+                    h.getYPosition(),
+                    h.getCapacity()
+                });
+            }
+        }
+    
+        resultado.sort(Comparator
+            .comparingInt((int[] a) -> a[0])  // x
+            .thenComparingInt(a -> a[1])      // y
+            .thenComparingInt(a -> a[2]));    // capacidad restante
+    
+        return resultado.toArray(new int[0][]);
+    }
+
 
     /**
      * Hace visible el contenedor y todos sus elementos.

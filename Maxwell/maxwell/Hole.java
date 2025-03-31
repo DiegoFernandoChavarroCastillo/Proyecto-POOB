@@ -101,12 +101,11 @@ public class Hole {
      * @return true si la partícula fue absorbida, false en caso contrario
      */
     public boolean absorbInContainer(Particle p, Iterator<Particle> iterator) {
-        // Primero verifica si es una FlyingParticle (no se absorbe)
+        
         if (p instanceof FlyingParticle) {
             return false;
         }
         
-        // Lógica normal de absorción para otras partículas
         if (Math.abs(this.getXPosition() - p.getX()) <= 5 && 
             Math.abs(this.getYPosition() - p.getY()) <= 5) {
             
@@ -119,5 +118,18 @@ public class Hole {
             }
         }
         return false;
+    }
+    
+    /**
+     * actualiza la posicion del agujero negro.
+     */
+    public void moveTo(int newX,int newY){
+        this.xPosition = newX;
+        this.yPosition = newY;
+        circle.moveTo(newX,newY);
+    }
+    
+    public void setDiameter(int diameter){
+        circle.setDiameter(MaxwellContainer.getWidth() / 25);
     }
 }

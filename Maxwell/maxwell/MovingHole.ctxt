@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=MovingHole
+comment0.text=\r\n\ Agujero\ negro\ que\ se\ mueve\ en\ el\ contenedor\ con\ velocidad\ constante\ (1,1),\r\n\ rebotando\ en\ los\ bordes\ como\ las\ part\u00EDculas.\r\n
+comment1.params=xPos\ yPos\ capMax
+comment1.target=MovingHole(int,\ int,\ int)
+comment1.text=\r\n\ Crea\ un\ agujero\ m\u00F3vil\ con\ una\ posici\u00F3n\ inicial\ y\ capacidad\ de\ absorci\u00F3n.\r\n\r\n\ @param\ xPos\ posici\u00F3n\ inicial\ en\ X\r\n\ @param\ yPos\ posici\u00F3n\ inicial\ en\ Y\r\n\ @param\ capMax\ capacidad\ m\u00E1xima\ de\ part\u00EDculas\ que\ puede\ absorber\r\n
+comment2.params=width\ height
+comment2.target=void\ moveInContainer(int,\ int)
+comment2.text=\r\n\ Mueve\ el\ agujero\ dentro\ del\ contenedor,\ rebotando\ en\ los\ bordes.\r\n\r\n\ @param\ width\ ancho\ del\ contenedor\r\n\ @param\ height\ alto\ del\ contenedor\r\n
+numComments=3
