@@ -294,6 +294,10 @@ public class MaxwellContainer {
                 particles.add(new RotatorParticle(color, px, py, isRed, vx, vy));
                 setIsOk(true);
                 break;
+            case "colorchanging":
+                particles.add(new ColorChangingParticle(color, px, py, isRed, vx, vy));
+                break;
+
             default:
                 System.out.println("Advertencia: Tipo de partícula '" + type + "' no reconocido. Ignorada.");
                 setIsOk(false);
@@ -613,9 +617,9 @@ public class MaxwellContainer {
         }
     
         resultado.sort(Comparator
-            .comparingInt((int[] a) -> a[0])  // x
-            .thenComparingInt(a -> a[1])      // y
-            .thenComparingInt(a -> a[2]));    // capacidad restante
+            .comparingInt((int[] a) -> a[0])  
+            .thenComparingInt(a -> a[1])      
+            .thenComparingInt(a -> a[2]));    
     
         return resultado.toArray(new int[0][]);
     }

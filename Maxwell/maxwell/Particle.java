@@ -225,5 +225,7 @@ class Particle {
         circle.setDiameter(diameter);
     }
 
-
+    public void changeColor(String color){
+        circle.changeColor(color);
+    }
 }

@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=ColorChangingParticle
+comment0.text=\r\n\ Part\u00EDcula\ que\ cambia\ de\ color\ en\ cada\ movimiento.\r\n
+comment1.params=color\ xPos\ yPos\ isRed\ speedX\ speedY
+comment1.target=ColorChangingParticle(java.lang.String,\ int,\ int,\ boolean,\ int,\ int)
+comment1.text=\r\n\ Crea\ una\ part\u00EDcula\ que\ cambia\ de\ color\ en\ cada\ movimiento.\r\n\r\n\ @param\ color\ color\ inicial\ (ser\u00E1\ reemplazado\ al\ moverse)\r\n\ @param\ xPos\ posici\u00F3n\ inicial\ en\ X\r\n\ @param\ yPos\ posici\u00F3n\ inicial\ en\ Y\r\n\ @param\ isRed\ indica\ si\ es\ roja\ (relevante\ para\ demonios)\r\n\ @param\ speedX\ velocidad\ en\ X\r\n\ @param\ speedY\ velocidad\ en\ Y\r\n
+comment2.params=width\ height
+comment2.target=void\ moveInContainer(int,\ int)
+numComments=3

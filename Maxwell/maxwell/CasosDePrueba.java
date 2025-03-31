@@ -106,7 +106,10 @@ public class CasosDePrueba {
 
         container.addParticle("rotator", "orange", true, 70, 70, 5, 5);
         container.addParticle("rotator", "orange", false, 370, 370, -6, -3);
-
+        
+        container.addParticle("colorchanging", "cyan", false, 100, 100, 3, 2);
+        container.addParticle("colorchanging", "black", true, 300, 100, -2, 2);
+        
         container.start(2000);
     }
     

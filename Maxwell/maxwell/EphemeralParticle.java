@@ -2,13 +2,12 @@ package maxwell;
 
 /**
  * Representa una partícula efímera en el experimento del demonio de Maxwell.
- * <p>
- * Esta partícula tiene las siguientes características especiales:
- * <ul>
- *   <li>Reduce su velocidad en 1 unidad en cada eje cuando colisiona con los bordes</li>
- *   <li>Se autodestruye cuando su velocidad llega a cero en ambos ejes</li>
- *   <li>Se visualiza más pequeña que las partículas normales</li>
- * </ul>
+ * 
+ * Esta partícula tiene las siguientes características:
+ * Reduce su velocidad en 1 unidad en cada eje cuando colisiona con los bordes
+ * Se autodestruye cuando su velocidad llega a cero en ambos ejes
+ * Se visualiza más pequeña que las partículas normales
+ * 
  * 
  * @see Particle
  * @see MaxwellContainer

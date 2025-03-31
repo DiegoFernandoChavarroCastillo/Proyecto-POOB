@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=MaxwellContestTest
+comment1.params=
+comment1.target=void\ shouldReflectCorrectlyWithinBounds()
+comment2.params=
+comment2.target=void\ shouldReflectCorrectlyWhenOverBounds()
+comment3.params=
+comment3.target=void\ shouldReflectNegativeCorrectly()
+comment4.params=
+comment4.target=void\ shouldReturnInfinityIfNoFlipPossible()
+comment5.params=
+comment5.target=void\ shouldReturnImpossibleIfNoFlipCanBeDone()
+numComments=6
