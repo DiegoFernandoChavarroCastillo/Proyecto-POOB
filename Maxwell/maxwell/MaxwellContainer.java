@@ -217,7 +217,12 @@ public class MaxwellContainer {
             case "ephemeral":
                 particles.add(new EphemeralParticle(color, px, py, isRed, vx, vy, this));
                 break;
-            // futuros tipos: flying, rotator...
+            case "flying":
+                particles.add(new FlyingParticle(color, px, py, isRed, vx, vy));
+                break;
+            case "rotator":
+                particles.add(new RotatorParticle(color, px, py, isRed, vx, vy));
+              break;
             default:
                 System.out.println("Advertencia: Tipo de partícula '" + type + "' no reconocido. Ignorada.");
                 setIsOk(false);

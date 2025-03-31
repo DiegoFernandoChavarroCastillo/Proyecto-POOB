@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=RotatorParticle
+comment0.text=\r\n\ Part\u00EDcula\ de\ tipo\ rotator.\r\n\ Intercambia\ sus\ velocidades\ Vx\ y\ Vy\ en\ cada\ colisi\u00F3n\ con\ los\ bordes\ o\ con\ la\ divisi\u00F3n\ central.\r\n\ Tiene\ un\ tama\u00F1o\ m\u00E1s\ peque\u00F1o\ que\ las\ part\u00EDculas\ normales\ para\ facilitar\ su\ identificaci\u00F3n\ visual.\r\n
+comment1.params=color\ xPos\ yPos\ isRed\ speedX\ speedY
+comment1.target=RotatorParticle(java.lang.String,\ int,\ int,\ boolean,\ int,\ int)
+comment1.text=\r\n\ Crea\ una\ nueva\ part\u00EDcula\ rotator.\r\n\r\n\ @param\ color\ color\ de\ la\ part\u00EDcula\r\n\ @param\ xPos\ posici\u00F3n\ inicial\ en\ X\r\n\ @param\ yPos\ posici\u00F3n\ inicial\ en\ Y\r\n\ @param\ isRed\ indica\ si\ la\ part\u00EDcula\ es\ roja\r\n\ @param\ speedX\ velocidad\ inicial\ en\ X\r\n\ @param\ speedY\ velocidad\ inicial\ en\ Y\r\n
+comment2.params=width\ height
+comment2.target=void\ moveInContainer(int,\ int)
+comment2.text=\r\n\ Mueve\ la\ part\u00EDcula\ dentro\ del\ contenedor.\r\n\ En\ cada\ colisi\u00F3n\ con\ los\ bordes\ o\ la\ divisi\u00F3n\ central,\ intercambia\ sus\ velocidades.\r\n\ Los\ signos\ de\ las\ velocidades\ se\ ajustan\ para\ evitar\ que\ atraviese\ los\ l\u00EDmites\ del\ contenedor.\r\n\r\n\ @param\ width\ ancho\ del\ contenedor\r\n\ @param\ height\ alto\ del\ contenedor\r\n
+numComments=3

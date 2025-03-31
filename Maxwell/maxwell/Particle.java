@@ -8,7 +8,7 @@ import shapes.Circle;
  * La clase Particle representa una partícula en la simulación del contenedor de Maxwell.
  * Cada partícula tiene una posición, velocidad, color y puede moverse dentro del contenedor.
  * 
- * @author Diego
+ * @author Diego Chavarro y Diego Rodriguez
  * @version 1.0
  */
 class Particle {

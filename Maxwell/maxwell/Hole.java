@@ -95,10 +95,21 @@ public class Hole {
     }
     
     /**
-     * Absorbe particulas en el contenedor.
+     * Intenta absorber una partícula en el contenedor.
+     * @param p La partícula a verificar
+     * @param iterator El iterador de la lista de partículas
+     * @return true si la partícula fue absorbida, false en caso contrario
      */
     public boolean absorbInContainer(Particle p, Iterator<Particle> iterator) {
-        if (Math.abs(this.getXPosition() - p.getX()) <= 5 && Math.abs(this.getYPosition() - p.getY()) <= 5) {
+        // Primero verifica si es una FlyingParticle (no se absorbe)
+        if (p instanceof FlyingParticle) {
+            return false;
+        }
+        
+        // Lógica normal de absorción para otras partículas
+        if (Math.abs(this.getXPosition() - p.getX()) <= 5 && 
+            Math.abs(this.getYPosition() - p.getY()) <= 5) {
+            
             if (this.canAbsorbMore()) { 
                 this.absorbParticle();  
                 p.erase();

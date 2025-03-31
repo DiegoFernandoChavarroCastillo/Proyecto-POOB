@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Particle
-comment0.text=\r\n\ La\ clase\ Particle\ representa\ una\ part\u00EDcula\ en\ la\ simulaci\u00F3n\ del\ contenedor\ de\ Maxwell.\r\n\ Cada\ part\u00EDcula\ tiene\ una\ posici\u00F3n,\ velocidad,\ color\ y\ puede\ moverse\ dentro\ del\ contenedor.\r\n\ \r\n\ @author\ Diego\r\n\ @version\ 1.0\r\n
+comment0.text=\r\n\ La\ clase\ Particle\ representa\ una\ part\u00EDcula\ en\ la\ simulaci\u00F3n\ del\ contenedor\ de\ Maxwell.\r\n\ Cada\ part\u00EDcula\ tiene\ una\ posici\u00F3n,\ velocidad,\ color\ y\ puede\ moverse\ dentro\ del\ contenedor.\r\n\ \r\n\ @author\ Diego\ Chavarro\ y\ Diego\ Rodriguez\r\n\ @version\ 1.0\r\n
 comment1.params=color\ xPos\ yPos\ isRed\ speedX\ speedY
 comment1.target=Particle(java.lang.String,\ int,\ int,\ boolean,\ int,\ int)
 comment1.text=\r\n\ Constructor\ de\ la\ clase\ Particle.\r\n\ Inicializa\ la\ part\u00EDcula\ con\ una\ posici\u00F3n,\ color,\ velocidad\ y\ la\ hace\ visible.\r\n\ \r\n\ @param\ color\ El\ color\ de\ la\ part\u00EDcula.\r\n\ @param\ xPos\ La\ posici\u00F3n\ inicial\ en\ el\ eje\ X.\r\n\ @param\ yPos\ La\ posici\u00F3n\ inicial\ en\ el\ eje\ Y.\r\n\ @param\ isRed\ Indica\ si\ la\ part\u00EDcula\ es\ roja.\r\n\ @param\ speedX\ La\ velocidad\ inicial\ en\ el\ eje\ X.\r\n\ @param\ speedY\ La\ velocidad\ inicial\ en\ el\ eje\ Y.\r\n
