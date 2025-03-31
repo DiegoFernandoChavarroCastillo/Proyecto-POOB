@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=WeakDemon
+comment0.text=\r\n\ Demonio\ de\ tipo\ weak.\r\n\ Solo\ act\u00FAa\ una\ vez\:\ despu\u00E9s\ de\ permitir\ el\ paso\ de\ una\ part\u00EDcula,\ se\ elimina.\r\n
+comment1.params=yPos\ container
+comment1.target=WeakDemon(int,\ MaxwellContainer)
+comment1.text=\r\n\ Crea\ un\ demonio\ d\u00E9bil\ en\ una\ posici\u00F3n\ dada.\r\n\r\n\ @param\ yPos\ posici\u00F3n\ vertical\ del\ demonio\r\n\ @param\ container\ referencia\ al\ contenedor\ para\ poder\ eliminarse\r\n
+comment2.params=p\ oldX\ oldY\ newX\ newY
+comment2.target=boolean\ interactInContainer(Particle,\ int,\ int,\ int,\ int)
+comment2.text=\r\n\ Interact\u00FAa\ con\ una\ part\u00EDcula\ cruzando\ la\ divisi\u00F3n.\ Solo\ act\u00FAa\ si\ no\ ha\ sido\ eliminado.\r\n\ Despu\u00E9s\ de\ dejar\ pasar\ o\ rebotar\ una\ part\u00EDcula,\ se\ elimina.\r\n\r\n\ @param\ p\ part\u00EDcula\ que\ intenta\ cruzar\r\n\ @param\ oldX\ posici\u00F3n\ anterior\ en\ X\r\n\ @param\ oldY\ posici\u00F3n\ anterior\ en\ Y\r\n\ @param\ newX\ nueva\ posici\u00F3n\ en\ X\r\n\ @param\ newY\ nueva\ posici\u00F3n\ en\ Y\r\n\ @return\ true\ si\ act\u00FAa\ y\ debe\ detener\ el\ movimiento\ autom\u00E1tico\r\n
+numComments=3

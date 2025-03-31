@@ -79,4 +79,5 @@ public class Triangle extends Figure {
             canvas.erase(this);
         }
     }
+    
 }

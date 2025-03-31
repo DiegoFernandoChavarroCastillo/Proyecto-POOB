@@ -121,6 +121,42 @@ public class MaxwellContainer {
             setIsOk(true);
         }
     }
+    
+    /**
+     * Agrega un demonio de un tipo específico en una posición dada.
+     *
+     * @param type tipo de demonio ("normal", "blue", "weak")
+     * @param d posición en X donde se ubicará el demonio
+     */
+    public void addDemon(String type, int d) {
+        if (d < 0 || d > height) {
+            System.out.println("Error: Posición del demonio fuera de rango.");
+            setIsOk(false);
+            return;
+        }
+    
+        switch (type.toLowerCase()) {
+            case "normal":
+                addDemon(d);
+                setIsOk(true);
+                break;
+            case "blue":
+                demons.add(new BlueDemon(d));
+                setIsOk(true);
+                break;
+            case "weak":
+                //demons.add(new WeakDemon(d));
+                setIsOk(true);
+                break;
+            default:
+                System.out.println("Error: Tipo de demonio '" + type + "' no reconocido.");
+                setIsOk(false);
+                return;
+        }
+    
+        setIsOk(true);
+    }
+
 
     /**
      * Elimina todos los demonios en la posición especificada.
@@ -148,6 +184,11 @@ public class MaxwellContainer {
             setIsOk(false);
         }
     }
+    
+    public void removeDemon(Demon d) {
+        demons.remove(d);
+    }
+
     
     public void addHole(int px, int py, int maxParticles) {
         if (isInside(px, py)) {
@@ -212,17 +253,20 @@ public class MaxwellContainer {
     
         switch (type.toLowerCase()) {
             case "normal":
-                addParticle(color, isRed, px, py, vx, vy); // delega
+                addParticle(color, isRed, px, py, vx, vy); 
                 break;
             case "ephemeral":
                 particles.add(new EphemeralParticle(color, px, py, isRed, vx, vy, this));
+                setIsOk(true);
                 break;
             case "flying":
                 particles.add(new FlyingParticle(color, px, py, isRed, vx, vy));
+                setIsOk(true);
                 break;
             case "rotator":
                 particles.add(new RotatorParticle(color, px, py, isRed, vx, vy));
-              break;
+                setIsOk(true);
+                break;
             default:
                 System.out.println("Advertencia: Tipo de partícula '" + type + "' no reconocido. Ignorada.");
                 setIsOk(false);
@@ -353,8 +397,6 @@ public class MaxwellContainer {
             simulationThread.start();
         }
     }
-
-
 
     /**
      * Verifica si todas las partículas rojas están en un solo lado y todas las azules en el otro,

@@ -109,6 +109,32 @@ public class CasosDePrueba {
 
         container.start(2000);
     }
+    
+    /**
+     * Caso de prueba 6: Verificación del demonio azul (BlueDemon).
+     * Solo permite el paso de partículas azules, las rojas son devueltas.
+     */
+    public void casoPrueba6() {
+        MaxwellContainer container = new MaxwellContainer(400, 500);
+    
+        // Agregamos un BlueDemon a la altura media
+        container.addDemon("blue", 250);
+    
+        // Partícula azul intentando cruzar desde la izquierda hacia la derecha → debe pasar
+        container.addParticle("normal", "blue", false, 100, 250, -15, 0);
+    
+        // Partícula azul intentando cruzar desde la derecha hacia la izquierda → debe pasar
+        container.addParticle("normal", "blue", false, 350, 250, -15, 0);
+    
+        // Partícula roja intentando cruzar desde la izquierda hacia la derecha → debe ser devuelta
+        container.addParticle("normal", "red", true, 100, 250, 15, 0);
+    
+        // Partícula roja intentando cruzar desde la derecha hacia la izquierda → debe ser devuelta
+        container.addParticle("normal", "red", true, 350, 250, 15, 0);
+    
+        container.start(2000);
+    }
+
 
 
     /**

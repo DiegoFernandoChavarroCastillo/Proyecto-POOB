@@ -82,4 +82,8 @@ public class Demon {
         }
         return false;
     }
+    
+    public void setBodyColor(String color){
+        body.changeColor(color);
+    }
 }

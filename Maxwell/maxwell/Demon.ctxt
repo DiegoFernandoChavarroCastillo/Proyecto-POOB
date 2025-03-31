@@ -19,4 +19,6 @@ comment5.text=\r\n\ Devuelve\ la\ posici\u00F3n\ en\ el\ eje\ Y\ del\ demonio.\r
 comment6.params=p\ oldX\ oldY\ newX\ newY
 comment6.target=boolean\ interactInContainer(Particle,\ int,\ int,\ int,\ int)
 comment6.text=\r\n\ decide\ si\ dejar\ pasar\ o\ no\ a\ la\ particula.\r\n
-numComments=7
+comment7.params=color
+comment7.target=void\ setBodyColor(java.lang.String)
+numComments=8
